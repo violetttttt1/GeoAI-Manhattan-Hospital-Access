@@ -7,7 +7,7 @@ import re, collections
 O=O
 # ---------- electricity of the elevator model: parse station_table access paths + elevator_detail availability
 ST=pd.read_csv(O+"station_table.csv",dtype=str); ED=pd.read_csv(O+"elevator_detail.csv")
-AVAIL={r["Equipment Code"]:(float(r.avail_24h_12m) if r.avail_status=="已知" else None) for _,r in ED[ED.in_probability_model].iterrows()}
+AVAIL={r["Equipment Code"]:(float(r.avail_24h_12m) if r.avail_status=="known" else None) for _,r in ED[ED.in_probability_model].iterrows()}
 FILL_MEAN=float(ST.fill_mean_used.iloc[0]); FILL_LOW=float(ST.fill_low_used.iloc[0])
 STATIONS={}      # gtfs parent -> {name, paths:{'PN':[set..],'PS':[..]}}
 for _,r in ST.iterrows():

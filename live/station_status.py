@@ -9,10 +9,10 @@ station_status_timeseries.csv, append one row per station:
   - station_table.csv `access_paths` gives the structure: "PN: A+B | C+D; PS: ..."
     "+" = in series (all needed), "|" = alternative paths (any one is enough),
     each direction (PN/PS) must have at least one fully working path
-  - a station with elevator_dependency starting with "无" (Harlem-148 St, no elevator needed,
+  - a station with elevator_dependency starting with "no" (Harlem-148 St, no elevator needed,
     per MTA facilities data, not verified on site) gets available = 1 regardless of outages
   - a station with no access_paths and no such flag gets available = "" (cannot tell)
-  - recovery_overdue: set to "预计恢复时间已过" when the snapshot is later than the
+  - recovery_overdue: set to "estimated return time has passed" when the snapshot is later than the
     estimatedreturntoservice of an elevator that is out (latest estimate among its current rows).
     Informational only, availability is NOT changed. The feed's times have no timezone; they are
     read as New York local time (unverified).
@@ -39,7 +39,7 @@ NYC = ZoneInfo("America/New_York")
 HEADER = ["snapshot_utc", "snapshot_nyc", "station_id", "gtfs_stop_id", "station_name", "routes",
           "elevator_dependency", "available", "blocked_directions", "elevators_out",
           "recovery_overdue", "overdue_elevators"]
-OVERDUE = "预计恢复时间已过"
+OVERDUE = "estimated return time has passed"
 
 
 def parse_paths(text):
@@ -93,7 +93,7 @@ def station_status(st, out_now):
     paths = st["paths"]
     members = sorted({e for ps in paths.values() for p in ps for e in p})
     elevators_out = [e for e in members if e in out_now]
-    if st.get("elevator_dependency", "").startswith("无"):
+    if st.get("elevator_dependency", "").startswith("no"):
         return 1, "", elevators_out
     if not paths:
         return "", "", elevators_out

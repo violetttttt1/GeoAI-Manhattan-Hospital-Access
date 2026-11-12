@@ -1,38 +1,38 @@
-# 项目现状
+# Project status
 
-## 目标
-量化"地图上无障碍"和"现实中到得了"的差距，对象是曼哈顿岛上的三家医院（Harlem Hospital、NYP/Columbia、Mount Sinai Morningside），先看地铁和公交，再加电梯故障，最后加坡道。研究范围限定在曼哈顿岛，居民只统计曼哈顿的 tract。
+## Goal
+Quantify the gap between "accessible on the map" and "actually reachable" for three hospitals on Manhattan island (Harlem Hospital, NYP/Columbia, Mount Sinai Morningside): first subway and bus, then elevator failures, finally curb ramps. The study is limited to Manhattan island, and residents are counted only in Manhattan tracts.
 
-## 已完成
-- 7 份数据下载并体检（docs/checks_data.md）。
-- 研究区站点表和逐电梯明细。补建了 9 个站的电梯模型，目前 54 个站可建模，5 个不能。148 St 按"无电梯依赖"处理，没有现场核实。
-- 三家医院各 4 个情景的 30 分钟等时圈：普通人和只走 ADA 站，各自再加公交。正向和反向，五个出发时刻取平均，居民数用 ACS 行走困难人口。
-- 电梯故障的 Monte Carlo（情景④，1000 次，覆盖曼哈顿内 90% 到 100% 的 ADA 站）和单点失效排序。
-- 实时电梯停运抓取（在组长电脑上跑，周六上午分享快照）。
+## Done
+- 7 datasets downloaded and health-checked (`docs/checks_data.md`).
+- Study-area station table and per-elevator detail. Elevator models were added for 9 more stations; 54 stations can now be modelled and 5 cannot. 148 St is treated as "no elevator dependency", not verified on site.
+- 30-minute isochrones for each of the three hospitals in 4 scenarios: anyone and ADA-stations-only, each with and without bus. Forward and reverse, averaged over five departure times; residents are ACS residents with an ambulatory difficulty.
+- Monte Carlo of elevator failures (scenario 4, 1000 draws, covering 90% to 100% of the ADA stations in Manhattan) and the single-point-failure ranking.
+- Live elevator-outage fetching (runs on the team lead's computer; a snapshot is shared on Saturday morning).
 
-## 初步发现（反向，曼哈顿居民，都是初步，别写精确值）
-- ADA 组占普通人的比例，只走地铁：NYP 约 75%，Harlem 约 71%，Mount Sinai 约 42%。加公交后：Harlem 约 84%，NYP 约 81%，Mount Sinai 约 69%。Harlem 和 NYP 的先后不稳定，Mount Sinai 最低。
-- Monte Carlo 最差 5% 的日子相对基线：NYP 约 70%，Harlem 约 90%，Mount Sinai 约 94%。
-- 单点依赖：NYP 的 168 St（A/C）一停损失约 43% 居民，取决于一部电梯 EL139。Harlem 的 135 St（2/3）损失约 32%。
-- 注意：居民数用五个出发时刻的均值，Monte Carlo 只用 08:00，两者时间口径不同，不要直接比较绝对值。
+## Preliminary findings (reverse, Manhattan residents; all preliminary, do not quote exact values)
+- ADA group as a share of anyone, subway only: NYP about 75%, Harlem about 71%, Mount Sinai about 42%. With bus added: Harlem about 84%, NYP about 81%, Mount Sinai about 69%. The order of Harlem and NYP is not stable; Mount Sinai is the lowest.
+- Monte Carlo, worst 5% of days relative to the own baseline: NYP about 70%, Harlem about 90%, Mount Sinai about 94%.
+- Single-point dependence: at NYP, one outage at 168 St (A/C) loses about 43% of residents and depends on one elevator, EL139. At Harlem, 135 St (2/3) loses about 32%.
+- Note: resident counts use the mean of five departure times, while the Monte Carlo uses only 08:00. The time bases differ, so do not compare absolute values directly.
 
-## 已知问题，请先读
-- 研究区有几部电梯在可用率表里没有记录，沿用两种补值，目前对结果没有影响。
-- 5 个 ADA 站没有电梯模型，当作永远可用，会高估这些站附近的覆盖概率。补建的 9 个站，结构来自 MTA 设备清单的文字说明，没有现场核实。
-- 161 St（B/D）几部电梯的可用率只有约 50%，原因没核实。
-- 坡道数据采集于 2017 到 2020 年，之后有改造。测量值不能直接说明是否符合 ADA。MBPO 验证样本很小。
-- 实时数据里的时间没有时区标记，ismaintenanceoutage 字段不可用。
-- 假设：电梯故障相互独立，用 24 小时平均可用率，步行速度 4.8 km/h，公交全部当作无障碍，居民在 tract 内均匀分布。
+## Known problems — read first
+- A few elevators in the study area have no record in the availability table; the two fill values are used, and for now this does not change the results.
+- 5 ADA stations have no elevator model and are treated as always available, which overstates coverage near them. For the 9 stations added later, the structure comes from the text descriptions in the MTA equipment list and has not been checked on site.
+- Several elevators at 161 St (B/D) have an availability of only about 50%; the reason has not been checked.
+- Ramp data were collected in 2017 to 2020 and have been rebuilt since. Measured values cannot show ADA compliance by themselves. The MBPO validation sample is small.
+- Times in the live data carry no time-zone marker, and the `ismaintenanceoutage` field is not usable.
+- Assumptions: elevator failures are independent; 24-hour average availability; walking speed 4.8 km/h; all buses treated as accessible; residents spread uniformly inside each tract.
 
-## 待办
-- t1：坡道步行网络。先做 NYP 周边 400 米，用"测量时可通行、不可通行、之后改过"三种状态，跑严格和宽松两个版本。
-- t2：优先级排名。把单点失效排序变成"提高某部电梯可用率的期望收益"，再加入坡道。
-- t3：XGBoost 电梯故障预测，按时间切分，和历史平均对比。
-- t4：实时数据对照。用快照检验站点概率和独立性假设，做周六的"此刻"图层。
-- t5：现场核对 20 到 30 个坡道，加上 181 St、175 St 和 148 St 的电梯结构。
-- t6：pitch 和 slides。
+## To do
+- t1: Ramp walking network. Start with 400 m around NYP, using three states ("passable when measured", "not passable", "modified since") and running a strict and a lenient version.
+- t2: Priority ranking. Turn the single-point-failure ranking into "expected benefit of improving one elevator's availability", then add ramps.
+- t3: XGBoost elevator-failure prediction, split by time and compared with the historical average.
+- t4: Live-data comparison. Use the snapshots to test the station probabilities and the independence assumption, and build the Saturday "right now" layer.
+- t5: Field check of 20 to 30 ramps, plus the elevator structures at 181 St, 175 St and 148 St.
+- t6: Pitch and slides.
 
-## 规则
-- 不要修改已有脚本和 data/clean 里的文件。要改就新建，文件名以任务编号开头，比如 t1_。
-- 结果写在 docs/checks_t1.md 这样的文件里，不写人名。
-- 数字都先标"初步"，别写精确面积。
+## Rules
+- Do not modify existing scripts or the files in `data/clean`. To change something, create a new file whose name starts with the task number, for example `t1_`.
+- Write results in files such as `docs/checks_t1.md`, without personal names.
+- Label every number "preliminary" and do not quote exact areas.

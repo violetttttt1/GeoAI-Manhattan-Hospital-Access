@@ -25,7 +25,7 @@ M=pd.DataFrame({"months_in_window":g.apply(lambda d:int((d["24-Hour Total Hours"
  "unscheduled_outages_12m":g["Unscheduled Outages"].sum(),"total_outages_12m":g["Total Outages"].sum()})
 ever=set(av[av["Equipment Type"]=="Elevator"]["Equipment Code"])
 ie=ie.merge(M,left_on="Equipment Code",right_index=True,how="left")
-ie["avail_status"]=np.where(ie.avail_24h_12m.notna(),"已知",np.where(ie["Equipment Code"].isin(ever),"未知(近12月无数据)","未知(无任何记录)"))
+ie["avail_status"]=np.where(ie.avail_24h_12m.notna(),"known",np.where(ie["Equipment Code"].isin(ever),"unknown (no data in last 12 months)","unknown (no record)"))
 # fill values from study-area elevators with known availability
 sa=ie[ie.in_study_area&ie.avail_24h_12m.notna()]; FILL_MEAN=sa.avail_24h_12m.mean(); FILL_LOW=sa.avail_24h_12m.quantile(0.10)
 print("study-area elevators",ie.in_study_area.sum(),"known",len(sa),"mean fill %.4f p10 fill %.4f min %.4f median %.4f"%(FILL_MEAN,FILL_LOW,sa.avail_24h_12m.min(),sa.avail_24h_12m.median()))
@@ -83,7 +83,7 @@ for _,s in ada.sort_values(["lat"],ascending=False).iterrows():
     edges=[];unplaced=[]
     for _,e in L.iterrows():
         nl=landings(e); ok=len(nl)>=2 and not str(e["Service Status"]).startswith("Removed")
-        reason="" if ok else ("无出入口层级字段，无法确定在通道中的位置" if len(nl)<2 else "已拆除")
+        reason="" if ok else ("no landing-level fields; cannot place the elevator in the access path" if len(nl)<2 else "removed")
         if ok: edges.append((e["Equipment Code"],frozenset(nl)))
         else: unplaced.append((e["Equipment Code"],reason,e.Notes))
         erows.append((e["Equipment Code"],s["Station ID"],ok,reason,sorted(nl)))
@@ -93,25 +93,25 @@ for _,s in ada.sort_values(["lat"],ascending=False).iterrows():
     if edges:
         allnodes=set().union(*[n for _,n in edges])
         if "Street" in allnodes: entr="Street"
-        else: entr="M2" if "M2" in allnodes else "M1"; notes.append(f"清单中无街面直达电梯，入口按推断设为{entr}（地面入口进入最外层夹层）")
+        else: entr="M2" if "M2" in allnodes else "M1"; notes.append(f"No street-level elevator in the inventory; entrance inferred as {entr} (street entrance leads to the outermost mezzanine)")
         miss=[d for d in dirs if d not in allnodes]
-        if miss: notes.append(f"{'/'.join(miss)} 站台无电梯可达")
+        if miss: notes.append(f"{'/'.join(miss)} platform has no elevator access")
     ks=L[L["Equipment Code"].isin([c for c,_ in edges])].set_index("Equipment Code")
     status={c:ks.loc[c,"avail_status"] for c,_ in edges}; av12={c:ks.loc[c,"avail_24h_12m"] for c,_ in edges}
-    p_mean={c:(av12[c] if status[c]=="已知" else FILL_MEAN) for c,_ in edges}; p_low={c:(av12[c] if status[c]=="已知" else FILL_LOW) for c,_ in edges}
+    p_mean={c:(av12[c] if status[c]=="known" else FILL_MEAN) for c,_ in edges}; p_low={c:(av12[c] if status[c]=="known" else FILL_LOW) for c,_ in edges}
     if edges and not [d for d in dirs if d not in allnodes]:
         pm=analyse(edges,entr,dirs,p_mean); pl=analyse(edges,entr,dirs,p_low)
         paths="; ".join(f"{d}: "+min_paths(edges,entr,d) for d in dirs)
     else: pm=pl=np.nan; paths=""
-    if not len(L): notes.append("资产清单中没有任何电梯可对应到该站")
-    if unplaced: notes.append("已关联但未纳入计算："+"; ".join(f"{c}({r}; {n})" for c,r,n in unplaced))
-    nunk=sum(1 for c,_ in edges if status[c]!="已知")
-    short=[f"{c}({int(ks.loc[c,'months_in_window'])}个月)" for c,_ in edges if status[c]=="已知" and ks.loc[c,"months_in_window"]<12]
-    if short: notes.append("近12个月数据不足12个月，可用率与停运次数只覆盖部分月份："+"; ".join(short))
-    if nunk: notes.append("有 %d 部电梯无可用率，概率为补值结果"%nunk)
-    if s["Station ID"]=="143": notes.append("车辆段电梯 EL147/150/151/152/153/155 离本站最近(319–575m)，见 elevators_assigned_by_coordinates.csv；它们不是站内通道，未纳入")
+    if not len(L): notes.append("No elevator in the asset inventory maps to this station")
+    if unplaced: notes.append("Linked but not included in the calculation: "+"; ".join(f"{c}({r}; {n})" for c,r,n in unplaced))
+    nunk=sum(1 for c,_ in edges if status[c]!="known")
+    short=[f"{c}({int(ks.loc[c,'months_in_window'])} months)" for c,_ in edges if status[c]=="known" and ks.loc[c,"months_in_window"]<12]
+    if short: notes.append("Fewer than 12 months of data in the last 12 months; availability and outage counts cover only some months: "+"; ".join(short))
+    if nunk: notes.append("%d elevator(s) have no availability record; probability uses the fill value"%nunk)
+    if s["Station ID"]=="143": notes.append("Yard elevators EL147/150/151/152/153/155 are nearest to this station (319–575m); see elevators_assigned_by_coordinates.csv; they are not in-station paths and are not included")
     fmt=lambda f_:";".join(f_(c) for c,_ in edges)
-    pe=lambda c: f"{av12[c]:.4f}" if status[c]=="已知" else "未知"
+    pe=lambda c: f"{av12[c]:.4f}" if status[c]=="known" else "unknown"
     srows.append(dict(station_id=s["Station ID"],gtfs_stop_id=s["GTFS Stop ID"],complex_id=s["Complex ID"],station_name=s["Stop Name"],line=s["Line"],routes=s["Daytime Routes"],
       ada=s.ADA,ada_northbound=s["ADA Northbound"],ada_southbound=s["ADA Southbound"],north_label=s["North Direction Label"],south_label=s["South Direction Label"],lat=s.lat,lon=s.lon,in_area_reason=s.why,
       n_elevators_linked=len(L),n_elevators_in_model=len(edges),n_unknown_avail=nunk,
@@ -120,9 +120,9 @@ for _,s in ada.sort_values(["lat"],ascending=False).iterrows():
       elevator_roles=fmt(lambda c:f"{c}:{'-'.join(n for n in ['Street','M2','M1','PN','PS'] if n in dict(edges)[c])}"),
       elevator_avail_status=fmt(lambda c:f"{c}={status[c]}"),
       elevator_avail_24h_12m=fmt(lambda c:f"{c}={pe(c)}"),
-      elevator_unsched_outages_12m=fmt(lambda c:f"{c}="+(str(int(ks.loc[c,'unscheduled_outages_12m'])) if status[c]=="已知" else "未知")),
+      elevator_unsched_outages_12m=fmt(lambda c:f"{c}="+(str(int(ks.loc[c,'unscheduled_outages_12m'])) if status[c]=="known" else "unknown")),
       access_paths=paths,station_prob_mean_fill=pm,station_prob_low_fill=pl,fill_mean_used=round(FILL_MEAN,4),fill_low_used=round(FILL_LOW,4),
-      needs_review="是" if notes else "否",review_note=" | ".join(notes)))
+      needs_review="yes" if notes else "no",review_note=" | ".join(notes)))
 T=pd.DataFrame(srows); 
 for c in ["station_prob_mean_fill","station_prob_low_fill"]: T[c]=T[c].round(4)
 T.to_csv(OUT+"station_table.csv",index=False,encoding="utf-8-sig")
@@ -134,17 +134,17 @@ print(T[["station_name","review_note"]].to_string())
 sidmap=dict(zip(ada["Station ID"],ada["Stop Name"]+" ("+ada["Daytime Routes"]+")"))
 placed={c:(ok,rs,nl) for c,sid,ok,rs,nl in erows}
 D=ie[ie.in_study_area|ie.sid.isin(ada_ids)].copy()
-D["linked_station_id"]=D.sid; D["link_method"]=np.where(D.sid.notna(),"Station MRN",np.where(D["Equipment Code"].isin(six_df.equipment_code),"最近车站(按坐标)","无"))
+D["linked_station_id"]=D.sid; D["link_method"]=np.where(D.sid.notna(),"Station MRN",np.where(D["Equipment Code"].isin(six_df.equipment_code),"nearest station (by coordinates)","none"))
 D["linked_station"]=D.sid.map(lambda x:sidmap.get(x,"")) 
 nm=st.set_index("Station ID")
 D["linked_station"]=[ (nm.loc[x,"Stop Name"]+" ("+nm.loc[x,"Daytime Routes"]+")") if isinstance(x,str) and x in nm.index else "" for x in D.sid]
-D.loc[D.link_method=="最近车站(按坐标)","linked_station_id"]=D["Equipment Code"].map(dict(zip(six_df.equipment_code,six_df.nearest_station_id)))
-D.loc[D.link_method=="最近车站(按坐标)","linked_station"]=D["Equipment Code"].map(dict(zip(six_df.equipment_code,six_df.nearest_station)))
+D.loc[D.link_method=="nearest station (by coordinates)","linked_station_id"]=D["Equipment Code"].map(dict(zip(six_df.equipment_code,six_df.nearest_station_id)))
+D.loc[D.link_method=="nearest station (by coordinates)","linked_station"]=D["Equipment Code"].map(dict(zip(six_df.equipment_code,six_df.nearest_station)))
 D["station_is_ada_in_table"]=D.sid.isin(ada_ids)
-D["in_probability_model"]=D["Equipment Code"].map(lambda c:placed.get(c,(False,"",""))[0]); D["model_exclusion_reason"]=D["Equipment Code"].map(lambda c:placed.get(c,(False,"车站不在 ADA 车站表中",""))[1])
+D["in_probability_model"]=D["Equipment Code"].map(lambda c:placed.get(c,(False,"",""))[0]); D["model_exclusion_reason"]=D["Equipment Code"].map(lambda c:placed.get(c,(False,"station not in ADA station table",""))[1])
 keep=["Equipment Code","linked_station_id","linked_station","link_method","station_is_ada_in_table","in_study_area","lat","lon","Street Access","Elevator Direction Serviced","Elevator Mezzanine 1 Access","Elevator Mezzanine 2 Access","Elevator Platform Access","Redundant Elevator","Notes","Service Status","Maintained By","ADA Compliant","avail_status","months_in_window","avail_24h_12m","avail_am_peak_12m","avail_pm_peak_12m","unscheduled_outages_12m","total_outages_12m","in_probability_model","model_exclusion_reason"]
 D[keep].sort_values(["linked_station_id","Equipment Code"]).to_csv(OUT+"elevator_detail.csv",index=False,encoding="utf-8-sig")
 print("elevator_detail rows",len(D),"| in model",D.in_probability_model.sum(),"| ada-linked",D.station_is_ada_in_table.sum())
-print("months_in_window<12 among known in model:",D[D.in_probability_model&(D.avail_status=="已知")&(D.months_in_window<12)][["Equipment Code","months_in_window"]].values.tolist())
+print("months_in_window<12 among known in model:",D[D.in_probability_model&(D.avail_status=="known")&(D.months_in_window<12)][["Equipment Code","months_in_window"]].values.tolist())
 # link sanity: elevator distance to its station
 dd=[hav(nm.loc[r.sid,"lat"],nm.loc[r.sid,"lon"],r.lat,r.lon) for _,r in D[D.station_is_ada_in_table].iterrows()] if False else None

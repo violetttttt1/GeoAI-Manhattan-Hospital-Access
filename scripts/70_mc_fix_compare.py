@@ -4,10 +4,10 @@ from _paths import S, R, O, REB, ROOT   # all paths come from scripts/_paths.py
 import pandas as pd, numpy as np
 O=O; S=S
 A=pd.read_csv(O+"mc_manhattan_summary.csv"); B=pd.read_csv(O+"mc_manhattan_summary_fixed.csv"); SGb=pd.read_csv(O+"mc_manhattan_single_failure_fixed.csv")
-short={"Harlem Hospital":"Harlem","NYP/Columbia (CUIMC)":"NYP/Columbia","Mount Sinai Morningside":"Mount Sinai"}; dn={"reverse":"反向","forward":"正向"}
+short={"Harlem Hospital":"Harlem","NYP/Columbia (CUIMC)":"NYP/Columbia","Mount Sinai Morningside":"Mount Sinai"}; dn={"reverse":"reverse","forward":"forward"}
 a=A[(A.model=="expanded")&(A.fill=="mean")].set_index(["hospital","direction"]); b=B[(B.model=="expanded")&(B.fill=="mean")].set_index(["hospital","direction"]); bl=B[(B.model=="expanded")&(B.fill=="low")].set_index(["hospital","direction"])
 print("fill variants identical in fixed run? max abs diff:",(b[["mean","p5","res_ge90","res_ge99","res_ge100","draws_with_loss"]]-bl[["mean","p5","res_ge90","res_ge99","res_ge100","draws_with_loss"]]).abs().max().round(3).to_dict(),"| draws with station block mean/low:",int(b.draws_with_station_block.iloc[0]),int(bl.draws_with_station_block.iloc[0]))
-rows=["| 医院 / 方向 | 基线 前→后 | 均值 前→后 | 第 5 百分位 前→后 | ≥ 99% 前→后 | 最差 5% 均值 前→后 | 有损失的次数 前→后 |","|---|---|---|---|---|---|---|"]
+rows=["| Hospital / direction | Baseline before→after | Mean before→after | 5th percentile before→after | ≥99% before→after | Worst-5% mean before→after | Draws with loss before→after |","|---|---|---|---|---|---|---|"]
 for h in short:
     for d in ("reverse","forward"):
         x=a.loc[(h,d)]; y=b.loc[(h,d)]

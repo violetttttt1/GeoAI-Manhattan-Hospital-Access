@@ -16,7 +16,7 @@ for _,r in ST10.iterrows():
     ok_all&=same; print(f"  {r.station_name:24s} old-vs-new paths identical: {same} ({m['status']})")
 print("generalised builder reproduces all 10 station_table access_paths:",ok_all)
 # 2) availability consistency with elevator_detail.csv
-ED=pd.read_csv(O+"elevator_detail.csv"); k=ED[ED.in_probability_model&(ED.avail_status=="已知")]
+ED=pd.read_csv(O+"elevator_detail.csv"); k=ED[ED.in_probability_model&(ED.avail_status=="known")]
 dif=max(abs(AVAIL12[e]-a) for e,a in zip(k["Equipment Code"],k.avail_24h_12m)); print("recomputed 12-month availability vs elevator_detail.csv for %d elevators: max abs diff %.2e"%(len(k),dif))
 # 3) ADA stations reached in baseline scenario 4 (forward 08:00 and reverse 08:00), all three hospitals
 BUSF=prep_bus(8); BUSR=prep_bus("rev"); reached_by={}; REACH={}

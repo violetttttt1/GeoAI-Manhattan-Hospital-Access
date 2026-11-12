@@ -1,969 +1,969 @@
-# 等时圈、居民数、Monte Carlo 与最终汇总（checks_isochrone）
+# Isochrones, residents, Monte Carlo and final summary (checks_isochrone)
 
-覆盖：NYP 等时圈、公交、三家医院、反向与时间平均、曼哈顿裁剪、Monte Carlo、最终汇总。 节号在本文件内重新编排；原文件保存在 `archive/checks_original.md`，文末有新旧节号对照。所有数字均为初步结果。
+Covers: the NYP isochrone, buses, the three hospitals, reverse direction and time averaging, the Manhattan clipping, the Monte Carlo, and the final summary. Section numbers are renumbered inside this file; the original file is kept in `archive/checks_original.md`, and a table at the end maps new to old section numbers. All numbers are preliminary.
 
 ---
 
-*（原章：第四轮：148 St 电梯搜索、医院周边 ADA 车站、NYP/Columbia 30 分钟等时圈）*
+*(Original chapter: Round 4, 148 St elevator search, ADA stations near the hospitals, NYP/Columbia 30-minute isochrone)*
 
-## 1. NYP/Columbia 30 分钟等时圈
+## 1. NYP/Columbia 30-minute isochrone
 
-出图：[nyp_isochrone_30min.png](../outputs/nyp_isochrone_30min.png)；数值：[nyp_isochrone_summary.csv](../outputs/nyp_isochrone_summary.csv)。
+Map: [nyp_isochrone_30min.png](../outputs/nyp_isochrone_30min.png); values: [nyp_isochrone_summary.csv](../outputs/nyp_isochrone_summary.csv).
 
-### 结果
+### Results
 
-> **更正（见docs/checks_live.md 第 5 节）：** 本节的"普通人"面积 30.75 km² 偏小，修正后是 30.95 km²，原因是上一轮代码的一个 bug。"只走 ADA"的 17.58 km² 不受影响。比例仍约 57%。
+> **Correction (see section 5 of docs/checks_live.md):** the "anyone" area of 30.75 km² in this section is too small; after the fix it is 30.95 km², because of a bug in the code of the previous round. The 17.58 km² for "ADA only" is not affected. The ratio is still about 57%.
 
-| 情景（工作日 08:00 出发，缓冲 100 m） | 覆盖面积 | 可达街道长度 | 到达的车站记录 / 站群 |
+| Scenario (weekday 08:00 departure, 100 m buffer) | Area covered | Reachable street length | Station records / station groups reached |
 |---|---|---|---|
-| **普通人（所有地铁站）** | **30.75 km²** | 450.7 km | 61 / 55 |
-| **只走 ADA 车站** | **17.58 km²**（普通人的 57%） | 246.8 km | 14 / 11 |
-| 只步行（不乘地铁） | 7.99 km² | 134.0 km | 0 |
+| **Anyone (all subway stations)** | **30.75 km²** | 450.7 km | 61 / 55 |
+| **ADA stations only** | **17.58 km²** (57% of anyone) | 246.8 km | 14 / 11 |
+| Walking only (no subway) | 7.99 km² | 134.0 km | 0 |
 
-灵敏度（面积 km²，普通人 / 只走 ADA）：
+Sensitivity (area in km², anyone / ADA only):
 
-| 条件 | 普通人 | 只走 ADA | ADA 占普通 |
+| Condition | Anyone | ADA only | ADA as share of anyone |
 |---|---|---|---|
-| 08:00，缓冲 100 m（基准） | 30.75 | 17.58 | 57% |
-| 08:00，缓冲 50 m | 25.80 | 14.37 | 56% |
-| 12:00，缓冲 100 m | 37.24 | 19.15 | 51% |
-| 12:00，缓冲 50 m | 31.77 | 15.84 | 50% |
+| 08:00, 100 m buffer (baseline) | 30.75 | 17.58 | 57% |
+| 08:00, 50 m buffer | 25.80 | 14.37 | 56% |
+| 12:00, 100 m buffer | 37.24 | 19.15 | 51% |
+| 12:00, 50 m buffer | 31.77 | 15.84 | 50% |
 
-怎么读：
-- 面积差在 08:00 的基准下是 13.17 km²（30.75 − 17.58）。换成 12:00 或 50 m 缓冲，ADA 占普通人的比例都在 50%–57%，所以"只走 ADA 站大约少一半到四成多"的量级比较稳
-- 地图上，只走 ADA 的人到不了的主要是：下城方向 125 St 以南沿西侧 1 号线一带的一大片，以及 Bronx 北部和哈莱姆河以东的若干片区。原因是这些路线上的站大多不是 ADA 站（如 1 号线的 168 St-Washington Hts 就不是）。这是从图上看到的现象，我没有对原因做逐站归因
-- 只走 ADA 的人通过 A 线快车到 125 St（15.0 分钟）、59 St-Columbus Circle（23.5 分钟）、42 St-Port Authority（26.5 分钟），在 Times Sq 和 72 St 附近时已接近 30 分钟，剩下的步行时间很少，所以南端的蓝色区域很小
-- "站记录"按 GTFS 母站点计，一个站群可能有多条记录。到达时间超过 30 分钟的站不计入
+How to read it:
+- The area difference at the 08:00 baseline is 13.17 km² (30.75 − 17.58). With 12:00 or a 50 m buffer, the ADA share of anyone stays between 50% and 57%, so the order of magnitude, "ADA-only stations give somewhere between about half and four-tenths less", is fairly stable
+- On the map, the places that ADA-only travellers cannot reach are mainly: a large area south of 125 St along the west-side 1 line, and several areas in the northern Bronx and east of the Harlem River. The reason is that most stations on these routes are not ADA stations (for example 168 St-Washington Hts on the 1 line is not). This is what the map shows; I did not attribute it station by station
+- ADA-only travellers on the A express reach 125 St (15.0 minutes), 59 St-Columbus Circle (23.5 minutes) and 42 St-Port Authority (26.5 minutes); near Times Sq and 72 St they are already close to 30 minutes, so little walking time is left, which is why the blue area at the southern end is small
+- "Station records" are counted by GTFS parent stop, so one station group can have several records. Stations reached after more than 30 minutes are not counted
 
-### 用到的假设和做法
+### Assumptions and method used
 
-**出发和时间**
-- 起点：NYP/CUIMC 的单个坐标点（40.8410, -73.9407，即 622 W 168th St），吸附到最近的街道节点，吸附距离 58 m 按步行时间计
-- 出发时间：工作日 08:00，**只用这一个出发时刻**，没有对多个时刻平均。地铁班次间隔会影响结果，12:00 的面积比 08:00 大 21%，说明对出发时刻有一定敏感
-- 总时间 30 分钟 = 起点步行 + 候车 + 乘车 + 换乘 + 下车后步行
+**Departure and time**
+- Origin: the single coordinate point of NYP/CUIMC (40.8410, -73.9407, i.e. 622 W 168th St), snapped to the nearest street node; the snapping distance of 58 m is counted as walking time
+- Departure time: weekday 08:00, **this single departure time only**, with no averaging over several times. Subway headways affect the result; the 12:00 area is 21% larger than at 08:00, which shows some sensitivity to the departure time
+- Total time 30 minutes = walk from the origin + waiting + riding + transfers + walk after getting off
 
-**公交（GTFS）**
-- 用 MTA 的 `gtfs_subway.zip`，工作日（`Weekday`）服务，共 8,498 个班次，207 个运行模式。该时刻表有效期 2026-11-01 至 2027-05-15
-- 是**计划时刻表**，没有考虑实时延误、停运或临时改线
-- **只含地铁和史坦顿岛铁路**。没有公交（如 M3、Bx7）、没有 LIRR、Metro-North、渡轮
-- 换乘只用 GTFS 的 `transfers.txt`：站内换乘 180 秒（463 条）和站间换乘（150 条，如 Times Sq 与 42 St-Port Authority）。**没有**街面步行换乘（下车后走到另一个不相连的站再上车）
-- 用 RAPTOR 最早到达算法，最多 7 轮（6 次换乘）
-- 候车：到站后等下一班，没有额外进站时间，没有闸机、楼梯、电梯的垂直移动时间，车站位置取 GTFS 母站点坐标。两组都因此略偏乐观
+**Transit (GTFS)**
+- MTA `gtfs_subway.zip`, weekday (`Weekday`) service, 8,498 trips and 207 running patterns. The timetable is valid from 2026-11-01 to 2027-05-15
+- It is the **scheduled timetable**; real-time delays, outages and temporary re-routing are not considered
+- **Subway and Staten Island Railway only.** No buses (such as M3, Bx7), no LIRR, Metro-North or ferries
+- Transfers use only GTFS `transfers.txt`: in-station transfers of 180 seconds (463 records) and between-station transfers (150 records, such as Times Sq with 42 St-Port Authority). There are **no** street-level walking transfers (getting off and walking to another, unconnected station to board again)
+- RAPTOR earliest-arrival algorithm, at most 7 rounds (6 transfers)
+- Waiting: wait for the next train on arrival at the station, with no extra time to enter the station and no vertical movement time for fare gates, stairs or elevators; station locations use the GTFS parent-stop coordinates. Both groups are therefore slightly optimistic
 
-**只走 ADA 车站的人**
-- 只能在 ADA 车站上车、下车和换乘。ADA=1 的站所有站台可用；ADA=2（仅单向）的站只有无障碍方向的站台可用，用车站表的 `ADA Northbound/Southbound` 判断。共 992 个站台中 340 个可用
-- 可以乘车经过非 ADA 站（不下车）
-- 两个 ADA 车站之间的 GTFS 换乘**默认也是无障碍的**，没有逐条核实
-- **不考虑电梯故障**。可用性按"该站标为 ADA 即可用"，不使用第三轮的整站可用概率（按你的要求不建模）
-- 步行部分与普通人用同一张街道网络，没有区分台阶、路缘坡道
+**People using ADA stations only**
+- They may board, alight and transfer only at ADA stations. At ADA=1 stations all platforms are usable; at ADA=2 (one direction only) stations only the accessible-direction platform is usable, judged from `ADA Northbound/Southbound` of the station table. 340 of the 992 platforms are usable
+- They may ride through non-ADA stations (without getting off)
+- GTFS transfers between two ADA stations are **also assumed accessible by default**, without checking each one
+- **Elevator failures are not considered.** Usability is "the station is marked ADA, so it is usable"; the whole-station availability probability of Round 3 is not used (no modelling, as you asked)
+- The walking part uses the same street network as for anyone, with no distinction between steps and curb ramps
 
-**步行网络**
-- 来源：NYC Open Data 的 Street Centerline（CSCL，`inkn-q76z`，122,331 个路段），下载在 `raw/nyc_centerline/`
-- 先试了 OpenStreetMap Overpass，但取一个 1.5×1.7 km 的小块就要 77 秒，覆盖整个等时圈范围不现实，所以改用 CSCL
-- 保留：街道、桥（名字含 PKWY、EXPY、HWY、DR 等高速字样的桥排除）、步道、小巷、台阶街（258 段）、木栈道。排除：高速公路、隧道、车道、匝道、渡轮、在建街道
-- 范围：纬度 40.60–40.93，经度 -74.06 至 -73.78，只保留整段在范围内的路段。共 86,873 段，最大连通分量占节点的 91.3%，只用该分量（约 7,720 km）
-- 步行速度 4.8 km/h（1.33 m/s），按路段长度算，不考虑坡度、过街等待
-- **没有人行道、路缘坡道、过街信号**。街道中心线代替人行道。公园内部步道只有部分被收录，影响 Fort Tryon、Highbridge 等公园附近
-- 台阶街两组人都能走。严格说轮椅使用者不能走台阶，但你要求先不含坡道，我保持两组网络一致，只让地铁部分有差异
-- 每个路段用起点到终点的直线表示位置，实际长度用原始折线长度
+**Walking network**
+- Source: NYC Open Data Street Centerline (CSCL, `inkn-q76z`, 122,331 segments), downloaded to `raw/nyc_centerline/`
+- OpenStreetMap Overpass was tried first, but fetching a 1.5 × 1.7 km block took 77 seconds, so covering the whole isochrone extent was not practical; CSCL was used instead
+- Kept: streets, bridges (bridges whose names contain highway-like words such as PKWY, EXPY, HWY, DR are excluded), footpaths, alleys, step streets (258 segments), boardwalks. Excluded: highways, tunnels, driveways, ramps, ferries, streets under construction
+- Extent: latitude 40.60–40.93, longitude -74.06 to -73.78; only segments entirely inside the extent are kept. 86,873 segments; the largest connected component holds 91.3% of the nodes and is the only one used (about 7,720 km)
+- Walking speed 4.8 km/h (1.33 m/s) by segment length, with no gradient or crossing waits
+- **No sidewalks, curb ramps or crossing signals.** Street centerlines stand in for sidewalks. Only some paths inside parks are included, which affects the areas around Fort Tryon, Highbridge and other parks
+- Step streets are walkable for both groups. Strictly, wheelchair users cannot use steps, but you asked to leave ramps out for now, so I kept the network the same for both groups and let only the subway part differ
+- Each segment is positioned by a straight line from start to end; the real length uses the length of the original polyline
 
-**面积计算**
-- 把到达的街道（含只走到一半的路段）按 5 m 间隔采样，落到 10 m 的栅格里，距离到达街道 ≤ 100 m 的陆地格子算入覆盖（50 m 作灵敏度）
-- 用 NYC 行政区边界扣掉水面，所以河面不计入
-- 面积对缓冲宽度很敏感（100 m 与 50 m 差约 5–6 km²），**比较两组的相对差比绝对面积更可靠**
-- 地图上的虚线是纯步行的覆盖范围
+**Area calculation**
+- Reached streets (including segments reached halfway) are sampled every 5 m and dropped into a 10 m grid; land cells within ≤ 100 m of a reached street count as covered (50 m as a sensitivity check)
+- The NYC borough boundary is used to remove water, so river surface is not counted
+- Area is sensitive to the buffer width (100 m versus 50 m differs by about 5–6 km²), so **the relative difference between the two groups is more reliable than the absolute area**
+- The dashed line on the map is the coverage of pure walking
 
-### 已做的检查
-1. **时间合理性：** 168 St 到 125 St（A 线快车）共 15.0 分钟（含 2.4 分钟步行、候车和乘车），59 St-Columbus Circle 23.5 分钟，42 St-Port Authority 26.5 分钟，与 A 线快车的实际时刻量级一致
-2. **子集关系：** 只走 ADA 的到达时间在所有街道节点上都不早于普通人（违例节点 0 个），所以蓝色区域应该完全落在橙色区域内
-3. **站数口径：** 修正了一个计数错误：换乘时间叠加后有站点的到达时间超过 30 分钟，已排除。对面积没有影响（街道步行只从 ≤30 分钟到达的站点出发）
-4. 纯步行 8.0 km² 对应约 2.4 km 的路网距离，在 168 St 一带这个数量级合理（山地、河岸限制了范围）
+### Checks done
+1. **Plausible times:** 168 St to 125 St (A express) takes 15.0 minutes in total (including 2.4 minutes of walking, waiting and riding), 59 St-Columbus Circle 23.5 minutes, 42 St-Port Authority 26.5 minutes, consistent in order of magnitude with the real A express timetable
+2. **Subset relation:** arrival times for ADA-only are never earlier than for anyone at any street node (0 violating nodes), so the blue area must lie entirely inside the orange area
+3. **Station-count definition:** a counting error was fixed: after adding transfer times, some stations had arrival times over 30 minutes and were excluded. It has no effect on the area (street walking starts only from stations reached within ≤ 30 minutes)
+4. Pure walking of 8.0 km² corresponds to a network distance of about 2.4 km, which is a reasonable order of magnitude around 168 St (hills and the riverbank limit the extent)
 
-### 局限
-- 单一起点、单一出发时刻、计划时刻表，没有实时数据
-- 没有公交车，真实世界里无障碍乘客会大量使用公交，所以"只走 ADA 地铁站"会低估实际可达范围
-- 街道网络不含坡道，也没有路缘坡道信息；坡道数据（Ramp Locations / Program Progress）留到后面再接入
-- ADA 标志取自车站表，没有按电梯是否可用或实际路径核实
-- 没有包含进出站时间；两组都偏乐观，对 ADA 组而言电梯等待、较长的无障碍路径会使差距更大
+### Limitations
+- A single origin, a single departure time and a scheduled timetable; no real-time data
+- No buses; in the real world accessible travellers use buses a lot, so "ADA subway stations only" underestimates the real reachable range
+- The street network contains no ramps and no curb-ramp information; the ramp data (Ramp Locations / Program Progress) are left for later
+- The ADA flag comes from the station table and was not checked against elevator availability or actual paths
+- Station entry and exit time is not included; both groups are optimistic, and for the ADA group elevator waits and longer accessible paths would make the gap larger
 
-## 2. 本轮新增文件
+## 2. New files in this round
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [nyp_isochrone_30min.png](../outputs/nyp_isochrone_30min.png) | 两层等时圈地图 |
-| [nyp_isochrone_summary.csv](../outputs/nyp_isochrone_summary.csv) | 各情景面积、街道长度、车站数 |
-| [hospital_ada_stations.csv](../outputs/hospital_ada_stations.csv) | 三家医院 400 m 内的 ADA 车站和最近 ADA 车站 |
-| `raw/live_equipment/`、`raw/mta_entrances/`、`raw/mta_amenities/`、`raw/nyc_centerline/` | 本轮下载的原始数据 |
+| [nyp_isochrone_30min.png](../outputs/nyp_isochrone_30min.png) | Two-layer isochrone map |
+| [nyp_isochrone_summary.csv](../outputs/nyp_isochrone_summary.csv) | Area, street length and station counts per scenario |
+| [hospital_ada_stations.csv](../outputs/hospital_ada_stations.csv) | ADA stations within 400 m of the three hospitals and the nearest ADA station |
+| `raw/live_equipment/`, `raw/mta_entrances/`, `raw/mta_amenities/`, `raw/nyc_centerline/` | Raw data downloaded in this round |
 
 ---
 
-*（原章：第五轮：加入公交（NYP/Columbia 等时圈））*
+*(Original chapter: Round 5, adding buses (NYP/Columbia isochrone))*
 
-出图：[nyp_isochrone_bus_4scenarios.png](../outputs/nyp_isochrone_bus_4scenarios.png)；数值：[nyp_isochrone_bus_summary.csv](../outputs/nyp_isochrone_bus_summary.csv)。除加入公交外，其他设置与第 1 节相同（起点、08:00 出发、30 分钟、4.8 km/h、CSCL 街道网络、100 m 缓冲、不含坡道）。
+Map: [nyp_isochrone_bus_4scenarios.png](../outputs/nyp_isochrone_bus_4scenarios.png); values: [nyp_isochrone_bus_summary.csv](../outputs/nyp_isochrone_bus_summary.csv). Apart from adding buses, the settings are the same as in section 1 (origin, 08:00 departure, 30 minutes, 4.8 km/h, CSCL street network, 100 m buffer, no ramps).
 
-## 3. 结果
+## 3. Results
 
-工作日 08:00 出发，缓冲 100 m（基准）：
+Weekday 08:00 departure, 100 m buffer (baseline):
 
-| 情景 | 覆盖面积 | 占①的比例 | 到达的地铁站记录 | 作为步行起点的公交站 |
+| Scenario | Area covered | Share of (1) | Subway station records reached | Bus stops used as walking origins |
 |---|---|---|---|---|
-| ① 普通人，只坐地铁 | **30.95 km²** | 100% | 61 | 0 |
-| ② 只走 ADA 地铁站 | **17.59 km²** | 57% | 14 | 0 |
-| ③ 普通人，地铁 + 公交 | **36.51 km²** | 118% | 76 | 1,170 |
-| ④ 只走 ADA 地铁站，加公交 | **23.79 km²** | 77% | 22 | 759 |
+| (1) Anyone, subway only | **30.95 km²** | 100% | 61 | 0 |
+| (2) ADA subway stations only | **17.59 km²** | 57% | 14 | 0 |
+| (3) Anyone, subway + bus | **36.51 km²** | 118% | 76 | 1,170 |
+| (4) ADA subway stations only, plus bus | **23.79 km²** | 77% | 22 | 759 |
 
-**两组之间的相对比例**（ADA 组 ÷ 普通人）：
+**Relative ratio between the two groups** (ADA group ÷ anyone):
 
-| 比较 | 08:00（100 m） | 08:00（50 m） | 12:00（100 m） | 12:00（50 m） |
+| Comparison | 08:00 (100 m) | 08:00 (50 m) | 12:00 (100 m) | 12:00 (50 m) |
 |---|---|---|---|---|
-| 只有地铁：② ÷ ① | **57%** | 55% | 51% | 50% |
-| 地铁 + 公交：④ ÷ ③ | **65%** | 64% | 57% | 55% |
+| Subway only: (2) ÷ (1) | **57%** | 55% | 51% | 50% |
+| Subway + bus: (4) ÷ (3) | **65%** | 64% | 57% | 55% |
 
-**加公交的增量：**
+**Gain from adding buses:**
 
 | | 08:00 | 12:00 |
 |---|---|---|
-| 普通人：③ − ① | +5.56 km²（+18%） | +3.35 km²（+9%） |
-| ADA 组：④ − ② | +6.20 km²（+35%） | +3.79 km²（+20%） |
+| Anyone: (3) − (1) | +5.56 km² (+18%) | +3.35 km² (+9%) |
+| ADA group: (4) − (2) | +6.20 km² (+35%) | +3.79 km² (+20%) |
 
-另外 08:00 下：④ ÷ ② = 135%，③ ÷ ② = 208%；12:00 下：④ 的面积（22.96 km²）反而比 08:00 小（23.79 km²），而 ③ 在 12:00（40.65 km²）比 08:00 大。
+Also at 08:00: (4) ÷ (2) = 135%, (3) ÷ (2) = 208%; at 12:00 the area of (4) (22.96 km²) is actually smaller than at 08:00 (23.79 km²), while (3) at 12:00 (40.65 km²) is larger than at 08:00.
 
-怎么读：
-1. **公交缩小了两组之间的差距，但没有消除。** 08:00 下 ADA 组占普通人的比例从 57% 升到 65%，绝对差距从 13.4 km² 降到 12.7 km²。12:00 下比例是 51% 升到 57%。
-2. **公交对 ADA 组的相对帮助更大**（+35% 对 +18%），因为他们的地铁选择少，公交补了缺口。
-3. **加的面积主要落在布朗克斯。** 按区拆分（08:00，km²）：
+How to read it:
+1. **Buses narrow the gap between the two groups but do not remove it.** At 08:00 the ADA group's share of anyone rises from 57% to 65%, and the absolute gap falls from 13.4 km² to 12.7 km². At 12:00 the share goes from 51% to 57%.
+2. **Buses help the ADA group more in relative terms** (+35% versus +18%), because they have fewer subway options and buses fill the gap.
+3. **The added area falls mainly in the Bronx.** Split by borough (08:00, km²):
 
-| 情景 | 曼哈顿 | 布朗克斯 | 其中曼哈顿 110 St 以北 / 以南 |
+| Scenario | Manhattan | Bronx | of which Manhattan north / south of 110 St |
 |---|---|---|---|
-| ① | 22.53 | 8.43 | 14.88 / 7.66 |
-| ② | 15.18 | 2.42 | 13.03 / 2.15 |
-| ③ | 23.75 | 12.78 | 15.65 / 8.09 |
-| ④ | 17.54 | 6.26 | 14.96 / 2.58 |
+| (1) | 22.53 | 8.43 | 14.88 / 7.66 |
+| (2) | 15.18 | 2.42 | 13.03 / 2.15 |
+| (3) | 23.75 | 12.78 | 15.65 / 8.09 |
+| (4) | 17.54 | 6.26 | 14.96 / 2.58 |
 
-   普通人从公交多得的 5.56 km² 里，布朗克斯 4.35、曼哈顿 1.22。ADA 组多得的 6.20 km² 里，布朗克斯 3.84、曼哈顿 2.36（其中 110 St 以北 1.93）。Brooklyn 和 Queens 在 30 分钟内都没有到达。
-4. 研究区附近的两个对比最大的区域：ADA 组在 110 St 以南的曼哈顿只有 2.15 km²（普通人 7.66），加公交后也只有 2.58 km²。公交主要在 110 St 以北的曼哈顿和布朗克斯帮到了 ADA 组。
-5. **敏感性：** 比例随出发时刻和缓冲宽度会变，方向一致，量级在 50%–65% 之间。12:00 的结果更低，可能因为中午的公交班次减少（08:00 有 1,170 个公交站作为步行起点，12:00 是 1,254 个，差别不大，更可能是不同的换乘组合造成），我没有逐一核实原因。
+   Of the 5.56 km² that anyone gains from buses, the Bronx accounts for 4.35 and Manhattan for 1.22. Of the 6.20 km² the ADA group gains, the Bronx accounts for 3.84 and Manhattan for 2.36 (of which 1.93 north of 110 St). Neither Brooklyn nor Queens is reached within 30 minutes.
+4. The two starkest contrasts near the study area: south of 110 St in Manhattan the ADA group has only 2.15 km² (anyone 7.66), and only 2.58 km² after adding buses. Buses help the ADA group mainly in Manhattan north of 110 St and in the Bronx.
+5. **Sensitivity:** the ratio changes with the departure time and the buffer width, but in the same direction, within about 50%–65%. The 12:00 result is lower, possibly because there are fewer buses at midday (at 08:00 there are 1,170 bus stops used as walking origins and at 12:00 1,254, not much different, so different transfer combinations are more likely); I did not check the reason one by one.
 
-### 对上一轮结果的更正
+### Correction to the previous round's result
 
-重新验证时发现**上一轮代码有一个 bug**：在把"到达各站的时间"作为街道步行的起点时，如果有多个站点吸附到同一个街道节点，我用赋值覆盖，保留的是最后写入的值，而不是最早到达的值。结果是普通人情景里有 3 个街道节点（每个节点上各有 2 个到达的站）取了较晚的时间，最大差 180 秒。
+On re-verification I found **a bug in the previous round's code**: when the "arrival times at stations" are used as the starting points of street walking, and several stations snap to the same street node, I used assignment and kept the last value written, not the earliest arrival. As a result, 3 street nodes in the "anyone" scenario (each with 2 reached stations) took the later time, by up to 180 seconds.
 
-- 验证：用旧写法能完全复现上一轮的结果，改成取最小值后差异消失。上一轮的公交以外的部分（RAPTOR 本身、到达站点的时间）都一致。
-- 影响：普通人面积 30.75 → **30.95 km²**（+0.20，其中 0.12 来自 bug，0.08 来自本轮栅格网格范围变化引起的对齐差异）；ADA 组 17.58 → **17.59 km²**（不受影响，因为没有重合节点）；比例 57.2% → **56.8%**，结论不变。
-- 第 1 节里的灵敏度（12:00 的 37.24 / 19.15、50 m 缓冲的数字）有同样的小偏差。本节已用修正后的代码全部重算，请以第 3 节为准。
+- Verification: the old way of writing reproduces the previous round's result exactly, and the difference disappears after taking the minimum. Everything in the previous round other than buses (RAPTOR itself, the station arrival times) is identical.
+- Effect: the "anyone" area 30.75 → **30.95 km²** (+0.20, of which 0.12 comes from the bug and 0.08 from alignment differences caused by the changed extent of this round's grid); ADA group 17.58 → **17.59 km²** (not affected, because there are no coinciding nodes); the ratio 57.2% → **56.8%**, so the conclusion is unchanged.
+- The sensitivity numbers in section 1 (12:00 at 37.24 / 19.15, the 50 m buffer) have the same small deviation. This section was fully recomputed with the corrected code, so please use section 3.
 
-## 4. 公交数据：用哪些 feed，其他区的数据是否需要
+## 4. Bus data: which feeds are used, and whether data for other boroughs is needed
 
-MTA 公交 GTFS 按"线路所属区"拆分，下载地址形如 `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_<区>.zip`。下载在 `raw/gtfs_bus/`。
+MTA bus GTFS is split by "the borough the route belongs to", with download addresses like `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_<borough>.zip`. They are downloaded to `raw/gtfs_bus/`.
 
-| feed | 状态 | 说明 |
+| Feed | Status | Note |
 |---|---|---|
-| `gtfs_m` 曼哈顿 | **使用** | 19 条线停靠曼哈顿 110 St 以北：M1、M2、M3、M4、M5、M7、M10、M11、M15、M15+、M35、M60+、M98、M101、M102、M103、M104、M116、M125 |
-| `gtfs_bx` 布朗克斯 | **使用（上曼哈顿必需）** | 15 条线停靠上曼哈顿：Bx3、Bx6、Bx6+、Bx7、Bx9、Bx11、Bx12、Bx12+、Bx13、Bx19、Bx20、Bx33、Bx35、Bx36，以及 **M100**。M100 虽然名字是 M 线，却在布朗克斯 feed 里，只下曼哈顿 feed 会漏掉它。这些 Bx 线同时也是通往布朗克斯的通道，而布朗克斯是本图里公交增量的主要来源 |
-| `gtfs_busco` MTA Bus Company | **使用** | 9 条 BxM 快线停靠上曼哈顿（共 10 个站），影响很小 |
-| `gtfs_b` 布鲁克林 | 不需要 | 在上曼哈顿及布朗克斯西侧的范围内一个站都没有 |
-| `gtfs_q` 皇后区 | 不需要 | 同上，0 个站 |
-| `gtfs_si` 史坦顿岛 | 不需要 | 同上，0 个站 |
+| `gtfs_m` Manhattan | **Used** | 19 routes stop in Manhattan north of 110 St: M1, M2, M3, M4, M5, M7, M10, M11, M15, M15+, M35, M60+, M98, M101, M102, M103, M104, M116, M125 |
+| `gtfs_bx` Bronx | **Used (required for upper Manhattan)** | 15 routes stop in upper Manhattan: Bx3, Bx6, Bx6+, Bx7, Bx9, Bx11, Bx12, Bx12+, Bx13, Bx19, Bx20, Bx33, Bx35, Bx36, and **M100**. M100 has an M name but is in the Bronx feed, so downloading only the Manhattan feed would miss it. These Bx routes are also the corridor to the Bronx, which is the main source of the bus gain in this map |
+| `gtfs_busco` MTA Bus Company | **Used** | 9 BxM express routes stop in upper Manhattan (10 stops in total), with very little effect |
+| `gtfs_b` Brooklyn | Not needed | Not a single stop in the extent covering upper Manhattan and the west side of the Bronx |
+| `gtfs_q` Queens | Not needed | Same, 0 stops |
+| `gtfs_si` Staten Island | Not needed | Same, 0 stops |
 
-三个不需要的 feed 也下载了（用来验证没有站点）。各 feed 的有效期是 2026-10-12 至 2027-01-02。
+The three unneeded feeds were also downloaded (to verify that they have no stops). All feeds are valid from 2026-10-12 to 2027-01-02.
 
-**要点：** 上曼哈顿的公交线**确实需要其他区的数据**，至少需要布朗克斯 feed，所以不能只下载曼哈顿 feed。
+**Key point:** bus routes in upper Manhattan **do need data from other boroughs**, at least the Bronx feed, so downloading only the Manhattan feed is not enough.
 
-## 5. 用到的假设
+## 5. Assumptions used
 
-**公交时刻表**
-- **服务日期：2026-11-18（周三）。** 今天（11 月 11 日）是 Veterans Day，各 feed 都有假日调整，所以没用今天。根据 `calendar.txt` 和 `calendar_dates.txt` 解析当天有效的服务：曼哈顿 5 个、布朗克斯 4 个、Bus Company 8 个服务。该日是上课日，带 `SDon` 的服务包含在内
-- 地铁 feed 沿用上一轮的 `Weekday` 服务（该 feed 有效期是 2026-11-01 至 2027-05-15，与公交 feed 的有效期不同，两者不是同一个日期的精确对应，但都是工作日常规服务）
-- 窗口内班次：只保留在 08:00 到 08:30 期间运行的班次（曼哈顿 760 个、布朗克斯 909 个、Bus Company 1,255 个），共 405 个运行模式，涉及 6,220 个公交站
-- **计划时刻表，不含实时和交通状况**；上下车限制（`pickup_type`/`drop_off_type`）已处理，不允许上车的站不能上，不允许下车的站不能下
-- BxM 快线按普通线路处理，没有考虑快线的单独票价或停靠规则以外的限制；Select Bus Service 的站外付费也不考虑
-- 各 feed 的公交站编号加了 feed 前缀，同一物理站点出现在多个 feed 时按不同站处理，步行换乘 0 秒
+**Bus timetable**
+- **Service date: 2026-11-18 (Wednesday).** Today (11 November) is Veterans Day and every feed has holiday adjustments, so today was not used. The services valid on that day were resolved from `calendar.txt` and `calendar_dates.txt`: 5 services for Manhattan, 4 for the Bronx and 8 for Bus Company. The day is a school day, so services marked `SDon` are included
+- The subway feed keeps the previous round's `Weekday` service (the feed is valid 2026-11-01 to 2027-05-15, different from the bus feeds' validity, so the two do not correspond to exactly the same date, but both are regular weekday service)
+- Trips in the window: only trips running between 08:00 and 08:30 are kept (760 for Manhattan, 909 for the Bronx, 1,255 for Bus Company), giving 405 running patterns and 6,220 bus stops
+- **Scheduled timetable; no real-time or traffic conditions**; boarding/alighting restrictions (`pickup_type`/`drop_off_type`) are handled: a stop that does not allow boarding cannot be boarded at, and one that does not allow alighting cannot be alighted at
+- BxM express routes are treated as ordinary routes, without restrictions other than the express fare or stopping rules; off-board payment for Select Bus Service is not considered either
+- Bus stop numbers carry a feed prefix; when one physical stop appears in several feeds it is treated as different stops, with a 0-second walking transfer
 
-**换乘和步行**
-- **公交与公交、公交与地铁之间加了街面步行换乘**，上限 5 分钟（300 秒，按街道网络距离、4.8 km/h），共 67,716 对；**地铁与地铁之间的换乘保持原样**，只用 GTFS 的 `transfers.txt`。这样做是为了让情景 ①② 与上一轮可比，但它带来一个不对称：地铁之间没有街面步行换乘，公交相关的有
-- 公交站大多在街区中段，所以公交站吸附到最近的**路段**（按路段上最近的点算，到两端的距离分别计入）；地铁站仍按上一轮的做法吸附到最近的**节点**，为了保持情景 ①② 可比。这是两种口径并存。6,220 个公交站里有 360 个（5.8%）离街道网络超过 150 m，无法步行，08:00 下这 360 个里没有一个在 30 分钟内被到达，所以对结果没有影响
-- 起点到公交站：与到地铁站同样，按街道网络步行
-- 候车：到站后等下一班，没有额外进站、过街或买票时间
+**Transfers and walking**
+- **Street-level walking transfers were added between bus and bus and between bus and subway**, up to 5 minutes (300 seconds, by street-network distance at 4.8 km/h), 67,716 pairs in total; **transfers between subway stations stay as before**, using only GTFS `transfers.txt`. This keeps scenarios (1) and (2) comparable with the previous round, but it creates an asymmetry: there are no street-level walking transfers between subway stations, while there are for those involving buses
+- Bus stops are mostly in the middle of a block, so bus stops snap to the nearest **segment** (by the nearest point on the segment, with the distances to both ends counted); subway stations still snap to the nearest **node** as in the previous round, to keep scenarios (1) and (2) comparable. The two conventions coexist. Of the 6,220 bus stops, 360 (5.8%) are more than 150 m from the street network and cannot be walked to; at 08:00 none of these 360 is reached within 30 minutes, so there is no effect on the results
+- Origin to bus stop: walking on the street network, the same as to subway stations
+- Waiting: wait for the next bus on arrival, with no extra time to enter, cross streets or buy a ticket
 
-**ADA 组与公交**
-- **所有公交车和所有公交站都当作 ADA 组可用**。这是按你的要求（公交站不要求有路缘坡道，先不考虑坡道）做的假设，也是上限：现实中并不是每个站都有无障碍的路缘、公交站台和人行道。MTA 公交车辆本身是无障碍的，但车站周边的可达性没有核实
-- 地铁部分保持上一轮的限制：只能在 ADA 车站（ADA=1 的所有站台；ADA=2 的无障碍方向站台）上下车和换乘，可以乘车经过非 ADA 站。ADA 地铁站与公交站之间的步行换乘按普通换乘算，不做额外限制
-- 不考虑电梯故障、不考虑街道步行的台阶和路缘坡道
+**ADA group and buses**
+- **All buses and all bus stops are treated as usable by the ADA group.** This is an assumption made at your request (bus stops do not require curb ramps; ramps are not considered for now), and it is an upper bound: in reality not every stop has an accessible curb, bus pad and sidewalk. MTA buses themselves are accessible, but accessibility around the stops was not checked
+- The subway part keeps the previous round's restriction: boarding, alighting and transferring only at ADA stations (all platforms at ADA=1; the accessible-direction platform at ADA=2), and riding through non-ADA stations is allowed. Walking transfers between ADA subway stations and bus stops are treated as ordinary transfers, with no extra restriction
+- Elevator failures, and steps and curb ramps on street walking, are not considered
 
-**其他沿用的设置：** 起点、30 分钟、步行 4.8 km/h、街道网络（CSCL）、100 m 缓冲、10 m 栅格、扣水面的做法、地图上的虚线是纯步行范围。
+**Other settings kept:** origin, 30 minutes, walking at 4.8 km/h, the street network (CSCL), the 100 m buffer, the 10 m grid, the removal of water surface; the dashed line on the map is the pure-walking range.
 
-## 6. 遇到的问题
+## 6. Problems met
 
-1. **只下曼哈顿 feed 不够。** 见第 4 节，M100 在布朗克斯 feed 里，Bx 线是进入布朗克斯的通道。
-2. **今天的日期不适合做基准。** Veterans Day，各 feed 对当天做了调整，改用 11-18。
-3. **公交的上下车限制最初漏掉了。** 第一版解析时只读了停靠时间，没读 `pickup_type` / `drop_off_type`。检查发现 Bus Company 快线约 6% 的停靠不允许上车、6% 不允许下车（曼哈顿、布朗克斯 feed 只有 0.1%–0.2%）。补上后重跑，**08:00 的结果完全没变**，12:00 只差几个站（公交站 1,258 → 1,254），所以对结论没有影响。
-4. **发现并修正了上一轮的 bug**（见第 3 节"更正"）。
-5. **公交站落在街道网络之外。** OSM 的小块下载太慢，所以街道网络用的是 CSCL，范围限制在纬度 40.60–40.93、经度 -74.06 至 -73.78。360 个公交站在范围外或离街道太远，08:00 下没有被到达，所以没有造成截断。但 12:00 我没有单独检查这一点。
-6. **没有做的事：** 纯公交（不含地铁）的情景、对多个出发时刻取平均、公交的可靠性和拥挤，以及换乘的实际路径是否无障碍（电梯、斜坡）。
-7. **合理性检查：** (a) 到达的公交站隐含的直线平均速度最大 6.4 m/s（23 km/h，含步行和候车），没有"瞬移"；(b) 到达的公交站全部能吸附到街道网络（0 个被截断）；(c) 公交让 15 个原本在 30 分钟内到不了的地铁站变得可达（如 125 St、135 St、145 St、116 St、Fordham Rd、Kingsbridge Rd、3 Av-149 St），另有 36 个站台提前到达。
+1. **Downloading only the Manhattan feed is not enough.** See section 4: M100 is in the Bronx feed, and the Bx routes are the corridor into the Bronx.
+2. **Today's date is not suitable as the baseline.** It is Veterans Day and the feeds adjust that day, so 11-18 was used instead.
+3. **Boarding/alighting restrictions of buses were missed at first.** The first version of the parser read only the stop times and not `pickup_type` / `drop_off_type`. The check found that about 6% of the stops of the Bus Company express routes do not allow boarding and 6% do not allow alighting (only 0.1%–0.2% in the Manhattan and Bronx feeds). After adding them and re-running, **the 08:00 result is completely unchanged**, and 12:00 differs by only a few stops (bus stops 1,258 → 1,254), so there is no effect on the conclusion.
+4. **A bug in the previous round was found and corrected** (see "Correction" in section 3).
+5. **Bus stops falling outside the street network.** Downloading OSM in blocks was too slow, so the street network uses CSCL, limited to latitude 40.60–40.93 and longitude -74.06 to -73.78. 360 bus stops are outside the extent or too far from a street; at 08:00 none of them is reached, so nothing was truncated. But I did not check this separately for 12:00.
+6. **Not done:** a bus-only scenario (without subway), averaging over several departure times, bus reliability and crowding, and whether the actual transfer paths are accessible (elevators, slopes).
+7. **Plausibility checks:** (a) the implied straight-line average speed to the bus stops reached is at most 6.4 m/s (23 km/h, including walking and waiting), with no "teleporting"; (b) all bus stops reached snap to the street network (0 truncated); (c) buses make 15 subway stations that were unreachable within 30 minutes reachable (such as 125 St, 135 St, 145 St, 116 St, Fordham Rd, Kingsbridge Rd, 3 Av-149 St), and another 36 platforms are reached earlier.
 
-## 7. 本轮新增文件
+## 7. New files in this round
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [nyp_isochrone_bus_4scenarios.png](../outputs/nyp_isochrone_bus_4scenarios.png) | 四个情景并排的地图，每个面板标题带面积和占比；③④ 中浅色为不含公交的范围，深色为公交增加的部分 |
-| [nyp_isochrone_bus_summary.csv](../outputs/nyp_isochrone_bus_summary.csv) | 各情景、两个出发时刻、两种缓冲的面积，以及上一轮结果（标为 superseded）供对照 |
-| `raw/gtfs_bus/` | 六个公交 feed 的 zip 和解压内容 |
+| [nyp_isochrone_bus_4scenarios.png](../outputs/nyp_isochrone_bus_4scenarios.png) | Map of the four scenarios side by side, with area and share in each panel title; in (3) and (4) the light colour is the range without buses and the dark colour is the part added by buses |
+| [nyp_isochrone_bus_summary.csv](../outputs/nyp_isochrone_bus_summary.csv) | Area for each scenario, two departure times and two buffers, plus the previous round's results (marked superseded) for comparison |
+| `raw/gtfs_bus/` | Zips and unzipped contents of the six bus feeds |
 
 ---
 
-*（原章：第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查）*
+*(Original chapter: Round 8, four-scenario isochrones for the three hospitals, land area, ACS residents and direction check)*
 
-**关于节号：** 写之前我完整读了一遍本文件。文件里现在有两条工作线各自用了"第四轮 / 第五轮"和 22–30 节的编号（实时停运数据检查一条，等时圈一条），节号有重复。我只追加、没有改动任何已有内容；本章从 **36** 节起，引用以标题为准，不再用"第 1 节""第 3 节"这类有歧义的节号。
+**About section numbers:** before writing I read this whole file. At that time the file had two workstreams that each used the numbering "Round 4 / Round 5" and sections 22–30 (the live outage data check and the isochrones), so section numbers were duplicated. I only appended and changed no existing content; this chapter started from section **36**, and references go by title instead of ambiguous numbers such as "section 1" or "section 3".
 
-## 8. 本章产出
+## 8. Output of this chapter
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [isochrone_harlem_4scenarios.png](../outputs/isochrone_harlem_4scenarios.png) | Harlem Hospital 四情景地图 |
-| [isochrone_nyp_columbia_4scenarios.png](../outputs/isochrone_nyp_columbia_4scenarios.png) | NYP/Columbia（CUIMC）四情景地图 |
-| [isochrone_mt_sinai_morningside_4scenarios.png](../outputs/isochrone_mt_sinai_morningside_4scenarios.png) | Mount Sinai Morningside 四情景地图 |
-| [hospital_isochrone_summary.csv](../outputs/hospital_isochrone_summary.csv) | 汇总表，102 行：3 家医院 × 4 种时间/方向设定 × 4 情景（另加纯步行）× 2 种缓冲。列含陆地面积、含水面积、曼哈顿/布朗克斯/布鲁克林/皇后区/史坦顿岛面积、可达街道长度、地铁站和公交站数、行走困难居民数及其 90% 误差、人口基数 |
-| `raw/census/` | `acsdt5y2024-b18105.dat`（ACS 汇总文件）和 `nyc_tracts_2020.geojson`（NYC 2020 人口普查区边界，已沿岸线裁剪） |
+| [isochrone_harlem_4scenarios.png](../outputs/isochrone_harlem_4scenarios.png) | Four-scenario map for Harlem Hospital |
+| [isochrone_nyp_columbia_4scenarios.png](../outputs/isochrone_nyp_columbia_4scenarios.png) | Four-scenario map for NYP/Columbia (CUIMC) |
+| [isochrone_mt_sinai_morningside_4scenarios.png](../outputs/isochrone_mt_sinai_morningside_4scenarios.png) | Four-scenario map for Mount Sinai Morningside |
+| [hospital_isochrone_summary.csv](../outputs/hospital_isochrone_summary.csv) | Summary table, 102 rows: 3 hospitals × 4 time/direction settings × 4 scenarios (plus pure walking) × 2 buffers. Columns include land area, area including water, areas in Manhattan / Bronx / Brooklyn / Queens / Staten Island, reachable street length, numbers of subway and bus stops, residents with an ambulatory difficulty and their 90% margin of error, and the population base |
+| `raw/census/` | `acsdt5y2024-b18105.dat` (ACS summary file) and `nyc_tracts_2020.geojson` (NYC 2020 census-tract boundaries, clipped to the shoreline) |
 
-四个情景的定义、公交数据、步行网络和面积算法与"加入公交（NYP/Columbia 等时圈）"一章完全相同（①普通人坐地铁，②只走 ADA 地铁站，③普通人地铁加公交，④只走 ADA 地铁站加公交；所有公交车和公交站都当作可用；08:00 出发；30 分钟；4.8 km/h；CSCL 街道；100 m 缓冲；不含坡道、不考虑电梯故障）。本章不重复那些假设。
+The definitions of the four scenarios, the bus data, the walking network and the area algorithm are exactly the same as in the chapter "Adding buses (NYP/Columbia isochrone)" ((1) anyone, subway; (2) ADA subway stations only; (3) anyone, subway + bus; (4) ADA subway stations only, plus bus; all buses and bus stops are treated as usable; 08:00 departure; 30 minutes; 4.8 km/h; CSCL streets; 100 m buffer; no ramps; no elevator failures). This chapter does not repeat those assumptions.
 
-**回归检查：** 重构代码后，用同一代码重算 NYP/Columbia 的 08:00 四个情景，**每个街道节点的到达时间与上一章结果逐点一致**（4/4）。面积差在 0.02 km² 以内（如情景 ① 30.95 → 30.93），来自栅格网格对齐不同。
+**Regression check:** after the code was restructured, the same code was used to recompute the four 08:00 scenarios for NYP/Columbia, and **the arrival time at every street node agrees point by point with the previous chapter's result** (4/4). The area difference is within 0.02 km² (for example scenario (1) 30.95 → 30.93), caused by a different alignment of the raster grid.
 
-## 9. 三家医院四个情景的结果
+## 9. Results of the four scenarios for the three hospitals
 
-工作日 08:00 出发，缓冲 100 m，**只算陆地**。"其他区"在所有情景里**全部是布朗克斯**：没有任何情景到达布鲁克林、皇后区或史坦顿岛（51 个情景全为 0）。
+Weekday 08:00 departure, 100 m buffer, **land only**. "Other boroughs" is **always the Bronx** in every scenario: no scenario reaches Brooklyn, Queens or Staten Island (all 51 scenarios are 0).
 
-| 医院 / 情景 | 陆地面积 km² | 曼哈顿 | 布朗克斯 | 占 ① | 地铁站记录 / 作为步行起点的公交站 | 行走困难居民（±90% 误差） |
+| Hospital / scenario | Land area km² | Manhattan | Bronx | Share of (1) | Subway station records / bus stops used as walking origins | Residents with ambulatory difficulty (±90% margin) |
 |---|---|---|---|---|---|---|
-| **Harlem Hospital** ① | 41.03 | 27.86 | 13.16 | 100% | 103 / 0 | 102,539（±3,516） |
-| ② | 28.92 | 20.19 | 8.73 | 70% | 38 / 0 | 70,857（±2,917） |
-| ③ | 46.80 | 31.96 | 14.84 | 114% | 119 / 1,464 | 111,358（±3,714） |
-| ④ | 33.98 | 22.79 | 11.19 | 83% | 40 / 1,067 | 83,580（±3,181） |
-| 纯步行 | 11.49 | 8.12 | 3.37 | | | 32,739（±1,866） |
-| **NYP/Columbia** ① | 30.93 | 22.51 | 8.43 | 100% | 61 / 0 | 74,067（±3,045） |
-| ② | 17.58 | 15.16 | 2.41 | 57% | 14 / 0 | 44,402（±2,310） |
-| ③ | 36.51 | 23.73 | 12.78 | 118% | 76 / 1,170 | 87,954（±3,287） |
-| ④ | 23.80 | 17.53 | 6.28 | 77% | 22 / 759 | 61,970（±2,753） |
-| 纯步行 | 7.98 | 6.48 | 1.50 | | | 25,017（±1,801） |
-| **Mount Sinai Morningside** ① | 25.17 | 23.77 | 1.40 | 100% | 70 / 0 | 60,600（±2,798） |
-| ② | 10.05 | 9.72 | 0.33 | 40% | 9 / 0 | 23,531（±1,587） |
-| ③ | 27.05 | 25.52 | 1.52 | 107% | 74 / 904 | 64,585（±2,867） |
-| ④ | 14.30 | 13.97 | 0.33 | 57% | 10 / 497 | 32,406（±1,903） |
-| 纯步行 | 9.03 | 9.03 | 0 | | | 21,611（±1,547） |
+| **Harlem Hospital** (1) | 41.03 | 27.86 | 13.16 | 100% | 103 / 0 | 102,539 (±3,516) |
+| (2) | 28.92 | 20.19 | 8.73 | 70% | 38 / 0 | 70,857 (±2,917) |
+| (3) | 46.80 | 31.96 | 14.84 | 114% | 119 / 1,464 | 111,358 (±3,714) |
+| (4) | 33.98 | 22.79 | 11.19 | 83% | 40 / 1,067 | 83,580 (±3,181) |
+| Walking only | 11.49 | 8.12 | 3.37 | | | 32,739 (±1,866) |
+| **NYP/Columbia** (1) | 30.93 | 22.51 | 8.43 | 100% | 61 / 0 | 74,067 (±3,045) |
+| (2) | 17.58 | 15.16 | 2.41 | 57% | 14 / 0 | 44,402 (±2,310) |
+| (3) | 36.51 | 23.73 | 12.78 | 118% | 76 / 1,170 | 87,954 (±3,287) |
+| (4) | 23.80 | 17.53 | 6.28 | 77% | 22 / 759 | 61,970 (±2,753) |
+| Walking only | 7.98 | 6.48 | 1.50 | | | 25,017 (±1,801) |
+| **Mount Sinai Morningside** (1) | 25.17 | 23.77 | 1.40 | 100% | 70 / 0 | 60,600 (±2,798) |
+| (2) | 10.05 | 9.72 | 0.33 | 40% | 9 / 0 | 23,531 (±1,587) |
+| (3) | 27.05 | 25.52 | 1.52 | 107% | 74 / 904 | 64,585 (±2,867) |
+| (4) | 14.30 | 13.97 | 0.33 | 57% | 10 / 497 | 32,406 (±1,903) |
+| Walking only | 9.03 | 9.03 | 0 | | | 21,611 (±1,547) |
 
-**相对比例（08:00，100 m）**，括号里是行走困难居民的对应比例：
+**Relative ratios (08:00, 100 m)**, with the corresponding ratios for residents with an ambulatory difficulty in parentheses:
 
-| 医院 | ADA 组 ÷ 普通人（只有地铁）② ÷ ① | 加公交后 ④ ÷ ③ | 公交对普通人 ③ ÷ ① | 公交对 ADA 组 ④ ÷ ② |
+| Hospital | ADA group ÷ anyone, subway only (2) ÷ (1) | With buses (4) ÷ (3) | Buses for anyone (3) ÷ (1) | Buses for the ADA group (4) ÷ (2) |
 |---|---|---|---|---|
-| Harlem Hospital | 70%（69%） | 73%（75%） | 114%（109%） | 117% |
-| NYP/Columbia | 57%（60%） | 65%（70%） | 118%（119%） | 135% |
-| Mount Sinai Morningside | 40%（39%） | 53%（50%） | 107%（107%） | 142% |
+| Harlem Hospital | 70% (69%) | 73% (75%) | 114% (109%) | 117% |
+| NYP/Columbia | 57% (60%) | 65% (70%) | 118% (119%) | 135% |
+| Mount Sinai Morningside | 40% (39%) | 53% (50%) | 107% (107%) | 142% |
 
-公交带来的面积增量（km²，08:00）：普通人 Harlem +5.78（+14%）、NYP +5.58（+18%）、Mount Sinai +1.87（+7%）；ADA 组 Harlem +5.06（+17%）、NYP +6.23（+35%）、Mount Sinai +4.25（+42%）。折成行走困难居民：普通人 +8,819 / +13,887 / +3,985，ADA 组 +12,723 / +17,568 / +8,875。
+Area gain from buses (km², 08:00): anyone Harlem +5.78 (+14%), NYP +5.58 (+18%), Mount Sinai +1.87 (+7%); ADA group Harlem +5.06 (+17%), NYP +6.23 (+35%), Mount Sinai +4.25 (+42%). In residents with an ambulatory difficulty: anyone +8,819 / +13,887 / +3,985, ADA group +12,723 / +17,568 / +8,875.
 
-怎么读：
-1. **三家医院的 ADA 可达性差别很大，顺序固定：Harlem（70%）> NYP/Columbia（57%）> Mount Sinai Morningside（40%）。** 这个顺序在后面所有时间和方向设定下都不变（见第 13 节）。
-2. **Mount Sinai Morningside 的 ② 几乎就是步行范围：** ② 的 10.05 km² 比纯步行的 9.03 km² 只多 1.0 km²。原因可以从之前的核对看出来：它 400 m 内没有 ADA 车站，最近的 ADA 站（125 St A/C/B/D）在 1,003 m 外。
-3. **公交对 ADA 组的相对帮助更大，对"更缺 ADA 站"的医院更大**（Mount Sinai +42%、NYP +35%、Harlem +17%）。公交补上了地铁 ADA 站稀疏造成的缺口，但补完后 ADA 组仍低于普通人（53%–73%）。
-4. 曼哈顿以外的面积全是布朗克斯。Harlem 和 NYP 的差距里，布朗克斯占的比重较大（Harlem ② 的布朗克斯面积是 ① 的 66%，曼哈顿部分是 72%）。
+How to read it:
+1. **ADA accessibility differs a lot between the three hospitals, in a fixed order: Harlem (70%) > NYP/Columbia (57%) > Mount Sinai Morningside (40%).** This order does not change under any of the later time and direction settings (see section 13).
+2. **Mount Sinai Morningside's (2) is almost just its walking range:** its 10.05 km² for (2) is only 1.0 km² more than the pure-walking 9.03 km². The reason can be seen from the earlier checks: there is no ADA station within 400 m, and the nearest ADA station (125 St A/C/B/D) is 1,003 m away.
+3. **Buses help the ADA group more in relative terms, and more for hospitals that lack ADA stations** (Mount Sinai +42%, NYP +35%, Harlem +17%). Buses fill the gap caused by sparse ADA subway stations, but after that the ADA group is still below anyone (53%–73%).
+4. All the area outside Manhattan is in the Bronx. The Bronx weighs more in the Harlem–NYP difference (Harlem's (2) Bronx area is 66% of (1), and the Manhattan part is 72%).
 
-## 10. 面积：只算陆地、按曼哈顿和其他区拆开
+## 10. Area: land only, split into Manhattan and other boroughs
 
-- 做法：把纽约市行政区边界（NYC Open Data Borough Boundaries，沿岸线裁剪）栅格化到 10 m 网格，每格标上所属区。等时圈的缓冲范围与陆地相交才算面积，河面和不属于任何区的格子不算。
-- 去掉的水面：08:00、100 m 的 12 个情景里，缓冲范围含水面的面积比陆地面积多 0.17–1.37 km²，即缓冲范围的 1.6%–5.3% 是水面。`hospital_isochrone_summary.csv` 里同时给了 `area_incl_water_km2` 和 `area_land_km2`，可以对照。
-- 曼哈顿面积含 Randalls Island 和 Marble Hill（行政区边界里它们属于曼哈顿）。
-- 面积 ≤ 缓冲半径内的陆地，不是"人能走到的面积"：缓冲 100 m 会把街道之间的公园、院落等也算进来。比较相对差比绝对面积可靠，但见第 13 节：相对值本身也随时间和方向变化。
-- 所有情景的最近一次检查：等时圈离街道网络范围边界（纬度 40.60–40.93、经度 -74.06 至 -73.78）最近 2.8 km（向北），51 个情景里没有一个贴近边界，所以没有被网络范围截断。
+- Method: the NYC borough boundary (NYC Open Data Borough Boundaries, clipped to the shoreline) is rasterized to a 10 m grid, and each cell is labelled with its borough. Only the intersection of the isochrone's buffer with land counts as area; river surface and cells belonging to no borough do not count.
+- Water removed: in the 12 scenarios at 08:00 and 100 m, the area of the buffer including water is 0.17–1.37 km² larger than the land area, i.e. 1.6%–5.3% of the buffer is water. `hospital_isochrone_summary.csv` gives both `area_incl_water_km2` and `area_land_km2` for comparison.
+- Manhattan area includes Randalls Island and Marble Hill (they belong to Manhattan in the borough boundary).
+- The area is the land within the buffer radius, not "the area people can walk to": a 100 m buffer also counts parks, courtyards and so on between streets. Comparing relative differences is more reliable than absolute areas, but see section 13: the relative values themselves also change with time and direction.
+- The latest check for all scenarios: the isochrones are at least 2.8 km (to the north) from the boundary of the street-network extent (latitude 40.60–40.93, longitude -74.06 to -73.78), and none of the 51 scenarios comes close to the boundary, so none is cut off by the network extent.
 
-## 11. 居民人数：ACS 行走困难人口，按面积比例分配
+## 11. Residents: ACS ambulatory-difficulty population, allocated by area share
 
-**指标：** ACS 表 B18105（性别 × 年龄 × 行走困难，对象是 5 岁及以上的非机构化平民人口）里"有行走困难"的 10 个单元格（男女各 5 个年龄段）之和。不含 5 岁以下和住在机构（养老院、监狱等）里的人。
+**Indicator:** the sum of the 10 "with an ambulatory difficulty" cells (5 age groups for each sex) in ACS table B18105 (sex × age × ambulatory difficulty, for the civilian non-institutionalized population aged 5 and over). It excludes children under 5 and people living in institutions (nursing homes, prisons and so on).
 
-**数据来源和下载：** 2020–2024 年 5 年期 ACS，**用的是 Census 的汇总文件下载，不是 API**。Census 的数据 API 现在返回 "Missing Key"（需要 API key），我没有替你注册 key。汇总文件是公开直接下载的：`https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b18105.dat`，74,139,777 字节，下载中途超时过一次，用断点续传补完，最终大小与服务器声明一致。纽约市的 5 个县共 2,327 个 tract，全市"有行走困难"合计 604,930 人，占 5 岁以上非机构化人口 7,946,933 的 7.6%，数量级合理。
+**Data source and download:** the 2020–2024 5-year ACS, **from the Census summary-file download, not the API**. The Census data API now returns "Missing Key" (an API key is required), and I did not register a key for you. The summary file is a public direct download: `https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b18105.dat`, 74,139,777 bytes; the download timed out once midway and was completed by resuming, and the final size matches what the server declares. The 5 counties of New York City have 2,327 tracts in total, with 604,930 people "with an ambulatory difficulty" citywide, which is 7.6% of the 7,946,933 non-institutionalized population aged 5 and over, a plausible order of magnitude.
 
-**人口普查区边界：** NYC 城市规划局的 2020 Census Tracts（`63ge-mke6`，沿岸线裁剪版，2,325 个）。**不能用含水域的版本**（`imfq-nf3j`），因为按面积比例分配时水面会稀释分母。2,325 个多边形都能按 `geoid` 对上 ACS 行；ACS 另有 2 行没有多边形（推测是纯水域 tract，未核实）。
+**Census-tract boundaries:** NYC Department of City Planning 2020 Census Tracts (`63ge-mke6`, shoreline-clipped version, 2,325 polygons). **The version including water areas** (`imfq-nf3j`) **cannot be used**, because with area-share allocation the water surface would dilute the denominator. All 2,325 polygons can be matched to ACS rows by `geoid`; ACS has 2 more rows without polygons (presumably pure-water tracts, not verified).
 
-**分配方法：** 每个 tract 的居民数 × （等时圈陆地面积在该 tract 内的占比），占比用 10 m 栅格算。即假设每个 tract 内居民均匀分布在陆地上。
-- 被我的栅格范围切到的 tract（栅格只覆盖等时圈所在区域）：占比的分母改用多边形矢量面积，否则会高估。这个修正让人数变化小于 1%（如 NYP ① 74,658 → 74,067）。
-- 栅格面积与矢量面积的比值：完整落在网格内的 tract，中位数 0.998，第 5 到 95 百分位 0.974–1.035。
-- 等时圈里不属于任何 tract 的陆地面积：0。
+**Allocation method:** each tract's residents × (the share of the isochrone's land area inside that tract), with the share computed on the 10 m raster. That is, residents are assumed to be spread uniformly over the land inside each tract.
+- For tracts cut by my raster extent (the raster covers only the area of the isochrone): the denominator of the share uses the polygon's vector area, otherwise the share would be overestimated. This correction changes the counts by less than 1% (for example NYP (1) 74,658 → 74,067).
+- Ratio of raster area to vector area: for tracts that fall completely inside the grid the median is 0.998, and the 5th to 95th percentile is 0.974–1.035.
+- Land area in the isochrones that belongs to no tract: 0.
 
-**误差：** 表里 ±是 90% 误差，按"每个 tract 的 ACS 误差乘以其分配比例，各 tract 独立，平方和开方"粗算。**只反映 ACS 抽样误差，不含"均匀分布"假设带来的误差**，所以真实不确定性比表里大。tract 层面 ACS 误差本来就大。
+**Margin of error:** the ± in the table is the 90% margin of error, computed roughly as "each tract's ACS margin of error times its allocation share, tracts independent, square root of the sum of squares". **It reflects only the ACS sampling error and not the error from the "uniform distribution" assumption**, so the real uncertainty is larger than in the table. The ACS error at tract level is large to begin with.
 
-**这个指标的局限：**
-- 是居住在圈内的人，不是去医院的患者或员工，也不是需要电梯或轮椅的人。"行走困难"是自述的，范围比"使用轮椅"宽得多
-- 圈是**从医院出发**的，而"居民能不能到医院"对应的是"到达"方向，见第 13 节的反向结果
-- 按面积均匀分配在公园、大型机构、高密度公寓楼附近都不准
+**Limitations of this indicator:**
+- It counts people who live inside the circle, not patients or staff going to the hospital, and not people who need an elevator or wheelchair. "Ambulatory difficulty" is self-reported and much broader than "wheelchair use"
+- The circle is **from the hospital outward**, while "can residents get to the hospital" corresponds to the "arrival" direction; see the reverse result in section 13
+- Uniform allocation by area is inaccurate in parks, large institutions, and near high-density apartment buildings
 
-**占比参考：** 08:00 的 ① 里行走困难居民占人口基数的 9.2%（Harlem）、8.9%（NYP）、8.4%（Mount Sinai），都高于全市 7.6%；纯步行圈 10.8%、10.1%、8.3%。
+**Share for reference:** in (1) at 08:00, residents with an ambulatory difficulty are 9.2% (Harlem), 8.9% (NYP) and 8.4% (Mount Sinai) of the population base, all above the citywide 7.6%; in the pure-walking circles 10.8%, 10.1% and 8.3%.
 
-## 12. 居民人数的相对比例
+## 12. Relative ratios of residents
 
-行走困难居民的 ② ÷ ① 和 ④ ÷ ③ 与面积比例接近（第 9 节括号里）：Harlem 69% / 75%、NYP 60% / 70%、Mount Sinai 39% / 50%。它们的差异（NYP 面积 57% vs 居民 60%）说明被 ADA 站覆盖的区域里居民略偏密，但差别在误差范围内，不做进一步解读。
+The (2) ÷ (1) and (4) ÷ (3) ratios of residents with an ambulatory difficulty are close to the area ratios (in parentheses in section 9): Harlem 69% / 75%, NYP 60% / 70%, Mount Sinai 39% / 50%. The differences (NYP area 57% versus residents 60%) show that residents are slightly denser in the areas covered by ADA stations, but the difference is within the margin of error and is not interpreted further.
 
-## 13. 方向检查：反过来算"08:00 前到达医院"
+## 13. Direction check: computing "arrive by 08:00" in reverse
 
-**问题：** 正向（从医院出发 30 分钟）回答"医院出发能去哪"；而对患者和员工更相关的是"哪些地方的人能在 08:00 前到医院"。我用时间反转的搜索算了后者，和正向对比。
+**Question:** the forward direction (30 minutes from the hospital) answers "where can one go from the hospital"; what matters more for patients and staff is "where can people reach the hospital by 08:00 from". I computed the latter with a time-reversed search and compared it with the forward one.
 
-**方法：** 把所有班次的时间取负、站序反转，再用同一个 RAPTOR 从医院出发搜索；上下车限制互换（原来的"允许下车"变成反向的"允许上车"），换乘表反向，ADA 站限制不变。给定"08:00 前到达"，对每个街道节点得到"最晚出发时刻" L，door-to-door 时长 = 08:00 − L，**时长 ≤ 30 分钟的节点**构成反向等时圈。公交用在 07:30–08:00 运行的班次。
+**Method:** the times of all trips are negated and the stop order reversed, and the same RAPTOR is run from the hospital; the boarding/alighting restrictions are swapped (the original "alighting allowed" becomes "boarding allowed" in reverse), the transfer table is reversed, and the ADA-station restriction is unchanged. Given "arrive by 08:00", each street node gets a "latest departure time" L, and the door-to-door duration = 08:00 − L; the **nodes with a duration ≤ 30 minutes** form the reverse isochrone. Buses use the trips running 07:30–08:00.
 
-**验证（重要）：** 对 NYP 和 Mount Sinai 各 3 种情形（地铁、地铁加公交、ADA 地铁加公交），各随机抽 25 个节点，共 150 个。把每个节点作为正向出发点，**在 L 时刻出发都能在 08:00 前到医院（150/150，最大偏差 0 秒）**；**晚 90 秒出发则全部赶不上（150/150）**。这说明反向搜索是正确的"最晚出发"。
-- 第一次验证失败了：我把 L 向上取整，而 L 恰好卡在一班车的发车时刻上，晚了不到 1 秒就错过这班，要等下一班（约 5 分钟），看起来像"晚到 5 分钟"。**这是测试写法的问题**（应该向下取整），不是模型错误，改后全部通过。逐站排查时已确认是这个原因。
+**Validation (important):** for each of NYP and Mount Sinai, 3 cases (subway, subway + bus, ADA subway + bus), 25 random nodes each, 150 in total. With each node as a forward origin, **leaving at time L always arrives at the hospital by 08:00 (150/150, maximum deviation 0 seconds)**; **leaving 90 seconds later misses it in all cases (150/150)**. This shows that the reverse search is a correct "latest departure".
+- The first validation failed: I rounded L up, and L fell exactly on a train departure time, so being less than 1 second late missed that train and required the next one (about 5 minutes later), which looked like "arriving 5 minutes late". **This was a problem in how the test was written** (it should round down), not a model error, and everything passed after the change. It was confirmed to be the cause by checking station by station.
 
-**对比三种设定的面积**（km²，陆地，100 m）。"正向 07:30"是对照：与反向使用同一个时间窗（07:30–08:00），用来把"方向"和"几点"分开：
+**Comparison of areas under the three settings** (km², land, 100 m). "Forward 07:30" is the control: it uses the same time window as the reverse (07:30–08:00), to separate "direction" from "time of day":
 
-| 医院 / 情景 | 正向 08:00 | 正向 07:30 | **反向（08:00 前到）** | 反向比正向 08:00 | 反向比正向 07:30 |
+| Hospital / scenario | Forward 08:00 | Forward 07:30 | **Reverse (arrive by 08:00)** | Reverse vs forward 08:00 | Reverse vs forward 07:30 |
 |---|---|---|---|---|---|
-| Harlem ① | 41.03 | 49.68 | **48.71** | +19% | −2% |
-| ② | 28.92 | 34.42 | **35.22** | +22% | +2% |
-| ③ | 46.80 | 55.10 | **52.03** | +11% | −6% |
-| ④ | 33.98 | 43.02 | **42.25** | +24% | −2% |
-| NYP ① | 30.93 | 35.03 | **38.16** | +23% | +9% |
-| ② | 17.58 | 18.95 | **24.09** | +37% | +27% |
-| ③ | 36.51 | 38.41 | **47.48** | +30% | +24% |
-| ④ | 23.80 | 27.19 | **30.27** | +27% | +11% |
-| Mount Sinai ① | 25.17 | 22.45 | **26.88** | +7% | +20% |
-| ② | 10.05 | 10.69 | **10.36** | +3% | −3% |
-| ③ | 27.05 | 27.82 | **31.71** | +17% | +14% |
-| ④ | 14.30 | 15.62 | **17.82** | +25% | +14% |
+| Harlem (1) | 41.03 | 49.68 | **48.71** | +19% | −2% |
+| (2) | 28.92 | 34.42 | **35.22** | +22% | +2% |
+| (3) | 46.80 | 55.10 | **52.03** | +11% | −6% |
+| (4) | 33.98 | 43.02 | **42.25** | +24% | −2% |
+| NYP (1) | 30.93 | 35.03 | **38.16** | +23% | +9% |
+| (2) | 17.58 | 18.95 | **24.09** | +37% | +27% |
+| (3) | 36.51 | 38.41 | **47.48** | +30% | +24% |
+| (4) | 23.80 | 27.19 | **30.27** | +27% | +11% |
+| Mount Sinai (1) | 25.17 | 22.45 | **26.88** | +7% | +20% |
+| (2) | 10.05 | 10.69 | **10.36** | +3% | −3% |
+| (3) | 27.05 | 27.82 | **31.71** | +17% | +14% |
+| (4) | 14.30 | 15.62 | **17.82** | +25% | +14% |
 
-**形状重合度（交并比 IoU，1 为完全重合）：** 正向 08:00 对反向 0.62–0.87；正向 07:30 对反向 0.67–0.92。重合度最高的是 Harlem 的 ①（0.92）；最低的是 ADA 组加公交 ④（0.62–0.68）。
+**Shape overlap (intersection over union, IoU, where 1 is a perfect overlap):** forward 08:00 against reverse 0.62–0.87; forward 07:30 against reverse 0.67–0.92. The highest overlap is Harlem's (1) (0.92); the lowest is the ADA group with buses (4) (0.62–0.68).
 
-**反向的居民人数（行走困难，人）：** Harlem ① 122,630 ② 92,515 ③ 130,196 ④ 109,534；NYP ① 84,452 ② 56,203 ③ 108,843 ④ 73,560；Mount Sinai ① 61,053 ② 24,003 ③ 72,532 ④ 46,125。
+**Residents in reverse (with ambulatory difficulty, persons):** Harlem (1) 122,630 (2) 92,515 (3) 130,196 (4) 109,534; NYP (1) 84,452 (2) 56,203 (3) 108,843 (4) 73,560; Mount Sinai (1) 61,053 (2) 24,003 (3) 72,532 (4) 46,125.
 
-**比例随设定的变化**（面积的 ② ÷ ① / ④ ÷ ③）：
+**How the ratios change with the setting** (area (2) ÷ (1) / (4) ÷ (3)):
 
-| 医院 | 正向 08:00 | 正向 12:00 | 正向 07:30 | 反向 |
+| Hospital | Forward 08:00 | Forward 12:00 | Forward 07:30 | Reverse |
 |---|---|---|---|---|
 | Harlem | 70% / 73% | 71% / 73% | 69% / 78% | 72% / 81% |
 | NYP/Columbia | 57% / 65% | 51% / 56% | 54% / 71% | 63% / 64% |
 | Mount Sinai | 40% / 53% | 41% / 48% | 48% / 56% | 39% / 56% |
 
-**结论：**
-1. **绝对面积对"几点"和"哪个方向"都敏感，不能当成精确数。** 反向比正向 08:00 大 3%–37%，且基本是更大。正向 07:30 对 08:00 也差 −11% 到 +27%（如 Harlem ① 41.0 → 49.7，Harlem ④ 34.0 → 43.0）。单一出发时刻的等时圈面积，在这三家医院上的不确定性量级大约是 ±10%–25%。
-2. **把时间窗对齐后（正向 07:30 对反向），Harlem 几乎一致（−6% 到 +2%），NYP 和 Mount Sinai 仍有差别（最高 +27%）。** 所以不只是"几点"的问题，方向本身也有影响，尤其对 ADA 组（NYP ② +27%）。
-3. **三家医院 ADA ÷ 普通人的比例顺序稳定：** 在上表 8 种组合（4 种设定 × 2 种口径）里，Harlem > NYP/Columbia > Mount Sinai 全部成立。这是本章最稳的结论。比例的具体数值会随设定摆动 5–20 个百分点（如 NYP ② ÷ ① 从 51% 到 63%）。
-4. **加了公交后，ADA 组的占比在全部 12 个组合里都升高**（4 种设定 × 3 家医院），只有反向下 NYP 几乎持平（63% → 64%）。与正向 08:00 的结论一致。
-5. **如果问题是"谁能到医院"，应当参考反向的数字**，因为它是以"到达"为目标。反向的面积和居民数都比正向大，比例相近。
+**Conclusions:**
+1. **The absolute area is sensitive to both "what time" and "which direction", and cannot be taken as an exact number.** Reverse is 3%–37% larger than forward 08:00, and almost always larger. Forward 07:30 also differs from 08:00 by −11% to +27% (for example Harlem (1) 41.0 → 49.7, Harlem (4) 34.0 → 43.0). For these three hospitals the uncertainty of a single-departure-time isochrone area is roughly ±10%–25%.
+2. **When the time windows are aligned (forward 07:30 against reverse), Harlem is almost the same (−6% to +2%), while NYP and Mount Sinai still differ (up to +27%).** So it is not only a matter of "what time"; the direction itself also matters, especially for the ADA group (NYP (2) +27%).
+3. **The order of the ADA ÷ anyone ratio across the three hospitals is stable:** in the 8 combinations in the table above (4 settings × 2 definitions), Harlem > NYP/Columbia > Mount Sinai holds in all. This is the most robust conclusion of this chapter. The specific ratio values swing by 5–20 percentage points with the setting (for example NYP (2) ÷ (1) from 51% to 63%).
+4. **After adding buses, the ADA group's share rises in all 12 combinations** (4 settings × 3 hospitals), except that for NYP in reverse it is almost flat (63% → 64%). This agrees with the forward 08:00 conclusion.
+5. **If the question is "who can get to the hospital", the reverse numbers should be used**, because they target arrival. The reverse area and resident counts are both larger than forward, with similar ratios.
 
-**对差异的可能解释（未逐项验证）：** 正向把"在出发地等第一班车"的时间算进 30 分钟，而且正好取决于 08:00 这个时刻与班次的相位；反向则相当于乘客可以挑出发时间，到达医院端提前到的松弛时间算进时长。两者对稀疏班次（ADA 组主要依赖的少数几条线）影响更大，所以 ADA 组的方向差别更明显。我没有把这两个因素分开定量。**一个更稳的做法（没有做）：** 对 07:30–08:30 内每隔几分钟的多个出发时刻取平均，或取"最大可达"，来消除班次相位的影响。
+**Possible explanations for the differences (not checked one by one):** forward counts the time spent "waiting for the first train at the origin" within the 30 minutes, and depends exactly on the phase between the 08:00 moment and the timetable; reverse is as if the passenger could pick the departure time, with the slack of arriving early at the hospital end counted in the duration. Both affect sparse services (the few lines the ADA group mainly depends on) more, so the direction difference is more visible for the ADA group. I did not separate and quantify these two factors. **A more robust approach (not done):** average over several departure times every few minutes between 07:30 and 08:30, or take the "maximum reachable", to remove the effect of timetable phase.
 
-## 14. 遇到的问题和局限
+## 14. Problems met and limitations
 
-1. **Census API 需要 key。** 返回 "Missing Key"。我没有注册，改用公开的汇总文件。下载 74 MB 中途超时，断点续传后完整。
-2. **节号重复。** 见本章开头。我没有改动别人写的章节。
-3. **反向搜索第一次验证失败。** 原因是测试取整方向，见第 13 节。已修正并通过。
-4. **边缘 tract 的分母。** 见第 11 节，修正后影响小于 1%。
-5. **公交 feed 只加载了曼哈顿、布朗克斯和 MTA Bus Company。** 布鲁克林、皇后区、史坦顿岛的公交没有加载；因为 51 个情景都没有到达那三个区，所以对本章结果没有影响。如果以后用更长时间或更大范围，需要补。
-6. **单一起点、单一出发时刻（另有 12:00 和 07:30 对照）、计划时刻表，没有实时数据。** 单一时刻对结果的影响见第 13 节。
-7. **ADA 组的公交假设仍是上限：** 所有公交车和公交站都当作可用。
-8. **没有做的事：** 多出发时刻平均、纯公交情景、反向搜索的 12:00 版本、居民人数分配到楼栋级（用 Census block 或建筑轮廓会比"tract 内均匀"更准）、用患者或员工的实际居住地做出行起点。
-9. **医院仍取单个坐标点。** 实际院区有一定范围；NYP/Columbia 院区较大，起点选在 622 W 168th St 一点，换一个点（如另一栋楼）结果会有小幅变化，没有做敏感性。
+1. **The Census API needs a key.** It returns "Missing Key". I did not register one and used the public summary file instead. The 74 MB download timed out midway and was complete after resuming.
+2. **Duplicated section numbers.** See the start of this chapter. I did not change the chapters written by others.
+3. **The first validation of the reverse search failed.** The cause was the rounding direction in the test, see section 13. Fixed and passing.
+4. **Denominator for edge tracts.** See section 11; the effect after the fix is below 1%.
+5. **Only the Manhattan, Bronx and MTA Bus Company bus feeds were loaded.** Buses in Brooklyn, Queens and Staten Island were not loaded; since none of the 51 scenarios reaches those three boroughs, there is no effect on this chapter's results. They would need to be added if longer times or a larger area are used later.
+6. **A single origin, a single departure time (plus 12:00 and 07:30 as controls) and a scheduled timetable; no real-time data.** The effect of a single time on the results is in section 13.
+7. **The bus assumption for the ADA group is still an upper bound:** all buses and bus stops are treated as usable.
+8. **Not done:** averaging over several departure times, a bus-only scenario, a 12:00 version of the reverse search, allocating residents to the building level (using Census blocks or building outlines would be more accurate than "uniform within a tract"), and using the actual home locations of patients or staff as trip origins.
+9. **Hospitals are still single coordinate points.** The real campus has some extent; the NYP/Columbia campus is large, and the origin is a single point at 622 W 168th St, so another point (such as another building) would change the results slightly; no sensitivity check was done.
 
 ---
 
-*（原章：第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo）*
+*(Original chapter: Round 9, residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo)*
 
-写之前我再确认过 checks.md 自上一章追加后没有被改动（987 行）。本章只追加；节号从 **43** 起，延续上一章（第八轮，36–42 节）。引用其他章节仍用标题。
+Before writing I confirmed again that checks.md had not changed since the last chapter was appended (987 lines). This chapter is append-only; section numbers start from **43**, continuing the previous chapter (Round 8, sections 36–42). References to other chapters still go by title.
 
-## 15. 本章产出
+## 15. Output of this chapter
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [hospital_isochrone_timeavg_summary.csv](../outputs/hospital_isochrone_timeavg_summary.csv) | 第二件事：每家医院 × 4 情景，5 个出发时刻的均值、标准差、最小、最大、变异系数（面积和居民，含曼哈顿/布朗克斯拆分） |
-| [hospital_isochrone_timeavg_runs.csv](../outputs/hospital_isochrone_timeavg_runs.csv) | 上面的 60 次逐个运行的原始结果 |
-| [mc_scenario4_summary.csv](../outputs/mc_scenario4_summary.csv) | 第三件事：Monte Carlo 汇总，12 行（3 医院 × 反向/正向 × 2 种补值）。列含基线居民、1000 次的均值/标准差/5%分位/最小、覆盖概率各档的居民数和面积（含曼哈顿/布朗克斯拆分） |
-| [mc_single_failure.csv](../outputs/mc_single_failure.csv) | 单个车站、单部电梯单独故障时损失的居民数 |
-| [mc_scenario4_coverage_reverse.png](../outputs/mc_scenario4_coverage_reverse.png)、[mc_scenario4_coverage_forward.png](../outputs/mc_scenario4_coverage_forward.png) | 覆盖概率地图（3 家医院并排） |
+| [hospital_isochrone_timeavg_summary.csv](../outputs/hospital_isochrone_timeavg_summary.csv) | Second item: for each hospital × 4 scenarios, the mean, standard deviation, minimum, maximum and coefficient of variation over the 5 departure times (area and residents, with the Manhattan/Bronx split) |
+| [hospital_isochrone_timeavg_runs.csv](../outputs/hospital_isochrone_timeavg_runs.csv) | Raw results of the 60 individual runs behind the above |
+| [mc_scenario4_summary.csv](../outputs/mc_scenario4_summary.csv) | Third item: Monte Carlo summary, 12 rows (3 hospitals × reverse/forward × 2 fills). Columns include baseline residents, the mean / standard deviation / 5th percentile / minimum of the 1000 draws, residents and area at each coverage-probability level (with the Manhattan/Bronx split) |
+| [mc_single_failure.csv](../outputs/mc_single_failure.csv) | Residents lost when a single station or a single elevator fails on its own |
+| [mc_scenario4_coverage_reverse.png](../outputs/mc_scenario4_coverage_reverse.png), [mc_scenario4_coverage_forward.png](../outputs/mc_scenario4_coverage_forward.png) | Coverage-probability maps (the 3 hospitals side by side) |
 
-第一件事不需要新文件：反向居民数在 `hospital_isochrone_summary.csv`（`mode = rev0800`）里已经算过，下面整理成表。
+The first item needs no new file: the reverse resident counts were already computed in `hospital_isochrone_summary.csv` (`mode = rev0800`) and are organized into a table below.
 
-## 16. 居民数改成反向口径（到达医院），拆成曼哈顿和布朗克斯
+## 16. Residents on the reverse basis (arriving at the hospital), split into Manhattan and the Bronx
 
-反向 = 在 08:00 前到达医院、总时长 ≤ 30 分钟的出发地（做法和验证见上一章"方向检查"一节）。居民 = ACS 2020–2024 B18105"有行走困难"的居民，按 tract 面积比例分配。**曼哈顿 / 布朗克斯按 tract 所属的县拆**（New York County / Bronx County）。上一章已确认：所有情景里除曼哈顿和布朗克斯外，布鲁克林、皇后区、史坦顿岛的面积都是 0，所以"其他区"就是布朗克斯。两部分相加与总数的差最大 1 人，是取整造成的。
+Reverse = origins from which the hospital is reached by 08:00 with a total duration ≤ 30 minutes (method and validation in the "Direction check" section of the previous chapter). Residents = ACS 2020–2024 B18105 residents "with an ambulatory difficulty", allocated by tract area share. **Manhattan / Bronx is split by the county of the tract** (New York County / Bronx County). The previous chapter established that in all scenarios the areas in Brooklyn, Queens and Staten Island are 0 apart from Manhattan and the Bronx, so "other boroughs" means the Bronx. The two parts differ from the total by at most 1 person, due to rounding.
 
-| 医院 / 情景（08:00 前到达，100 m） | 居民合计（±90% 误差） | 曼哈顿 | 布朗克斯 | 布朗克斯占比 |
+| Hospital / scenario (arrive by 08:00, 100 m) | Total residents (±90% margin) | Manhattan | Bronx | Bronx share |
 |---|---|---|---|---|
-| **Harlem Hospital** ① 普通人，地铁 | 122,630（±3,809） | 62,299 | 60,331 | 49% |
-| ② 只走 ADA 地铁站 | 92,515（±3,254） | 45,187 | 47,327 | 51% |
-| ③ 地铁加公交 | 130,196（±3,927） | 65,163 | 65,032 | 50% |
-| ④ ADA 地铁加公交 | 109,534（±3,603） | 55,598 | 53,936 | 49% |
-| **NYP/Columbia** ① | 84,452（±3,303） | 59,911 | 24,541 | 29% |
-| ② | 56,203（±2,655） | 47,151 | 9,052 | 16% |
-| ③ | 108,843（±3,658） | 68,502 | 40,341 | 37% |
-| ④ | 73,560（±3,025） | 58,365 | 15,195 | 21% |
-| **Mount Sinai Morningside** ① | 61,053（±2,839） | 59,827 | 1,226 | 2% |
-| ② | 24,003（±1,661） | 24,003 | 0 | 0% |
-| ③ | 72,532（±3,037） | 68,035 | 4,498 | 6% |
-| ④ | 46,125（±2,322） | 45,660 | 466 | 1% |
+| **Harlem Hospital** (1) anyone, subway | 122,630 (±3,809) | 62,299 | 60,331 | 49% |
+| (2) ADA subway stations only | 92,515 (±3,254) | 45,187 | 47,327 | 51% |
+| (3) subway + bus | 130,196 (±3,927) | 65,163 | 65,032 | 50% |
+| (4) ADA subway + bus | 109,534 (±3,603) | 55,598 | 53,936 | 49% |
+| **NYP/Columbia** (1) | 84,452 (±3,303) | 59,911 | 24,541 | 29% |
+| (2) | 56,203 (±2,655) | 47,151 | 9,052 | 16% |
+| (3) | 108,843 (±3,658) | 68,502 | 40,341 | 37% |
+| (4) | 73,560 (±3,025) | 58,365 | 15,195 | 21% |
+| **Mount Sinai Morningside** (1) | 61,053 (±2,839) | 59,827 | 1,226 | 2% |
+| (2) | 24,003 (±1,661) | 24,003 | 0 | 0% |
+| (3) | 72,532 (±3,037) | 68,035 | 4,498 | 6% |
+| (4) | 46,125 (±2,322) | 45,660 | 466 | 1% |
 
-**ADA 组 ÷ 普通人（居民数）**：只有地铁 ② ÷ ① = Harlem 75%、NYP 67%、Mount Sinai 39%；加公交 ④ ÷ ③ = 84%、68%、64%。顺序仍是 Harlem > NYP > Mount Sinai。
+**ADA group ÷ anyone (residents):** subway only (2) ÷ (1) = Harlem 75%, NYP 67%, Mount Sinai 39%; with buses (4) ÷ (3) = 84%, 68%, 64%. The order is still Harlem > NYP > Mount Sinai.
 
-**和正向 08:00 对比**：反向的居民数更大（Harlem ① 122,630 vs 102,539，NYP ① 84,452 vs 74,067，Mount Sinai ① 61,053 vs 60,600），布朗克斯占的份额也更高（Harlem ① 49% vs 40%）。原因见上一章（反向与正向对"等第一班车"的处理不同，加上时间窗不同），这里不再重复。
+**Compared with forward 08:00:** the reverse resident counts are larger (Harlem (1) 122,630 vs 102,539, NYP (1) 84,452 vs 74,067, Mount Sinai (1) 61,053 vs 60,600), and the Bronx share is also higher (Harlem (1) 49% vs 40%). The reasons are in the previous chapter (reverse and forward treat "waiting for the first train" differently, plus a different time window) and are not repeated here.
 
-这一节的数字来自上一章的栅格（范围较小），本章新的全范围栅格重算同样的 08:00 正向结果，面积差 ≤0.018 km²，居民数差 ≤148 人（0.13%），所以两套栅格可以互换使用。
+The numbers in this section come from the previous chapter's raster (a smaller extent). The new full-extent raster of this chapter recomputes the same 08:00 forward results with an area difference ≤ 0.018 km² and a resident difference ≤ 148 persons (0.13%), so the two rasters can be used interchangeably.
 
-## 17. 多个出发时刻取平均：面积、居民数和各时刻之间的波动
+## 17. Averaging over several departure times: area, residents and variation between times
 
-**做法：** 对每家医院、每个情景，分别从医院在 **07:30、07:45、08:00、08:15、08:30** 出发（正向，各自 30 分钟），共 3 × 4 × 5 = 60 次。公交班次取 07:30–09:00 内运行的（共约 4,800 个班次），地铁用全天班次。其余设置不变。表里"均值"是 5 个时刻**面积（或居民数）的平均**，不是 5 个圈叠加后的面积。SD 是样本标准差（n = 5），CV = SD ÷ 均值。
+**Method:** for each hospital and each scenario, depart from the hospital at **07:30, 07:45, 08:00, 08:15 and 08:30** (forward, 30 minutes each), 3 × 4 × 5 = 60 runs. Bus trips are those running between 07:30 and 09:00 (about 4,800 trips); the subway uses all-day trips. Other settings are unchanged. The "mean" in the tables is the **average of the area (or residents) of the 5 times**, not the area of the 5 overlaid circles. SD is the sample standard deviation (n = 5) and CV = SD ÷ mean.
 
-**面积（km²，陆地，100 m）：**
+**Area (km², land, 100 m):**
 
-| 医院 / 情景 | 均值 | SD | 最小 – 最大 | CV |
+| Hospital / scenario | Mean | SD | Min – max | CV |
 |---|---|---|---|---|
-| Harlem ① | **47.30** | 4.71 | 41.01 – 53.62 | 10.0% |
-| ② | 32.30 | 3.61 | 28.52 – 36.97 | 11.2% |
-| ③ | 53.76 | 5.52 | 46.79 – 61.90 | 10.3% |
-| ④ | 39.06 | 4.62 | 33.97 – 44.27 | 11.8% |
-| NYP ① | **35.98** | 5.73 | 30.20 – 43.01 | 15.9% |
-| ② | 20.37 | 4.40 | 15.81 – 26.83 | 21.6% |
-| ③ | 41.04 | 6.79 | 33.77 – 48.48 | 16.5% |
-| ④ | 26.46 | 4.15 | 20.95 – 31.41 | 15.7% |
-| Mount Sinai ① | **25.48** | 2.86 | 22.44 – 30.10 | 11.2% |
-| ② | 10.65 | 0.36 | 10.05 – 11.04 | 3.4% |
-| ③ | 27.97 | 2.76 | 25.61 – 32.70 | 9.9% |
-| ④ | 14.20 | 0.84 | 13.64 – 15.62 | 5.9% |
+| Harlem (1) | **47.30** | 4.71 | 41.01 – 53.62 | 10.0% |
+| (2) | 32.30 | 3.61 | 28.52 – 36.97 | 11.2% |
+| (3) | 53.76 | 5.52 | 46.79 – 61.90 | 10.3% |
+| (4) | 39.06 | 4.62 | 33.97 – 44.27 | 11.8% |
+| NYP (1) | **35.98** | 5.73 | 30.20 – 43.01 | 15.9% |
+| (2) | 20.37 | 4.40 | 15.81 – 26.83 | 21.6% |
+| (3) | 41.04 | 6.79 | 33.77 – 48.48 | 16.5% |
+| (4) | 26.46 | 4.15 | 20.95 – 31.41 | 15.7% |
+| Mount Sinai (1) | **25.48** | 2.86 | 22.44 – 30.10 | 11.2% |
+| (2) | 10.65 | 0.36 | 10.05 – 11.04 | 3.4% |
+| (3) | 27.97 | 2.76 | 25.61 – 32.70 | 9.9% |
+| (4) | 14.20 | 0.84 | 13.64 – 15.62 | 5.9% |
 
-**行走困难居民数（人）：**
+**Residents with an ambulatory difficulty (persons):**
 
-| 医院 / 情景 | 均值 | SD | 最小 – 最大 | CV |
+| Hospital / scenario | Mean | SD | Min – max | CV |
 |---|---|---|---|---|
-| Harlem ① | **117,224** | 10,437 | 102,496 – 129,716 | 8.9% |
-| ② | 80,771 | 10,787 | 67,993 – 91,240 | 13.4% |
-| ③ | 125,550 | 10,870 | 111,276 – 139,990 | 8.7% |
-| ④ | 95,541 | 10,868 | 83,579 – 106,319 | 11.4% |
-| NYP ① | **86,072** | 12,113 | 74,215 – 99,965 | 14.1% |
-| ② | 49,875 | 8,943 | 40,316 – 62,074 | 17.9% |
-| ③ | 98,538 | 13,766 | 85,059 – 114,177 | 14.0% |
-| ④ | 68,418 | 9,493 | 55,516 – 77,389 | 13.9% |
-| Mount Sinai ① | **57,022** | 5,872 | 49,989 – 64,727 | 10.3% |
-| ② | 25,212 | 1,067 | 23,585 – 26,288 | 4.2% |
-| ③ | 62,558 | 5,356 | 56,475 – 70,091 | 8.6% |
-| ④ | 33,096 | 1,663 | 31,699 – 35,855 | 5.0% |
+| Harlem (1) | **117,224** | 10,437 | 102,496 – 129,716 | 8.9% |
+| (2) | 80,771 | 10,787 | 67,993 – 91,240 | 13.4% |
+| (3) | 125,550 | 10,870 | 111,276 – 139,990 | 8.7% |
+| (4) | 95,541 | 10,868 | 83,579 – 106,319 | 11.4% |
+| NYP (1) | **86,072** | 12,113 | 74,215 – 99,965 | 14.1% |
+| (2) | 49,875 | 8,943 | 40,316 – 62,074 | 17.9% |
+| (3) | 98,538 | 13,766 | 85,059 – 114,177 | 14.0% |
+| (4) | 68,418 | 9,493 | 55,516 – 77,389 | 13.9% |
+| Mount Sinai (1) | **57,022** | 5,872 | 49,989 – 64,727 | 10.3% |
+| (2) | 25,212 | 1,067 | 23,585 – 26,288 | 4.2% |
+| (3) | 62,558 | 5,356 | 56,475 – 70,091 | 8.6% |
+| (4) | 33,096 | 1,663 | 31,699 – 35,855 | 5.0% |
 
-**各时刻的原始值**（面积 km² / 居民 千人，顺序 07:30、07:45、08:00、08:15、08:30）：
+**Raw values at each time** (area km² / residents in thousands, in the order 07:30, 07:45, 08:00, 08:15, 08:30):
 
-| 医院 / 情景 | 07:30 | 07:45 | 08:00 | 08:15 | 08:30 |
+| Hospital / scenario | 07:30 | 07:45 | 08:00 | 08:15 | 08:30 |
 |---|---|---|---|---|---|
-| Harlem ① | 49.7 / 123.7 | 45.6 / 112.7 | 41.0 / 102.5 | 53.6 / 129.7 | 46.6 / 117.4 |
-| ② | 34.4 / 91.2 | 28.5 / 68.0 | 28.9 / 70.9 | 37.0 / 90.2 | 32.7 / 83.5 |
-| ③ | 55.1 / 130.2 | 51.5 / 119.4 | 46.8 / 111.3 | 61.9 / 140.0 | 53.5 / 126.9 |
-| ④ | 43.0 / 106.3 | 35.0 / 84.2 | 34.0 / 83.6 | 44.3 / 103.3 | 39.1 / 100.3 |
-| NYP ① | 35.0 / 84.5 | 30.2 / 74.6 | 30.9 / 74.2 | 40.7 / 97.0 | 43.0 / 100.0 |
-| ② | 19.0 / 46.4 | 15.8 / 40.3 | 17.6 / 44.5 | 22.6 / 56.1 | 26.8 / 62.1 |
-| ③ | 38.4 / 93.1 | 33.8 / 85.1 | 36.5 / 88.0 | 48.5 / 114.2 | 48.0 / 112.4 |
-| ④ | 27.2 / 70.6 | 21.0 / 55.5 | 23.8 / 62.0 | 29.0 / 77.4 | 31.4 / 76.6 |
-| Mount Sinai ① | 22.4 / 50.0 | 30.1 / 64.7 | 25.2 / 60.7 | 24.1 / 53.1 | 25.6 / 56.6 |
-| ② | 10.7 / 25.9 | 10.6 / 24.8 | 10.1 / 23.6 | 10.8 / 25.5 | 11.0 / 26.3 |
-| ③ | 27.8 / 63.0 | 32.7 / 70.1 | 27.1 / 64.7 | 25.6 / 56.5 | 26.7 / 58.5 |
-| ④ | 15.6 / 35.9 | 13.7 / 33.4 | 14.3 / 32.5 | 13.7 / 32.1 | 13.6 / 31.7 |
+| Harlem (1) | 49.7 / 123.7 | 45.6 / 112.7 | 41.0 / 102.5 | 53.6 / 129.7 | 46.6 / 117.4 |
+| (2) | 34.4 / 91.2 | 28.5 / 68.0 | 28.9 / 70.9 | 37.0 / 90.2 | 32.7 / 83.5 |
+| (3) | 55.1 / 130.2 | 51.5 / 119.4 | 46.8 / 111.3 | 61.9 / 140.0 | 53.5 / 126.9 |
+| (4) | 43.0 / 106.3 | 35.0 / 84.2 | 34.0 / 83.6 | 44.3 / 103.3 | 39.1 / 100.3 |
+| NYP (1) | 35.0 / 84.5 | 30.2 / 74.6 | 30.9 / 74.2 | 40.7 / 97.0 | 43.0 / 100.0 |
+| (2) | 19.0 / 46.4 | 15.8 / 40.3 | 17.6 / 44.5 | 22.6 / 56.1 | 26.8 / 62.1 |
+| (3) | 38.4 / 93.1 | 33.8 / 85.1 | 36.5 / 88.0 | 48.5 / 114.2 | 48.0 / 112.4 |
+| (4) | 27.2 / 70.6 | 21.0 / 55.5 | 23.8 / 62.0 | 29.0 / 77.4 | 31.4 / 76.6 |
+| Mount Sinai (1) | 22.4 / 50.0 | 30.1 / 64.7 | 25.2 / 60.7 | 24.1 / 53.1 | 25.6 / 56.6 |
+| (2) | 10.7 / 25.9 | 10.6 / 24.8 | 10.1 / 23.6 | 10.8 / 25.5 | 11.0 / 26.3 |
+| (3) | 27.8 / 63.0 | 32.7 / 70.1 | 27.1 / 64.7 | 25.6 / 56.5 | 26.7 / 58.5 |
+| (4) | 15.6 / 35.9 | 13.7 / 33.4 | 14.3 / 32.5 | 13.7 / 32.1 | 13.6 / 31.7 |
 
-**平均后的相对比例（均值 ÷ 均值）：** 面积：Harlem ②÷① 68%、④÷③ 73%；NYP 57%、64%；Mount Sinai 42%、51%。居民：Harlem 69%、76%；NYP 58%、69%；Mount Sinai 44%、53%。逐时刻看比例的范围：Harlem ②÷① 63%–71%、④÷③ 68%–78%；NYP 52%–62%、60%–71%；Mount Sinai 35%–48%、42%–56%。公交的增量（均值 ③÷① / ④÷②）：Harlem 114% / 121%，NYP 114% / 130%，Mount Sinai 110% / 133%。
+**Relative ratios after averaging (mean ÷ mean):** area: Harlem (2)÷(1) 68%, (4)÷(3) 73%; NYP 57%, 64%; Mount Sinai 42%, 51%. Residents: Harlem 69%, 76%; NYP 58%, 69%; Mount Sinai 44%, 53%. The range of the ratio across individual times: Harlem (2)÷(1) 63%–71%, (4)÷(3) 68%–78%; NYP 52%–62%, 60%–71%; Mount Sinai 35%–48%, 42%–56%. The gain from buses (mean (3)÷(1) / (4)÷(2)): Harlem 114% / 121%, NYP 114% / 130%, Mount Sinai 110% / 133%.
 
-**结论：**
-1. **各时刻之间的波动很大：** 面积和居民数的 CV 多数在 9%–22%（只有 Mount Sinai 的两个 ADA 情景是 3%–6%）。除 Mount Sinai 的两个 ADA 情景（最大值比最小值高 10%–15%）外，同一医院同一情景的最大值比最小值高 28%–70%（如 NYP ② 15.8 → 26.8 km²，高 70%）。
-2. **08:00 这个单一时刻偏低：** Harlem 和 NYP 的 08:00 面积比 5 时刻均值低 10%–14%，Mount Sinai 只差 −6% 到 +1%。上两章用 08:00 单点给出的绝对面积，对 Harlem 和 NYP **比 5 时刻均值低 10%–14%**；要报一个代表性的绝对面积，应该用多时刻均值而不是单点。
-3. **波动的来源（推测，未逐项验证）：** 地铁和公交的发车相位。起点到最近站的步行时间只有 2–3 分钟，等车的时间落在 0–5 分钟之间，随出发时刻变化，直接吃掉 30 分钟里的一块。NYP 的 ADA 组依赖少数几条线，所以变化最大。
-4. **相对比例比绝对面积更稳，但仍有摆动**（见上面的范围）。三家医院 ②÷① 的顺序在均值上是 Harlem 68% > NYP 57% > Mount Sinai 42%，每个单独时刻也成立（Harlem 最低 63% 高于 NYP 最高 62%，NYP 最低 52% 高于 Mount Sinai 最高 48%）。④÷③ 的范围有重叠，所以不能说每个时刻都保持这个顺序。
-5. 只有 5 个时刻、间隔 15 分钟，样本很小，也可能与班次间隔同步。SD 只作量级参考。
+**Conclusions:**
+1. **The variation between times is large:** the CV of area and residents is mostly 9%–22% (only Mount Sinai's two ADA scenarios are at 3%–6%). Apart from Mount Sinai's two ADA scenarios (maximum 10%–15% above minimum), for the same hospital and scenario the maximum is 28%–70% above the minimum (for example NYP (2) 15.8 → 26.8 km², 70% higher).
+2. **The single time 08:00 is on the low side:** the 08:00 area of Harlem and NYP is 10%–14% below the 5-time mean, while Mount Sinai differs by only −6% to +1%. The absolute areas given at the single point 08:00 in the previous two chapters are **10%–14% below the 5-time mean** for Harlem and NYP; to report a representative absolute area, the multi-time mean should be used rather than a single point.
+3. **Source of the variation (conjecture, not checked one by one):** the departure phase of subways and buses. The walk from the origin to the nearest station is only 2–3 minutes, and the waiting time falls between 0 and 5 minutes, changing with the departure time and eating directly into a part of the 30 minutes. NYP's ADA group depends on a few lines, so it varies the most.
+4. **Relative ratios are more stable than absolute areas, but still swing** (see the ranges above). The order of (2)÷(1) across the three hospitals on the means is Harlem 68% > NYP 57% > Mount Sinai 42%, and it also holds at every individual time (Harlem's lowest 63% is above NYP's highest 62%, and NYP's lowest 52% is above Mount Sinai's highest 48%). The ranges of (4)÷(3) overlap, so it cannot be said that every time keeps this order.
+5. There are only 5 times, 15 minutes apart, a very small sample that may also be synchronized with the headways. SD is a rough guide to magnitude only.
 
-**回归：** 08:00 这一列与上一章结果比较，面积差 ≤0.018 km²，居民数差 ≤148 人。
+**Regression:** the 08:00 column compared with the previous chapter gives an area difference ≤ 0.018 km² and a resident difference ≤ 148 persons.
 
-## 18. Monte Carlo：电梯随机停运下情景④的覆盖概率
+## 18. Monte Carlo: coverage probability of scenario (4) under random elevator outages
 
-### 做了什么
+### What was done
 
-| 项目 | 做法 |
+| Item | Method |
 |---|---|
-| 情景 | 只做情景④（ADA 地铁加公交，所有公交车和公交站可用）。你没有指定方向，我**两个方向都做了**：反向（08:00 前到达，主要结果，与第 16 节居民口径一致）和正向（08:00 出发）。重算每次只要约 0.2–0.3 秒，所以不需要折中 |
-| 电梯模型 | 用 `station_table.csv` 的 `access_paths`（哪些电梯串联、哪些并联，到北向、南向站台）和 `elevator_detail.csv` 的 `avail_24h_12m`（12 个月 24 小时可用率）。共 10 个车站、23 部电梯 |
-| 抽样 | 每次对 23 部电梯**独立**抽 Bernoulli：在停的概率 = 1 − 可用率。共 **1000 次**，固定随机种子（20261111），三家医院、两个方向、两种补值用**同一组随机数** |
-| 一次抽样怎么影响等时圈 | 站台某个方向没有一条完整可用的电梯通路时，该站该方向的站台对 ADA 乘客不能上车、下车或换乘（仍可乘车经过）。然后**完整重算**等时圈（RAPTOR + 街道步行 + 栅格化 + 居民分配） |
-| Harlem-148 St | 按第七轮的标记，无电梯依赖，永不被堵 |
-| 没有可用率的电梯 | 只有 **EL520**（137 St 南向）。按之前的两个情景处理：**均值补 0.9787**（停运概率 2.13%）和**偏低补 0.9636**（3.64%）。两种补值各跑一遍 |
-| "每个居民被覆盖的概率" | 居民在 tract 内均匀分布，所以对每个 10 m 格子算"1000 次里有几次在圈内"，再乘以该格子的居民数。覆盖概率 ≥ 90% 的居民 = 这些格子的居民数之和 |
-| 基线 | 所有电梯都正常（即上一章的情景④，居民数略有不同，是网格对齐：如 NYP 反向 73,669 vs 73,560） |
+| Scenario | Only scenario (4) (ADA subway plus bus, all buses and bus stops usable). You did not specify a direction, so I **did both**: reverse (arrive by 08:00, the main result, consistent with the residents basis of section 16) and forward (depart at 08:00). A recomputation takes only about 0.2–0.3 seconds each, so no compromise was needed |
+| Elevator model | `access_paths` of `station_table.csv` (which elevators are in series or parallel, to the northbound and southbound platforms) and `avail_24h_12m` of `elevator_detail.csv` (12-month 24-hour availability). 10 stations and 23 elevators in total |
+| Sampling | Each draw takes an **independent** Bernoulli for each of the 23 elevators: probability of being out = 1 − availability. **1000 draws** in total with a fixed random seed (20261111); the three hospitals, two directions and two fills use the **same random numbers** |
+| How a draw affects the isochrone | If a station has no fully working elevator path to the platform of a direction, that platform at that station cannot be boarded, alighted or transferred at by ADA passengers (riding through is still possible). The isochrone is then **fully recomputed** (RAPTOR + street walking + rasterization + resident allocation) |
+| Harlem-148 St | Marked as in Round 7: no elevator dependency, never blocked |
+| Elevators without availability | Only **EL520** (137 St southbound). Handled with the two earlier scenarios: **mean fill 0.9787** (outage probability 2.13%) and **low fill 0.9636** (3.64%). Both fills were run |
+| "Probability that each resident is covered" | Residents are uniformly spread inside a tract, so for each 10 m cell I count "how many of the 1000 draws it is inside the isochrone" and multiply by the cell's residents. Residents with coverage probability ≥ 90% = the sum of residents in those cells |
+| Baseline | All elevators working (that is, scenario (4) of the previous chapter; the resident counts differ slightly because of grid alignment: for example NYP reverse 73,669 vs 73,560) |
 
-### 自检
+### Self-checks
 
-1. **抽样频率 vs 解析概率**（20,000 次抽样，各站"不是两个方向都完全可用"的频率与 `station_table` 的 1 − 整站概率）：Inwood-207 St 2.29% vs 2.52%，Dyckman 3.22% vs 3.05%，181 St 1.64% vs 1.53%，175 St 1.26% vs 1.32%，168 St 5.10% vs 5.30%，137 St 4.82% vs 4.98%，135 St 4.17% vs 4.20%，125 St A/C/B/D 3.42% vs 3.38%，125 St 4/5/6 4.80% vs 4.74%，Harlem-148 St 0 vs 0。差别都在抽样误差内。
-2. **用于提速的去重是精确的：** 一次抽样里被堵的站台，只有"基线里被用到的"才可能改变结果。只对这部分做去重（因此每个医院和方向只需 22–48 次独立重算，而不是 1000 次）。随机抽 25 次停运，**去重后的重算与完整重算结果逐点相同（25/25）**。
-3. 每个情景里，"从各格子覆盖概率算出的期望覆盖居民数"与"1000 次逐次结果的平均"相等（差 3×10⁻¹¹）；没有任何一个格子在基线之外被覆盖（停运只会减少覆盖）。
-4. **1000 次里 282 次（28.2%）有至少一个站不完全可用**（偏低补 290 次）。各站被堵的次数：Inwood-207 St 25、Dyckman 32、181 St 29、175 St 13、168 St 46、137 St 47、135 St 34、125 St A/C/B/D 43、125 St 4/5/6 57、Harlem-148 St 0。
+1. **Sampling frequency vs analytic probability** (20,000 draws, the frequency of each station being "not fully usable in both directions" against 1 − whole-station probability in `station_table`): Inwood-207 St 2.29% vs 2.52%, Dyckman 3.22% vs 3.05%, 181 St 1.64% vs 1.53%, 175 St 1.26% vs 1.32%, 168 St 5.10% vs 5.30%, 137 St 4.82% vs 4.98%, 135 St 4.17% vs 4.20%, 125 St A/C/B/D 3.42% vs 3.38%, 125 St 4/5/6 4.80% vs 4.74%, Harlem-148 St 0 vs 0. All differences are within sampling error.
+2. **The de-duplication used for speed is exact:** among the platforms blocked in a draw, only those "used in the baseline" can change the result. De-duplication is done on this part only (so each hospital and direction needs only 22–48 independent recomputations instead of 1000). For 25 randomly chosen outage draws, **the de-duplicated recomputation agrees point by point with the full recomputation (25/25)**.
+3. In every scenario, the "expected number of covered residents computed from the per-cell coverage probabilities" equals "the mean of the 1000 individual results" (difference 3×10⁻¹¹), and no cell is covered outside the baseline (outages only reduce coverage).
+4. **In 282 of the 1000 draws (28.2%) at least one station is not fully usable** (290 with the low fill). Number of draws in which each station is blocked: Inwood-207 St 25, Dyckman 32, 181 St 29, 175 St 13, 168 St 46, 137 St 47, 135 St 34, 125 St A/C/B/D 43, 125 St 4/5/6 57, Harlem-148 St 0.
 
-### 结果
+### Results
 
-**情景④居民数（行走困难，人）**，两种补值下这些居民数统计量（均值、分位数、各档覆盖概率的居民数、有损失的次数）**完全相同**（差 0），所以只列一份。两者只在"至少一个站不完全可用"的次数（282 vs 290）和独立重算的次数上有差别：
+**Scenario (4) residents (with ambulatory difficulty, persons).** Under the two fills, these resident statistics (mean, percentiles, residents at each coverage-probability level, number of draws with loss) are **exactly identical** (difference 0), so only one set is listed. The two differ only in the number of draws with "at least one station not fully usable" (282 vs 290) and in the number of independent recomputations:
 
-| 医院 / 方向 | 基线（无停运） | 1000 次均值 | SD | 5% 分位 | 最小 | **覆盖概率 ≥ 90%** | ≥ 95% | ≥ 99% | = 100% | 有损失的次数 |
+| Hospital / direction | Baseline (no outage) | Mean of 1000 | SD | 5th percentile | Min | **Coverage probability ≥ 90%** | ≥ 95% | ≥ 99% | = 100% | Draws with loss |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Harlem 反向 | 109,561 | 108,980 | 4,221 | 109,526 | 64,435 | **109,561（100.0%）** | 109,553（100.0%） | 101,104（92.3%） | 55,609（50.8%） | 115 |
-| Harlem 正向 | 83,579 | 83,085 | 2,586 | 83,427 | 68,676 | **83,579（100.0%）** | 83,427（99.8%） | 69,319（82.9%） | 54,568（65.3%） | 93 |
-| NYP 反向 | 73,669 | 71,755 | 6,510 | 52,487 | 39,859 | **72,887（98.9%）** | 54,962（74.6%） | 37,384（50.7%） | 37,384（50.7%） | 171 |
-| NYP 正向 | 61,961 | 61,028 | 3,138 | 53,439 | 43,565 | **61,961（100.0%）** | 48,890（78.9%） | 42,308（68.3%） | 42,155（68.0%） | 140 |
-| Mount Sinai 反向 | 46,169 | 45,890 | 916 | 43,510 | 40,183 | **46,169（100.0%）** | 42,704（92.5%） | 39,378（85.3%） | 39,378（85.3%） | 150 |
-| Mount Sinai 正向 | 32,480 | 32,455 | 117 | 32,289 | 31,763 | **32,480（100.0%）** | 32,289（99.4%） | 31,763（97.8%） | 31,763（97.8%） | 77 |
+| Harlem reverse | 109,561 | 108,980 | 4,221 | 109,526 | 64,435 | **109,561 (100.0%)** | 109,553 (100.0%) | 101,104 (92.3%) | 55,609 (50.8%) | 115 |
+| Harlem forward | 83,579 | 83,085 | 2,586 | 83,427 | 68,676 | **83,579 (100.0%)** | 83,427 (99.8%) | 69,319 (82.9%) | 54,568 (65.3%) | 93 |
+| NYP reverse | 73,669 | 71,755 | 6,510 | 52,487 | 39,859 | **72,887 (98.9%)** | 54,962 (74.6%) | 37,384 (50.7%) | 37,384 (50.7%) | 171 |
+| NYP forward | 61,961 | 61,028 | 3,138 | 53,439 | 43,565 | **61,961 (100.0%)** | 48,890 (78.9%) | 42,308 (68.3%) | 42,155 (68.0%) | 140 |
+| Mount Sinai reverse | 46,169 | 45,890 | 916 | 43,510 | 40,183 | **46,169 (100.0%)** | 42,704 (92.5%) | 39,378 (85.3%) | 39,378 (85.3%) | 150 |
+| Mount Sinai forward | 32,480 | 32,455 | 117 | 32,289 | 31,763 | **32,480 (100.0%)** | 32,289 (99.4%) | 31,763 (97.8%) | 31,763 (97.8%) | 77 |
 
-括号里是占基线的比例。"有损失的次数" = 1000 次里居民数低于基线的次数。
+In parentheses is the share of the baseline. "Draws with loss" = the number of the 1000 draws in which residents are below the baseline.
 
-**≥ 90% 的居民按曼哈顿 / 布朗克斯拆开**（括号里是基线）：
+**Residents with coverage ≥ 90% split by Manhattan / Bronx** (baseline in parentheses):
 
-| 医院 / 方向 | 曼哈顿 | 布朗克斯 |
+| Hospital / direction | Manhattan | Bronx |
 |---|---|---|
-| Harlem 反向 | 55,665（55,665） | 53,896（53,896） |
-| Harlem 正向 | 49,365（49,365） | 34,214（34,214） |
-| NYP 反向 | 57,922（58,458） | 14,965（15,212） |
-| NYP 正向 | 45,260（45,260） | 16,700（16,701） |
-| Mount Sinai 反向 | 45,694（45,694） | 475（475） |
-| Mount Sinai 正向 | 31,986（31,986） | 494（494） |
+| Harlem reverse | 55,665 (55,665) | 53,896 (53,896) |
+| Harlem forward | 49,365 (49,365) | 34,214 (34,214) |
+| NYP reverse | 57,922 (58,458) | 14,965 (15,212) |
+| NYP forward | 45,260 (45,260) | 16,700 (16,701) |
+| Mount Sinai reverse | 45,694 (45,694) | 475 (475) |
+| Mount Sinai forward | 31,986 (31,986) | 494 (494) |
 
-按面积：覆盖概率 ≥ 90% 的面积与基线几乎相同（Harlem 反向 42.2 km²，NYP 反向 29.9 km² 对基线 30.3 km²，Mount Sinai 反向 17.8 km²）；100% 覆盖的面积小得多（Harlem 反向 18.9 km²，NYP 反向 12.2 km²，Mount Sinai 反向 15.2 km²）。
+By area: the area with coverage probability ≥ 90% is almost the same as the baseline (Harlem reverse 42.2 km², NYP reverse 29.9 km² against a baseline of 30.3 km², Mount Sinai reverse 17.8 km²); the area with 100% coverage is much smaller (Harlem reverse 18.9 km², NYP reverse 12.2 km², Mount Sinai reverse 15.2 km²).
 
-### 怎么读
+### How to read it
 
-1. **"覆盖概率 ≥ 90%"的居民几乎等于基线（98.9%–100%）。** 但这主要是**阈值宽松**造成的：被扰动的每个车站，整站可用概率在 94.7%–98.7%，都高于 90%。只有 NYP 反向有 782 个居民（1.1%）落在 88%–92% 的噪声带里（1000 次抽样估计一个概率的标准误最大 1.6 个百分点），其他情景在这个带里是 0，所以 ≥ 90% 的结果不受抽样噪声影响。
-2. **阈值一提高，差别很快出现：** 到 ≥ 95%，NYP 反向降到 74.6%，Mount Sinai 反向 92.5%；到 ≥ 99%，NYP 反向 50.7%、Harlem 反向 92.3%、Mount Sinai 反向 85.3%。NYP 反向有 17,925 居民在 90%–95% 这一档，主要集中在 168 St 和 125 St 一带（地图里橙红色区域）。如果决策关心的是"几乎一定能到"，应该看 ≥ 95% 或 ≥ 99% 而不是 ≥ 90%。
-3. **平均损失不大，尾部很大：** 1000 次均值比基线低 0.5%（Harlem 反向）、2.6%（NYP 反向）、0.6%（Mount Sinai 反向）；正向 0.6%、1.5%、0.1%。但最坏的几次损失很大：Harlem 反向最小 64,435（基线的 59%）、NYP 反向最小 39,859（54%）。这是因为少数车站承担了大部分覆盖（下一条）。
-4. **哪些车站是单点：** 单独把一个车站两个方向都停掉，损失的居民数（反向）：
-   - Harlem：**135 St（2/3）损失 57,613 人，占基线 53%**；其余车站几乎无影响（9 个车站里 6 个完全无影响）
-   - NYP：**168 St（A/C）损失 32,898（45%）**，125 St（A/C/B/D）21,182（29%），Inwood-207 St 6,543（9%），125 St 4/5/6 782（1%）
-   - Mount Sinai：125 St（A/C/B/D）5,986（13%），168 St 2,659（6%），175 St 889（2%），125 St 4/5/6 805（2%），181 St 300（1%）
-   - 正向：Harlem 135 St −28,859（35%）；NYP 168 St −17,416（28%）、Inwood-207 St −8,521（14%）、125 St A/C/B/D −6,778（11%）；Mount Sinai 最大的 125 St A/C/B/D 只有 −718（2%）
+1. **The residents with "coverage probability ≥ 90%" almost equal the baseline (98.9%–100%).** But this is mainly caused by a **loose threshold**: every perturbed station has a whole-station availability probability of 94.7%–98.7%, all above 90%. Only for NYP reverse do 782 residents (1.1%) fall into the 88%–92% noise band (the standard error of a probability estimated from 1000 draws is at most 1.6 percentage points); in the other scenarios the band holds 0, so the ≥ 90% results are not affected by sampling noise.
+2. **Once the threshold is raised, differences appear quickly:** at ≥ 95%, NYP reverse drops to 74.6% and Mount Sinai reverse to 92.5%; at ≥ 99%, NYP reverse 50.7%, Harlem reverse 92.3%, Mount Sinai reverse 85.3%. NYP reverse has 17,925 residents in the 90%–95% band, concentrated around 168 St and 125 St (the orange-red areas on the map). If the decision concerns "almost certainly able to get there", look at ≥ 95% or ≥ 99% rather than ≥ 90%.
+3. **The mean loss is small but the tail is large:** the mean of the 1000 draws is below the baseline by 0.5% (Harlem reverse), 2.6% (NYP reverse), 0.6% (Mount Sinai reverse); forward 0.6%, 1.5%, 0.1%. But the worst few draws lose a lot: Harlem reverse minimum 64,435 (59% of the baseline), NYP reverse minimum 39,859 (54%). This is because a few stations carry most of the coverage (next point).
+4. **Which stations are single points:** the residents lost when one station is shut down in both directions on its own (reverse):
+   - Harlem: **135 St (2/3) loses 57,613 persons, 53% of the baseline**; the other stations have almost no effect (6 of 9 stations have no effect at all)
+   - NYP: **168 St (A/C) loses 32,898 (45%)**, 125 St (A/C/B/D) 21,182 (29%), Inwood-207 St 6,543 (9%), 125 St 4/5/6 782 (1%)
+   - Mount Sinai: 125 St (A/C/B/D) 5,986 (13%), 168 St 2,659 (6%), 175 St 889 (2%), 125 St 4/5/6 805 (2%), 181 St 300 (1%)
+   - Forward: Harlem 135 St −28,859 (35%); NYP 168 St −17,416 (28%), Inwood-207 St −8,521 (14%), 125 St A/C/B/D −6,778 (11%); Mount Sinai's largest, 125 St A/C/B/D, is only −718 (2%)
 
-   按期望损失（单独停运概率 × 单独停运损失）排序的电梯（反向）：Harlem：EL181（停运概率 1.4%，单独停运损失 45,126，期望 641）、EL180（2.8%，8,414，238）；NYP：EL139（2.6%，32,898，852）、EL140（1.8%，27,229，483）、EL144（1.6%，21,182，335）、EL142（0.7%，21,182，156）；Mount Sinai：EL139（69）、EL143（53）、EL142（44）、EL141（27）。23 部电梯里有损失的只有 5–12 部。
-5. **两种补值没有区别。** EL520（137 St）的停运概率从 2.13% 变到 3.64%，所有统计量完全一致：137 St 不在任何一家医院的最优 ADA 路径上，所以它的状态不影响结果。（独立重算次数偶尔差 1 次，如 NYP 反向 45 vs 46，是因为那几次的 137 St 状态不同，但对居民数没有影响。）
+   Elevators ranked by expected loss (probability of being out on its own × loss when out on its own), reverse: Harlem: EL181 (outage probability 1.4%, loss when out on its own 45,126, expected 641), EL180 (2.8%, 8,414, 238); NYP: EL139 (2.6%, 32,898, 852), EL140 (1.8%, 27,229, 483), EL144 (1.6%, 21,182, 335), EL142 (0.7%, 21,182, 156); Mount Sinai: EL139 (69), EL143 (53), EL142 (44), EL141 (27). Of the 23 elevators only 5–12 have any loss.
+5. **The two fills make no difference.** The outage probability of EL520 (137 St) changes from 2.13% to 3.64% and all statistics are identical: 137 St is on no hospital's best ADA path, so its state does not affect the result. (The number of independent recomputations occasionally differs by 1, such as NYP reverse 45 vs 46, because 137 St is in a different state in those draws, but this has no effect on the resident counts.)
 
-### 局限（请特别注意第 1 条）
+### Limitations (please pay particular attention to item 1)
 
-1. **只扰动了 station_table 里的 10 个研究区车站，其他 ADA 站被当作永远可用。** 等时圈里用到的 ADA 站远不止这 10 个：被扰动的车站占到达的 ADA 站的比例是——反向 Harlem 6/40、NYP 9/39、Mount Sinai 7/15；正向 Harlem 6/40、NYP 10/22、Mount Sinai 4/10（Harlem-148 St 也算在内，但它永不被堵）。所以南曼哈顿和布朗克斯的大片"P = 100%"区域，是因为那里依赖的站没有被扰动，**不是真的永远可用**，覆盖概率被**高估**，≥ 90% 的居民数也偏高。清单和可用率表里有全市电梯，原则上可以用同样的方法把 174 个 ADA 站都建模；你要求用 station_table，我没有这样做。
-2. **电梯相互独立：** 同一站的电梯可能一起停（停电、施工、同一承包商），独立假设会低估大损失的概率。
-3. **可用率是 24 小时、12 个月的平均**（含计划内停运和夜间），早高峰的实际可用率可能不同（`elevator_detail.csv` 里有早高峰可用率，没有使用）。EL519 只有 5 个月、EL144 只有 9 个月数据。
-4. **停运状态在整个 30 分钟内不变，**没有考虑途中恢复或新故障；也没有替代路线（如"用相邻电梯"之外的绕行），除了路径图本身编码的并联关系。
-5. **只有 ADA 组受影响**（情景④）；普通人不受电梯影响。基线是"所有电梯正常"，与之前的情景④一致，但不代表典型的一天。
-6. **居民数用"tract 内均匀分布"分配**，覆盖概率高的格子里居民数与现实不一定相符；居民是居住地，不是实际出行的患者。
-7. 1000 次抽样：覆盖概率的估计误差最大约 1.6 个百分点；对尾部事件（5% 分位、最小值）更不稳定。
+1. **Only the 10 study-area stations in station_table were perturbed; the other ADA stations are treated as always available.** The isochrones use far more ADA stations than these 10: the share of perturbed stations among the ADA stations reached is: reverse Harlem 6/40, NYP 9/39, Mount Sinai 7/15; forward Harlem 6/40, NYP 10/22, Mount Sinai 4/10 (Harlem-148 St is counted too, but it is never blocked). So the large "P = 100%" areas in southern Manhattan and the Bronx are there because the stations depended on there were not perturbed, **not because they are truly always available**; coverage probability is **overestimated**, and the ≥ 90% resident counts are too high. The inventory and the availability table cover the whole city's elevators, so in principle the same method could model all 174 ADA stations; you asked to use station_table, so I did not.
+2. **Elevators are independent:** elevators in one station may go out together (power cut, construction, the same contractor), and the independence assumption underestimates the probability of large losses.
+3. **Availability is a 24-hour, 12-month average** (including scheduled outages and nights), and the real availability in the morning peak may differ (`elevator_detail.csv` has the AM-peak availability, which was not used). EL519 has only 5 months and EL144 only 9 months of data.
+4. **The outage state does not change for the whole 30 minutes,** with no recovery or new failure along the way; there are also no alternative routes (such as detours beyond "use an adjacent elevator"), apart from the parallel relations encoded in the path graph itself.
+5. **Only the ADA group is affected** (scenario (4)); anyone is not affected by elevators. The baseline is "all elevators working", consistent with the earlier scenario (4), but does not represent a typical day.
+6. **Residents are allocated as "uniform inside a tract",** so in cells with high coverage probability the number of residents may not match reality; the residents counted are people living there, not patients who actually travel.
+7. 1000 draws: the estimation error of a coverage probability is up to about 1.6 percentage points; tail events (5th percentile, minimum) are less stable still.
 
-## 19. 本章遇到的问题
+## 19. Problems met in this chapter
 
-1. **方向没指定。** Monte Carlo 两个方向都做了，主要结果取反向。
-2. **脚本里的两个小错误**（都在出结果前发现并修正，没有影响最终数字）：居民密度最初是按 tract 而不是按格子取的，导致索引错误；保存的覆盖次数是整张网格而不是裁剪后的，在做阈值噪声检验时报错。
-3. **`item` 与 pandas 方法同名**，打印单站、单电梯排名时报错，改用字典取值。
-4. **被去重提速绕过的担忧：** 见第 18 节自检 2，已验证精确。
-5. **没有做的事：** 把全部 174 个 ADA 站建模（见局限 1）、非独立的电梯故障（共因）、用早高峰可用率、多个出发时刻下的 Monte Carlo（只做了 08:00）、对情景①②③的停运影响（它们不依赖电梯）。
+1. **No direction was specified.** The Monte Carlo was done in both directions, and the main result is the reverse one.
+2. **Two small bugs in the script** (both found and fixed before results were produced, with no effect on the final numbers): the resident density was first taken per tract instead of per cell, causing an index error; the saved coverage counts were for the whole grid instead of the clipped one, which raised an error in the threshold-noise test.
+3. **`item` has the same name as a pandas method,** which raised an error when printing the single-station and single-elevator rankings; dictionary lookup was used instead.
+4. **Concern that the de-duplication speed-up could be bypassed:** see self-check 2 in section 18; verified to be exact.
+5. **Not done:** modelling all 174 ADA stations (see limitation 1), non-independent elevator failures (common cause), using AM-peak availability, the Monte Carlo at several departure times (only 08:00 was done), and the outage effect on scenarios (1), (2) and (3) (they do not depend on elevators).
 
 ---
 
-*（原章：第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo）*
+*(Original chapter: Round 10, clipping to Manhattan, expanded elevator Monte Carlo)*
 
-写之前我再读了一遍 checks.md：它仍是 1178 行（自上一章追加后没有被改动）。本章只追加，节号延续上一章，从 **48** 起。本章分两次追加：第 20–23 节是"裁剪到曼哈顿"（你的第 1、2 点），随后是 Monte Carlo（第 3–5 点）。引用其他章节仍用标题。
+Before writing I read checks.md again: it was still 1178 lines (unchanged since the last chapter was appended). This chapter is append-only, and section numbers continue from the previous chapter, starting at **48**. This chapter was appended in two steps: sections 20–23 are "clipping to Manhattan" (your points 1 and 2), followed by the Monte Carlo (points 3–5). References to other chapters still go by title.
 
-## 20. 本章做法和产出
+## 20. Method and output of this chapter
 
-- **裁剪的含义：** 等时圈仍然在**整个街道网络**上计算（出行不限制在曼哈顿内，比如可以先坐公交经过布朗克斯再回来），算完后把覆盖范围**裁剪到曼哈顿行政区内**，面积和居民数都只统计曼哈顿。居民只统计**曼哈顿的 tract**（纽约县，FIPS 36061）。
-- **正反向、单一时刻和多时刻都做：** 每家医院、每个情景，做了 08:00 单一时刻的正向（08:00 出发）和反向（08:00 前到达），以及五个时刻的均值（正向：07:30、07:45、08:00、08:15、08:30 出发；反向：这五个到达时限）。共 3 家医院 × 4 情景 × 2 方向 × 5 个时刻 = 120 次，另加 3 个纯步行。反向的公交班次取 07:00–08:30 内运行的。
-- **回归：** "裁剪前"的数字是同一程序在同一栅格上算出的，与前两章的 60 个正向结果**逐点一致**（面积差 0.0000 km²，居民差 0）。
+- **What clipping means:** isochrones are still computed on the **whole street network** (travel is not restricted to Manhattan; for example one can take a bus through the Bronx and come back), and after computing, the coverage is **clipped to the Manhattan borough**, so area and residents count only Manhattan. Residents count only **Manhattan tracts** (New York County, FIPS 36061).
+- **Both directions, single time and multi-time:** for each hospital and scenario, I ran the single time 08:00 forward (depart at 08:00) and reverse (arrive by 08:00), and the mean of five times (forward: depart at 07:30, 07:45, 08:00, 08:15, 08:30; reverse: these five arrival deadlines). That is 3 hospitals × 4 scenarios × 2 directions × 5 times = 120 runs, plus 3 pure-walking runs. Reverse bus trips are those running 07:00–08:30.
+- **Regression:** the "before clipping" numbers were computed by the same program on the same raster and agree **point by point** with the 60 forward results of the previous two chapters (area difference 0.0000 km², resident difference 0).
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [manhattan_clip_runs.csv](../outputs/manhattan_clip_runs.csv) | 120 次运行 + 3 个纯步行的逐次结果：裁剪前后的面积和居民数，以及 Marble Hill、罗斯福岛、Randalls/Wards 岛等各部分的贡献 |
-| [manhattan_clip_comparison.csv](../outputs/manhattan_clip_comparison.csv) | 每家医院、每个情景、4 种设定（正/反向 × 单一/均值）的裁剪前后对照 |
-| [manhattan_clip_ratios.csv](../outputs/manhattan_clip_ratios.csv) | 各比例（② ÷ ①、④ ÷ ③、④ ÷ ②、③ ÷ ①）和公交增量，裁剪前后 |
+| [manhattan_clip_runs.csv](../outputs/manhattan_clip_runs.csv) | Results of the 120 runs + 3 pure-walking runs: area and residents before and after clipping, and the contribution of Marble Hill, Roosevelt Island, Randalls/Wards Island and other parts |
+| [manhattan_clip_comparison.csv](../outputs/manhattan_clip_comparison.csv) | For each hospital, scenario and 4 settings (forward/reverse × single/mean), the before and after clipping comparison |
+| [manhattan_clip_ratios.csv](../outputs/manhattan_clip_ratios.csv) | The ratios ((2) ÷ (1), (4) ÷ (3), (4) ÷ (2), (3) ÷ (1)) and the gain from buses, before and after clipping |
 
-## 21. 曼哈顿的范围：官方边界、去水面；Marble Hill 和罗斯福岛
+## 21. Extent of Manhattan: official boundary, water removed; Marble Hill and Roosevelt Island
 
-**边界：** NYC Open Data 的 Borough Boundaries（`gthc-hcne`，已沿岸线裁剪，只有陆地），行政区 = Manhattan。它由 36 块多边形组成，面积（矢量）合计 58.79 km²。**河面不在其中**，所以"去掉水面"已由边界本身保证；等时圈的 100 m 街道缓冲先与陆地相交再与曼哈顿相交。栅格化后的曼哈顿陆地面积是 59.18 km²，比矢量大 0.7%，是 10 m 栅格的边缘效应。
+**Boundary:** NYC Open Data Borough Boundaries (`gthc-hcne`, clipped to the shoreline, land only), borough = Manhattan. It consists of 36 polygons with a total (vector) area of 58.79 km². **River surface is not included**, so "removing water" is guaranteed by the boundary itself; the isochrone's 100 m street buffer is intersected first with land and then with Manhattan. The rasterized Manhattan land area is 59.18 km², 0.7% more than the vector area, which is an edge effect of the 10 m raster.
 
-| 部分 | 面积 km² | 算在内吗 | 在 120 次运行里被到达的次数 | 到达的最大面积 | 最多居民 |
+| Part | Area km² | Counted? | Times reached in the 120 runs | Largest area reached | Most residents |
 |---|---|---|---|---|---|
-| 主岛 | 54.62 | 是 | 全部 | | |
-| **Marble Hill** | 0.30 | **是** | 52 | 0.296 km² | 1,413 |
-| **罗斯福岛（Roosevelt Island）** | 0.58 | **是** | **0** | 0 | 0 |
-| Randalls/Wards 岛 | 2.17 | 是 | 49 | 1.53 km² | 109 |
-| Governors 岛 | 0.71 | 是 | 0 | 0 | 0 |
-| 其他小岛（Liberty、Ellis、Battery 一带） | 0.41 | 是 | 0 | 0 | 0 |
+| Main island | 54.62 | yes | all | | |
+| **Marble Hill** | 0.30 | **yes** | 52 | 0.296 km² | 1,413 |
+| **Roosevelt Island** | 0.58 | **yes** | **0** | 0 | 0 |
+| Randalls/Wards Island | 2.17 | yes | 49 | 1.53 km² | 109 |
+| Governors Island | 0.71 | yes | 0 | 0 | 0 |
+| Other small islands (Liberty, Ellis, around the Battery) | 0.41 | yes | 0 | 0 | 0 |
 
-**回答你的问题：**
-- **Marble Hill 算在内。** 它是官方曼哈顿边界里单独的一块（0.304 km²），在地理上连着布朗克斯大陆，但行政上属曼哈顿，人口普查区也在纽约县。它只在 NYP/Columbia 和 Mount Sinai 的情景里被到达（Harlem 的所有情景都没有）。对 NYP 的情景 ①（08:00），它贡献 0.30 km²、约 1,412 居民，占曼哈顿居民的 2.4%–2.6%；Mount Sinai ① 为 0.7%–1.4%。**排除它会怎样：** 我另外算了排除 Marble Hill 的版本，②÷①、④÷③ 的比例变化都在 1 个百分点以内，顺序的判断不变，所以本章不排除它。
-- **罗斯福岛算在内，但没有任何情景到达它。** 岛上有 176 个街道节点（都在连通的街道网络里），岛上的 Roosevelt Island 站是 ADA 站，但从三家医院出发或到达，30 分钟内都够不着，所以它对数字没有贡献。这是结果，不是数据缺失。
-- Randalls/Wards 岛：算在内；被到达时最大面积 1.53 km²，但居民最多只有 109 人，对居民数的贡献很小。
+**Answers to your questions:**
+- **Marble Hill is counted.** It is a separate piece of the official Manhattan boundary (0.304 km²), geographically attached to the Bronx mainland but administratively part of Manhattan, and its census tracts are in New York County. It is reached only in the NYP/Columbia and Mount Sinai scenarios (none of Harlem's scenarios). For NYP scenario (1) (08:00) it contributes 0.30 km² and about 1,412 residents, 2.4%–2.6% of the Manhattan residents; for Mount Sinai (1) 0.7%–1.4%. **What happens if it is excluded:** I also computed a version excluding Marble Hill; the changes in the (2)÷(1) and (4)÷(3) ratios are all within 1 percentage point and the judgement on the order does not change, so this chapter does not exclude it.
+- **Roosevelt Island is counted, but no scenario reaches it.** The island has 176 street nodes (all in the connected street network), and the Roosevelt Island station is an ADA station, but it cannot be reached within 30 minutes from or to any of the three hospitals, so it contributes nothing to the numbers. This is a result, not missing data.
+- Randalls/Wards Island: counted; the largest area when reached is 1.53 km², but the most residents are only 109, so its contribution to the resident counts is small.
 
-**一致性：** 曼哈顿边界与"纽约县的 tract"几乎完全重合：边界内但 tract 不在纽约县的面积只有 0.010 km²，反过来为 0，所以"面积裁到曼哈顿边界"和"居民只算曼哈顿 tract"是自洽的。裁剪后居民数等于上两章的 `amb_manhattan`（逐次相同）。
+**Consistency:** the Manhattan boundary and the "tracts of New York County" almost completely coincide: the area inside the boundary whose tract is not in New York County is only 0.010 km², and the reverse is 0, so "area clipped to the Manhattan boundary" and "residents counted only in Manhattan tracts" are self-consistent. After clipping, the resident count equals `amb_manhattan` of the previous two chapters (identical run by run).
 
-## 22. 裁剪前后对照表
+## 22. Before and after clipping
 
-"裁剪前" = 整个网络覆盖的全部陆地、全部 tract 的居民（前两章的口径，含布朗克斯）；"裁剪后" = 只算曼哈顿。面积单位 km²（陆地，100 m 缓冲），居民 = ACS 行走困难居民。"占 ①"是该情景占同一设定下情景 ①（普通人坐地铁）的比例。均值行的 SD 是五个时刻的面积标准差（裁剪后）。
+"Before clipping" = all the land covered by the whole network and the residents of all tracts (the basis of the previous two chapters, including the Bronx); "after clipping" = Manhattan only. Area in km² (land, 100 m buffer), residents = ACS residents with an ambulatory difficulty. "Share of (1)" is the scenario's share of scenario (1) (anyone, subway) under the same setting. The SD in the mean tables is the standard deviation of the area over the five times (after clipping).
 
-**正向 08:00 单一时刻**
+**Forward, single time 08:00**
 
-| 医院 / 情景 | 面积 裁剪前 → 裁剪后（km²） | 占 ① | 居民 裁剪前 → 裁剪后（人） | 占 ① |
+| Hospital / scenario | Area before → after (km²) | Share of (1) | Residents before → after (persons) | Share of (1) |
 |---|---|---|---|---|
-| **Harlem** ① | 41.01 → **27.84** | 100% → 100% | 102,496 → **61,324** | 100% → 100% |
-| ② | 28.92 → **20.19** | 71% → 73% | 70,938 → **43,627** | 69% → 71% |
-| ③ | 46.79 → **31.96** | 114% → 115% | 111,276 → **66,685** | 109% → 109% |
-| ④ | 33.97 → **22.79** | 83% → 82% | 83,579 → **49,365** | 82% → 80% |
-| **NYP/Columbia** ① | 30.95 → **22.52** | 100% → 100% | 74,215 → **54,408** | 100% → 100% |
-| ② | 17.59 → **15.18** | 57% → 67% | 44,483 → **38,321** | 60% → 70% |
-| ③ | 36.50 → **23.74** | 118% → 105% | 87,996 → **57,366** | 119% → 105% |
-| ④ | 23.79 → **17.53** | 77% → 78% | 61,961 → **45,260** | 83% → 83% |
-| **Mount Sinai** ① | 25.19 → **23.78** | 100% → 100% | 60,701 → **56,502** | 100% → 100% |
-| ② | 10.05 → **9.72** | 40% → 41% | 23,585 → **23,091** | 39% → 41% |
-| ③ | 27.06 → **25.53** | 107% → 107% | 64,683 → **60,341** | 107% → 107% |
-| ④ | 14.30 → **13.97** | 57% → 59% | 32,480 → **31,986** | 54% → 57% |
+| **Harlem** (1) | 41.01 → **27.84** | 100% → 100% | 102,496 → **61,324** | 100% → 100% |
+| (2) | 28.92 → **20.19** | 71% → 73% | 70,938 → **43,627** | 69% → 71% |
+| (3) | 46.79 → **31.96** | 114% → 115% | 111,276 → **66,685** | 109% → 109% |
+| (4) | 33.97 → **22.79** | 83% → 82% | 83,579 → **49,365** | 82% → 80% |
+| **NYP/Columbia** (1) | 30.95 → **22.52** | 100% → 100% | 74,215 → **54,408** | 100% → 100% |
+| (2) | 17.59 → **15.18** | 57% → 67% | 44,483 → **38,321** | 60% → 70% |
+| (3) | 36.50 → **23.74** | 118% → 105% | 87,996 → **57,366** | 119% → 105% |
+| (4) | 23.79 → **17.53** | 77% → 78% | 61,961 → **45,260** | 83% → 83% |
+| **Mount Sinai** (1) | 25.19 → **23.78** | 100% → 100% | 60,701 → **56,502** | 100% → 100% |
+| (2) | 10.05 → **9.72** | 40% → 41% | 23,585 → **23,091** | 39% → 41% |
+| (3) | 27.06 → **25.53** | 107% → 107% | 64,683 → **60,341** | 107% → 107% |
+| (4) | 14.30 → **13.97** | 57% → 59% | 32,480 → **31,986** | 54% → 57% |
 
-**反向 08:00 前到达（单一时刻）**
+**Reverse, arrive by 08:00 (single time)**
 
-| 医院 / 情景 | 面积 裁剪前 → 裁剪后（km²） | 占 ① | 居民 裁剪前 → 裁剪后（人） | 占 ① |
+| Hospital / scenario | Area before → after (km²) | Share of (1) | Residents before → after (persons) | Share of (1) |
 |---|---|---|---|---|
-| **Harlem** ① | 48.73 → **27.58** | 100% → 100% | 122,625 → **62,362** | 100% → 100% |
-| ② | 35.20 → **19.45** | 72% → 71% | 92,555 → **45,271** | 75% → 73% |
-| ③ | 52.07 → **28.54** | 107% → 103% | 130,214 → **65,237** | 106% → 105% |
-| ④ | 42.25 → **23.41** | 87% → 85% | 109,561 → **55,665** | 89% → 89% |
-| **NYP/Columbia** ① | 38.16 → **27.47** | 100% → 100% | 84,585 → **59,993** | 100% → 100% |
-| ② | 24.10 → **20.85** | 63% → 76% | 56,327 → **47,256** | 67% → 79% |
-| ③ | 47.47 → **30.52** | 124% → 111% | 108,925 → **68,578** | 129% → 114% |
-| ④ | 30.28 → **24.72** | 79% → 90% | 73,669 → **58,458** | 87% → 97% |
-| **Mount Sinai** ① | 26.88 → **26.21** | 100% → 100% | 61,102 → **59,878** | 100% → 100% |
-| ② | 10.36 → **10.36** | 39% → 40% | 24,067 → **24,067** | 39% → 40% |
-| ③ | 31.72 → **29.62** | 118% → 113% | 72,595 → **68,085** | 119% → 114% |
-| ④ | 17.82 → **17.54** | 66% → 67% | 46,169 → **45,694** | 76% → 76% |
+| **Harlem** (1) | 48.73 → **27.58** | 100% → 100% | 122,625 → **62,362** | 100% → 100% |
+| (2) | 35.20 → **19.45** | 72% → 71% | 92,555 → **45,271** | 75% → 73% |
+| (3) | 52.07 → **28.54** | 107% → 103% | 130,214 → **65,237** | 106% → 105% |
+| (4) | 42.25 → **23.41** | 87% → 85% | 109,561 → **55,665** | 89% → 89% |
+| **NYP/Columbia** (1) | 38.16 → **27.47** | 100% → 100% | 84,585 → **59,993** | 100% → 100% |
+| (2) | 24.10 → **20.85** | 63% → 76% | 56,327 → **47,256** | 67% → 79% |
+| (3) | 47.47 → **30.52** | 124% → 111% | 108,925 → **68,578** | 129% → 114% |
+| (4) | 30.28 → **24.72** | 79% → 90% | 73,669 → **58,458** | 87% → 97% |
+| **Mount Sinai** (1) | 26.88 → **26.21** | 100% → 100% | 61,102 → **59,878** | 100% → 100% |
+| (2) | 10.36 → **10.36** | 39% → 40% | 24,067 → **24,067** | 39% → 40% |
+| (3) | 31.72 → **29.62** | 118% → 113% | 72,595 → **68,085** | 119% → 114% |
+| (4) | 17.82 → **17.54** | 66% → 67% | 46,169 → **45,694** | 76% → 76% |
 
-**正向，五个出发时刻均值**
+**Forward, mean of five departure times**
 
-| 医院 / 情景 | 面积 裁剪前 → 裁剪后（km²） | 占 ① | 居民 裁剪前 → 裁剪后（人） | 占 ① |
+| Hospital / scenario | Area before → after (km²) | Share of (1) | Residents before → after (persons) | Share of (1) |
 |---|---|---|---|---|
-| **Harlem** ① | 47.30 → **29.99**（SD 2.6） | 100% → 100% | 117,224 → **66,409** | 100% → 100% |
-| ② | 32.30 → **20.01**（SD 1.3） | 68% → 67% | 80,771 → **43,493** | 69% → 65% |
-| ③ | 53.76 → **33.09**（SD 2.4） | 114% → 110% | 125,550 → **69,649** | 107% → 105% |
-| ④ | 39.06 → **23.41**（SD 1.2） | 83% → 78% | 95,541 → **51,279** | 82% → 77% |
-| **NYP/Columbia** ① | 35.98 → **24.60**（SD 3.2） | 100% → 100% | 86,072 → **57,243** | 100% → 100% |
-| ② | 20.37 → **17.45**（SD 3.4） | 57% → 71% | 49,875 → **41,880** | 58% → 73% |
-| ③ | 41.04 → **25.71**（SD 3.6） | 114% → 105% | 98,538 → **59,911** | 114% → 105% |
-| ④ | 26.46 → **19.68**（SD 3.4） | 74% → 80% | 68,418 → **48,626** | 79% → 85% |
-| **Mount Sinai** ① | 25.48 → **24.71**（SD 2.5） | 100% → 100% | 57,022 → **55,297** | 100% → 100% |
-| ② | 10.65 → **10.44**（SD 0.4） | 42% → 42% | 25,212 → **24,920** | 44% → 45% |
-| ③ | 27.97 → **26.78**（SD 2.2） | 110% → 108% | 62,558 → **59,715** | 110% → 108% |
-| ④ | 14.20 → **13.98**（SD 0.9） | 56% → 57% | 33,096 → **32,797** | 58% → 59% |
+| **Harlem** (1) | 47.30 → **29.99** (SD 2.6) | 100% → 100% | 117,224 → **66,409** | 100% → 100% |
+| (2) | 32.30 → **20.01** (SD 1.3) | 68% → 67% | 80,771 → **43,493** | 69% → 65% |
+| (3) | 53.76 → **33.09** (SD 2.4) | 114% → 110% | 125,550 → **69,649** | 107% → 105% |
+| (4) | 39.06 → **23.41** (SD 1.2) | 83% → 78% | 95,541 → **51,279** | 82% → 77% |
+| **NYP/Columbia** (1) | 35.98 → **24.60** (SD 3.2) | 100% → 100% | 86,072 → **57,243** | 100% → 100% |
+| (2) | 20.37 → **17.45** (SD 3.4) | 57% → 71% | 49,875 → **41,880** | 58% → 73% |
+| (3) | 41.04 → **25.71** (SD 3.6) | 114% → 105% | 98,538 → **59,911** | 114% → 105% |
+| (4) | 26.46 → **19.68** (SD 3.4) | 74% → 80% | 68,418 → **48,626** | 79% → 85% |
+| **Mount Sinai** (1) | 25.48 → **24.71** (SD 2.5) | 100% → 100% | 57,022 → **55,297** | 100% → 100% |
+| (2) | 10.65 → **10.44** (SD 0.4) | 42% → 42% | 25,212 → **24,920** | 44% → 45% |
+| (3) | 27.97 → **26.78** (SD 2.2) | 110% → 108% | 62,558 → **59,715** | 110% → 108% |
+| (4) | 14.20 → **13.98** (SD 0.9) | 56% → 57% | 33,096 → **32,797** | 58% → 59% |
 
-**反向，五个到达时限均值（07:30–08:30）**
+**Reverse, mean of five arrival deadlines (07:30–08:30)**
 
-| 医院 / 情景 | 面积 裁剪前 → 裁剪后（km²） | 占 ① | 居民 裁剪前 → 裁剪后（人） | 占 ① |
+| Hospital / scenario | Area before → after (km²) | Share of (1) | Residents before → after (persons) | Share of (1) |
 |---|---|---|---|---|
-| **Harlem** ① | 45.97 → **27.13**（SD 2.5） | 100% → 100% | 118,347 → **62,366** | 100% → 100% |
-| ② | 32.71 → **19.09**（SD 2.4） | 71% → 70% | 86,404 → **44,472** | 73% → 71% |
-| ③ | 50.16 → **29.08**（SD 4.0） | 109% → 107% | 126,390 → **65,860** | 107% → 106% |
-| ④ | 39.68 → **23.22**（SD 2.2） | 86% → 86% | 104,251 → **55,015** | 88% → 88% |
-| **NYP/Columbia** ① | 36.94 → **26.27**（SD 2.3） | 100% → 100% | 84,321 → **59,336** | 100% → 100% |
-| ② | 21.89 → **19.12**（SD 2.9） | 59% → 73% | 52,250 → **44,677** | 62% → 75% |
-| ③ | 44.53 → **28.16**（SD 2.4） | 121% → 107% | 104,207 → **64,248** | 124% → 108% |
-| ④ | 28.11 → **21.64**（SD 3.1） | 76% → 82% | 70,638 → **51,954** | 84% → 88% |
-| **Mount Sinai** ① | 25.68 → **25.01**（SD 1.6） | 100% → 100% | 58,460 → **57,017** | 100% → 100% |
-| ② | 10.22 → **10.15**（SD 0.3） | 40% → 41% | 23,810 → **23,699** | 41% → 42% |
-| ③ | 32.17 → **29.16**（SD 2.0） | 125% → 117% | 74,651 → **66,594** | 128% → 117% |
-| ④ | 19.14 → **18.22**（SD 3.1） | 75% → 73% | 47,794 → **45,598** | 82% → 80% |
+| **Harlem** (1) | 45.97 → **27.13** (SD 2.5) | 100% → 100% | 118,347 → **62,366** | 100% → 100% |
+| (2) | 32.71 → **19.09** (SD 2.4) | 71% → 70% | 86,404 → **44,472** | 73% → 71% |
+| (3) | 50.16 → **29.08** (SD 4.0) | 109% → 107% | 126,390 → **65,860** | 107% → 106% |
+| (4) | 39.68 → **23.22** (SD 2.2) | 86% → 86% | 104,251 → **55,015** | 88% → 88% |
+| **NYP/Columbia** (1) | 36.94 → **26.27** (SD 2.3) | 100% → 100% | 84,321 → **59,336** | 100% → 100% |
+| (2) | 21.89 → **19.12** (SD 2.9) | 59% → 73% | 52,250 → **44,677** | 62% → 75% |
+| (3) | 44.53 → **28.16** (SD 2.4) | 121% → 107% | 104,207 → **64,248** | 124% → 108% |
+| (4) | 28.11 → **21.64** (SD 3.1) | 76% → 82% | 70,638 → **51,954** | 84% → 88% |
+| **Mount Sinai** (1) | 25.68 → **25.01** (SD 1.6) | 100% → 100% | 58,460 → **57,017** | 100% → 100% |
+| (2) | 10.22 → **10.15** (SD 0.3) | 40% → 41% | 23,810 → **23,699** | 41% → 42% |
+| (3) | 32.17 → **29.16** (SD 2.0) | 125% → 117% | 74,651 → **66,594** | 128% → 117% |
+| (4) | 19.14 → **18.22** (SD 3.1) | 75% → 73% | 47,794 → **45,598** | 82% → 80% |
 
-纯步行范围（不乘车）：Harlem 11.49 → **8.12** km²，32,796 → **24,256** 居民；NYP/Columbia 7.98 → **6.48** km²，24,992 → **20,588**；Mount Sinai 9.03 → **9.03**，21,675 → **21,675**（Mount Sinai 的步行圈全在曼哈顿）。
+Pure-walking range (no vehicles): Harlem 11.49 → **8.12** km², 32,796 → **24,256** residents; NYP/Columbia 7.98 → **6.48** km², 24,992 → **20,588**; Mount Sinai 9.03 → **9.03**, 21,675 → **21,675** (Mount Sinai's walking circle is entirely in Manhattan).
 
-**哪里损失最多（08:00 正向，裁掉的比例）：** Harlem 面积 ① 32%、② 30%、③ 32%、④ 33%（居民 40% 左右）；NYP ① 27%、② 14%、③ 35%、④ 26%；Mount Sinai ① 6%、② 3%、③ 6%、④ 2%。反向下 Harlem 裁掉 43%–45%（居民 49%–51%）。
+**Where the loss is largest (forward 08:00, share cut off):** Harlem area (1) 32%, (2) 30%, (3) 32%, (4) 33% (residents about 40%); NYP (1) 27%, (2) 14%, (3) 35%, (4) 26%; Mount Sinai (1) 6%, (2) 3%, (3) 6%, (4) 2%. In reverse, Harlem loses 43%–45% (residents 49%–51%).
 
-## 23. 去掉其他区后哪些结论变了：两件重点
+## 23. What changed after removing the other boroughs: two main points
 
-### （一）ADA 组占普通人的比例：三家医院的顺序变了
+### (a) ADA group as a share of anyone: the order of the three hospitals changed
 
-比例 = ADA 组 ÷ 普通人（② ÷ ① 是只有地铁，④ ÷ ③ 是加公交）。4 种设定 × 面积/居民 × 2 种比例 = 16 种组合：
+Ratio = ADA group ÷ anyone ((2) ÷ (1) is subway only, (4) ÷ (3) is with buses). 4 settings × area/residents × 2 ratios = 16 combinations:
 
-| 设定 | 指标 | Harlem 前→后 | NYP/Columbia 前→后 | Mount Sinai 前→后 | 顺序（裁剪前 → 裁剪后） |
+| Setting | Indicator | Harlem before→after | NYP/Columbia before→after | Mount Sinai before→after | Order (before clipping → after clipping) |
 |---|---|---|---|---|---|
-| 正向 08:00 单一时刻 | 面积 ② ÷ ① | 71% → **73%** | 57% → **67%** | 40% → **41%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
-| 正向 08:00 单一时刻 | 面积 ④ ÷ ③ | 73% → **71%** | 65% → **74%** | 53% → **55%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 正向 08:00 单一时刻 | 居民 ② ÷ ① | 69% → **71%** | 60% → **70%** | 39% → **41%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
-| 正向 08:00 单一时刻 | 居民 ④ ÷ ③ | 75% → **74%** | 70% → **79%** | 50% → **53%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向 08:00 前到达（单一时刻） | 面积 ② ÷ ① | 72% → **71%** | 63% → **76%** | 39% → **40%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向 08:00 前到达（单一时刻） | 面积 ④ ÷ ③ | 81% → **82%** | 64% → **81%** | 56% → **59%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
-| 反向 08:00 前到达（单一时刻） | 居民 ② ÷ ① | 75% → **73%** | 67% → **79%** | 39% → **40%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向 08:00 前到达（单一时刻） | 居民 ④ ÷ ③ | 84% → **85%** | 68% → **85%** | 64% → **67%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
-| 正向，五个出发时刻均值 | 面积 ② ÷ ① | 68% → **67%** | 57% → **71%** | 42% → **42%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 正向，五个出发时刻均值 | 面积 ④ ÷ ③ | 73% → **71%** | 64% → **77%** | 51% → **52%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 正向，五个出发时刻均值 | 居民 ② ÷ ① | 69% → **65%** | 58% → **73%** | 44% → **45%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 正向，五个出发时刻均值 | 居民 ④ ÷ ③ | 76% → **74%** | 69% → **81%** | 53% → **55%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向，五个到达时限均值（07:30–08:30） | 面积 ② ÷ ① | 71% → **70%** | 59% → **73%** | 40% → **41%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向，五个到达时限均值（07:30–08:30） | 面积 ④ ÷ ③ | 79% → **80%** | 63% → **77%** | 60% → **62%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
-| 反向，五个到达时限均值（07:30–08:30） | 居民 ② ÷ ① | 73% → **71%** | 62% → **75%** | 41% → **42%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **变了** |
-| 反向，五个到达时限均值（07:30–08:30） | 居民 ④ ÷ ③ | 82% → **84%** | 68% → **81%** | 64% → **68%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Forward 08:00 single time | Area (2) ÷ (1) | 71% → **73%** | 57% → **67%** | 40% → **41%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Forward 08:00 single time | Area (4) ÷ (3) | 73% → **71%** | 65% → **74%** | 53% → **55%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Forward 08:00 single time | Residents (2) ÷ (1) | 69% → **71%** | 60% → **70%** | 39% → **41%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Forward 08:00 single time | Residents (4) ÷ (3) | 75% → **74%** | 70% → **79%** | 50% → **53%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, arrive by 08:00 (single time) | Area (2) ÷ (1) | 72% → **71%** | 63% → **76%** | 39% → **40%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, arrive by 08:00 (single time) | Area (4) ÷ (3) | 81% → **82%** | 64% → **81%** | 56% → **59%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Reverse, arrive by 08:00 (single time) | Residents (2) ÷ (1) | 75% → **73%** | 67% → **79%** | 39% → **40%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, arrive by 08:00 (single time) | Residents (4) ÷ (3) | 84% → **85%** | 68% → **85%** | 64% → **67%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Forward, mean of five departure times | Area (2) ÷ (1) | 68% → **67%** | 57% → **71%** | 42% → **42%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Forward, mean of five departure times | Area (4) ÷ (3) | 73% → **71%** | 64% → **77%** | 51% → **52%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Forward, mean of five departure times | Residents (2) ÷ (1) | 69% → **65%** | 58% → **73%** | 44% → **45%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Forward, mean of five departure times | Residents (4) ÷ (3) | 76% → **74%** | 69% → **81%** | 53% → **55%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Area (2) ÷ (1) | 71% → **70%** | 59% → **73%** | 40% → **41%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Area (4) ÷ (3) | 79% → **80%** | 63% → **77%** | 60% → **62%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Residents (2) ÷ (1) | 73% → **71%** | 62% → **75%** | 41% → **42%** | Harlem > NYP/Columbia > Mount → NYP/Columbia > Harlem > Mount **changed** |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Residents (4) ÷ (3) | 82% → **84%** | 68% → **81%** | 64% → **68%** | Harlem > NYP/Columbia > Mount → Harlem > NYP/Columbia > Mount |
 
-**结论：**
-1. **裁剪前，Harlem 在 16 种组合里全部排第一**，领先 NYP 4.7–17.3 个百分点。**裁剪后，Harlem 只在 6 种里排第一，NYP 在另外 10 种里更高**；Harlem 减 NYP 的差在 −7.7 到 +5.1 个百分点之间。上一章"Harlem > NYP > Mount Sinai 在所有设定下成立"的结论，**在曼哈顿范围内不再成立**（见"变了"标记）。
-2. **Mount Sinai 仍然全部垫底（16/16）：** 它的比例在 40%–68%，同一设定下另外两家中较低的一家是 65%–85%，差距很大。
-3. **为什么 Harlem 和 NYP 的顺序变了（解释来自上面的面积变化，是推断）：** Harlem 的裁剪对两组人几乎等比例（面积都损失约 30%–33%），所以比例基本不动。NYP 的普通人损失很大（情景 ①、③ 损失 27%–36%），ADA 组损失小（情景 ② 只损失 13%–14%）：NYP 的普通人往北、往东进入布朗克斯的那一大片，ADA 组本来就够不着。裁剪前 NYP 的 ADA 比例偏低，很大程度上是布朗克斯的差别；只看曼哈顿，NYP 的 ADA 组相对表现要好得多（② ÷ ① 从 57% 升到 67%，反向从 63% 升到 76%）。
-4. **所以：** "Mount Sinai 最低"是稳的；"Harlem 与 NYP 谁更高"在曼哈顿范围内**没有稳定的顺序**（差值在 ±8 个百分点内，与前一章记录的单个设定内的时间波动同量级）。
+**Conclusions:**
+1. **Before clipping, Harlem ranks first in all 16 combinations,** ahead of NYP by 4.7–17.3 percentage points. **After clipping, Harlem ranks first in only 6, and NYP is higher in the other 10;** Harlem minus NYP lies between −7.7 and +5.1 percentage points. The conclusion of the previous chapter that "Harlem > NYP > Mount Sinai holds under all settings" **no longer holds within Manhattan** (see the "changed" marks).
+2. **Mount Sinai is still last in every case (16/16):** its ratio is 40%–68%, while the lower of the other two is 65%–85% under the same setting, a large gap.
+3. **Why the order of Harlem and NYP changed (the explanation comes from the area changes above, and is an inference):** clipping affects the two groups at Harlem in almost the same proportion (area loses about 30%–33% in both), so the ratio hardly moves. For NYP, anyone loses a lot (scenarios (1) and (3) lose 27%–36%) and the ADA group loses little (scenario (2) loses only 13%–14%): the large area that NYP's anyone group reaches to the north and east in the Bronx is something the ADA group could not reach anyway. Before clipping, NYP's ADA ratio is low largely because of the Bronx; looking at Manhattan only, the NYP ADA group does much better in relative terms ((2) ÷ (1) rises from 57% to 67%, and in reverse from 63% to 76%).
+4. **So:** "Mount Sinai is lowest" is robust; "whether Harlem or NYP is higher" has **no stable order** within Manhattan (the difference is within ±8 percentage points, the same order of magnitude as the time-to-time variation within a single setting recorded in the previous chapter).
 
-### （二）公交对 ADA 组的帮助还剩多少
+### (b) How much of the help from buses remains for the ADA group
 
-公交的帮助 = ④ − ②（在 ADA 地铁站之外加上公交后，ADA 组多得的面积或居民）。括号里是裁剪后保留的比例。
+Help from buses = (4) − (2) (the area or residents that the ADA group gains when buses are added to the ADA subway stations). In parentheses is the share kept after clipping.
 
-| 设定 | 指标 | Harlem 前→后（保留） | NYP/Columbia 前→后（保留） | Mount Sinai 前→后（保留） |
+| Setting | Indicator | Harlem before→after (kept) | NYP/Columbia before→after (kept) | Mount Sinai before→after (kept) |
 |---|---|---|---|---|
-| 正向 08:00 单一时刻 | 面积 km² | +5.05 → **+2.60**（51%） | +6.20 → **+2.35**（38%） | +4.25 → **+4.25**（100%） |
-| 正向 08:00 单一时刻 | 居民 人 | +12,641 → **+5,738**（45%） | +17,478 → **+6,940**（40%） | +8,895 → **+8,895**（100%） |
-| 反向 08:00 前到达（单一时刻） | 面积 km² | +7.04 → **+3.96**（56%） | +6.18 → **+3.88**（63%） | +7.46 → **+7.17**（96%） |
-| 反向 08:00 前到达（单一时刻） | 居民 人 | +17,006 → **+10,394**（61%） | +17,342 → **+11,202**（65%） | +22,102 → **+21,628**（98%） |
-| 正向，五个出发时刻均值 | 面积 km² | +6.76 → **+3.40**（50%） | +6.10 → **+2.23**（37%） | +3.56 → **+3.55**（100%） |
-| 正向，五个出发时刻均值 | 居民 人 | +14,770 → **+7,786**（53%） | +18,543 → **+6,746**（36%） | +7,883 → **+7,877**（100%） |
-| 反向，五个到达时限均值（07:30–08:30） | 面积 km² | +6.98 → **+4.13**（59%） | +6.22 → **+2.52**（40%） | +8.92 → **+8.07**（90%） |
-| 反向，五个到达时限均值（07:30–08:30） | 居民 人 | +17,847 → **+10,542**（59%） | +18,388 → **+7,277**（40%） | +23,984 → **+21,900**（91%） |
+| Forward 08:00 single time | Area km² | +5.05 → **+2.60** (51%) | +6.20 → **+2.35** (38%) | +4.25 → **+4.25** (100%) |
+| Forward 08:00 single time | Residents | +12,641 → **+5,738** (45%) | +17,478 → **+6,940** (40%) | +8,895 → **+8,895** (100%) |
+| Reverse, arrive by 08:00 (single time) | Area km² | +7.04 → **+3.96** (56%) | +6.18 → **+3.88** (63%) | +7.46 → **+7.17** (96%) |
+| Reverse, arrive by 08:00 (single time) | Residents | +17,006 → **+10,394** (61%) | +17,342 → **+11,202** (65%) | +22,102 → **+21,628** (98%) |
+| Forward, mean of five departure times | Area km² | +6.76 → **+3.40** (50%) | +6.10 → **+2.23** (37%) | +3.56 → **+3.55** (100%) |
+| Forward, mean of five departure times | Residents | +14,770 → **+7,786** (53%) | +18,543 → **+6,746** (36%) | +7,883 → **+7,877** (100%) |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Area km² | +6.98 → **+4.13** (59%) | +6.22 → **+2.52** (40%) | +8.92 → **+8.07** (90%) |
+| Reverse, mean of five arrival deadlines (07:30–08:30) | Residents | +17,847 → **+10,542** (59%) | +18,388 → **+7,277** (40%) | +23,984 → **+21,900** (91%) |
 
-**相对增幅（④ ÷ ② − 1，面积）：** 裁剪前 Harlem +17%–+21%、NYP +26%–+35%、Mount Sinai +33%–+87%；裁剪后 Harlem **+13%–+22%**、NYP **+13%–+19%**、Mount Sinai **+34%–+80%**。
+**Relative increase ((4) ÷ (2) − 1, area):** before clipping Harlem +17%–+21%, NYP +26%–+35%, Mount Sinai +33%–+87%; after clipping Harlem **+13%–+22%**, NYP **+13%–+19%**, Mount Sinai **+34%–+80%**.
 
-**结论：**
-1. **Mount Sinai 几乎不变：** 公交帮助保留 90%–100%，因为它的增量几乎全在曼哈顿（推测：它附近的 ADA 地铁站少，公交补的是曼哈顿内部的缺口，没有逐站验证），面积相对增幅仍然最大（+34%–+80%）。
-2. **Harlem 保留约一半（面积 50%–59%，居民 45%–61%），NYP 保留 36%–65%（面积 37%–63%）。** 也就是说，上一章里看到的"公交对 NYP 的 ADA 组帮助很大（+35%）"，**有大约三分之二（08:00 正向 62%）来自布朗克斯**；Harlem 约一半（49%）来自布朗克斯。只看曼哈顿，两者的增幅降到 +13%–+22%，彼此相近，也远低于 Mount Sinai 的 +34%–+80%。
-3. **这仍然是上限：** 所有公交车和公交站都当作 ADA 组可用，且没考虑路缘坡道。在曼哈顿范围内，公交对 Harlem 和 NYP 的 ADA 组的帮助，是原来结果的一半左右，对 Mount Sinai 则基本全保留。
+**Conclusions:**
+1. **Mount Sinai is almost unchanged:** the help from buses keeps 90%–100%, because its gain is almost entirely in Manhattan (conjecture: there are few ADA subway stations near it, and buses fill gaps inside Manhattan; not verified station by station), and its relative increase in area is still the largest (+34%–+80%).
+2. **Harlem keeps about half (area 50%–59%, residents 45%–61%), NYP keeps 36%–65% (area 37%–63%).** That is, the previous chapter's finding that "buses help NYP's ADA group a lot (+35%)" had **about two thirds (62% in forward 08:00) coming from the Bronx**; for Harlem about half (49%) came from the Bronx. Looking at Manhattan only, the increases of both fall to +13%–+22%, similar to each other and far below Mount Sinai's +34%–+80%.
+3. **This is still an upper bound:** all buses and bus stops are treated as usable by the ADA group, and curb ramps are not considered. Within Manhattan, the help from buses for the ADA groups of Harlem and NYP is about half of the original result, while for Mount Sinai it is almost fully kept.
 
 
-### 本章第二部分：Monte Carlo（你的第 3–5 点）
+### Second part of this chapter: Monte Carlo (your points 3–5)
 
-写之前我再确认过 checks.md 自第 20–23 节追加后没有被改动。节号继续往下。
+Before writing I confirmed again that checks.md had not changed since sections 20–23 were appended. Section numbers continue.
 
-| 文件 | 内容 |
+| File | Content |
 |---|---|
-| [mc_manhattan_summary.csv](../outputs/mc_manhattan_summary.csv) | Monte Carlo 汇总，30 行：6 个"医院×方向"× 5 种（扩展模型 × 2 种补值、可用率=1 检验、原 10 站模型 × 2 种补值）。含基线、均值、SD、第 5 百分位、最差 5% 的均值、最小、各阈值的居民数和面积 |
-| [mc_manhattan_single_failure.csv](../outputs/mc_manhattan_single_failure.csv) | 单个车站、单部电梯单独停运时损失的曼哈顿居民数（1,038 行） |
-| [mc_station_model.csv](../data/clean/mc_station_model.csv) | 59 个到达的 ADA 站的电梯模型：能否建模、不能的原因、电梯、通路、入口是否为推断 |
+| [mc_manhattan_summary.csv](../outputs/mc_manhattan_summary.csv) | Monte Carlo summary, 30 rows: 6 "hospital × direction" × 5 variants (expanded model × 2 fills, availability = 1 check, original 10-station model × 2 fills). Includes baseline, mean, SD, 5th percentile, mean of the worst 5%, minimum, and residents and area at each threshold |
+| [mc_manhattan_single_failure.csv](../outputs/mc_manhattan_single_failure.csv) | Manhattan residents lost when a single station or a single elevator is out on its own (1,038 rows) |
+| [mc_station_model.csv](../data/clean/mc_station_model.csv) | Elevator model of the 59 ADA stations reached: whether it can be modelled, the reason if not, the elevators, the paths, and whether the entrance is inferred |
 
-## 24. Monte Carlo 的设置，以及和上一章的区别
+## 24. Monte Carlo set-up, and differences from the previous chapter
 
-| 项目 | 上一章 | 本章 |
+| Item | Previous chapter | This chapter |
 |---|---|---|
-| 被扰动的车站 | `station_table.csv` 里的 10 个研究区车站 | **基线情景④里被用到的全部 ADA 站**：三家医院 × 正反向的并集共 **59 个**，其中 **45 个能建电梯模型**（31 个在曼哈顿，14 个在布朗克斯），共 **128 部电梯** |
-| 电梯结构和可用率的来源 | station_table 的 `access_paths`、elevator_detail 的可用率 | **资产清单**的出入口字段（街面/夹层/站台、服务方向）建"街面→夹层→北向/南向站台"连通图，**可用率表**的 12 个月 24 小时按小时加权可用率。方法与第三轮相同 |
-| 居民与范围 | 全部 tract | **只算曼哈顿的 tract，等时圈裁剪到曼哈顿**（第 20–21 节） |
-| 报告的统计量 | 90%、95%、99% 阈值 | 阈值 **90%、95%、97%、99%、100%**；**均值、第 5 百分位、最差 5% 的均值、最小** |
-| 没有可用率的电梯 | EL520，两种补值 | 共 3 部：**EL132、EL133、EL520**，**沿用同样的两种补值**：均值补 0.9787，偏低补 0.9636 |
+| Perturbed stations | The 10 study-area stations in `station_table.csv` | **All ADA stations used in baseline scenario (4):** the union over three hospitals × both directions is **59**, of which **45 can be given an elevator model** (31 in Manhattan, 14 in the Bronx), with **128 elevators** in total |
+| Source of elevator structure and availability | `access_paths` of station_table, availability of elevator_detail | The **asset inventory** entrance fields (street / mezzanine / platform, direction served) build the "street → mezzanine → northbound/southbound platform" connectivity graph, and the **availability table**'s 12-month 24-hour hour-weighted availability. The method is the same as in Round 3 |
+| Residents and extent | All tracts | **Only Manhattan tracts, isochrones clipped to Manhattan** (sections 20–21) |
+| Statistics reported | Thresholds 90%, 95%, 99% | Thresholds **90%, 95%, 97%, 99%, 100%**; **mean, 5th percentile, mean of the worst 5%, minimum** |
+| Elevators without availability | EL520, two fills | 3 in total: **EL132, EL133, EL520**, **with the same two fills**: mean fill 0.9787, low fill 0.9636 |
 
-其余不变：只做情景④（ADA 地铁加公交，所有公交车和公交站可用）；两个方向（反向 = 08:00 前到达；正向 = 08:00 出发）；1000 次独立抽样，每部电梯在停的概率 = 1 − 可用率；固定种子 20261111，所有医院、方向共用同一组随机数；一次抽样里某个站台方向没有一条完整可用的电梯通路时，该站该方向对 ADA 乘客不可上下车或换乘（可以乘车经过）；每次抽样**完整重算**等时圈，再裁剪到曼哈顿，算曼哈顿居民。居民是 ACS 行走困难居民，在 tract 内均匀分布；"覆盖概率"= 1000 次里某个 10 m 格子在圈内的次数 ÷ 1000，"覆盖概率 ≥ X% 的居民"= 这些格子里的居民数之和。基线 = 所有电梯都正常。
+Everything else is unchanged: only scenario (4) (ADA subway plus bus, all buses and bus stops usable); two directions (reverse = arrive by 08:00; forward = depart at 08:00); 1000 independent draws, each elevator out with probability 1 − availability; fixed seed 20261111, with all hospitals and directions sharing the same random numbers; when a platform direction at a station has no fully working elevator path in a draw, that direction at that station cannot be boarded, alighted or transferred at by ADA passengers (riding through is allowed); each draw **fully recomputes** the isochrone, then clips it to Manhattan and computes Manhattan residents. Residents are ACS residents with an ambulatory difficulty, spread uniformly inside tracts; "coverage probability" = the number of the 1000 draws in which a 10 m cell is inside the isochrone ÷ 1000, and "residents with coverage probability ≥ X%" = the sum of residents in those cells. Baseline = all elevators working.
 
-**扩展模型的构建和验证：**
-- 通用构建器对原 10 个站重建，得到的 `access_paths` 与 station_table **10/10 完全一致**；对原模型里的 22 部有记录的电梯，重算的 12 个月可用率与 `elevator_detail.csv` 的差最大 3.3×10⁻¹⁶。
-- 59 个站里，**45 个能建模**；**14 个建不了**，被当作"永不停运"（乐观假设，见第 27–28 节）：6 个在清单里完全没有电梯（Harlem-148 St、Times Sq-42 St 的 7 号线和 S 线、59 St-Columbus Circle（1）、149 St-Hostos（2/5）、161 St-Yankee Stadium（4）），8 个因为清单的出入口字段不全无法确定通路（72 St、96 St、Times Sq-42 St 的 1/2/3 和 N/Q/R/W、42 St-Port Authority、49 St、51 St、W 4 St-Wash Sq）。
-- 45 个模型站里有 **8 个没有街面电梯**，入口按"最外层夹层"推断（与 181 St（A）的做法相同）。
-- 清单里有 1 部电梯（EL281）标为 ADA Compliant = NO 但位于模型站内，没有排除。
+**Construction and validation of the expanded model:**
+- The generic builder was used to rebuild the original 10 stations, and the resulting `access_paths` agree with station_table **10/10 exactly**; for the 22 elevators with records in the original model, the recomputed 12-month availability differs from `elevator_detail.csv` by at most 3.3×10⁻¹⁶.
+- Of the 59 stations, **45 can be modelled**; **14 cannot** and are treated as "never out" (an optimistic assumption, see sections 27–28): 6 have no elevator at all in the inventory (Harlem-148 St, the 7 and S lines of Times Sq-42 St, 59 St-Columbus Circle (1), 149 St-Hostos (2/5), 161 St-Yankee Stadium (4)), and 8 cannot get a path because the inventory's entrance fields are incomplete (72 St, 96 St, Times Sq-42 St 1/2/3 and N/Q/R/W, 42 St-Port Authority, 49 St, 51 St, W 4 St-Wash Sq).
+- Among the 45 modelled stations, **8 have no street elevator**, and the entrance is inferred as "the outermost mezzanine" (the same approach as for 181 St (A)).
+- One elevator in the inventory (EL281) is marked ADA Compliant = NO but is inside a modelled station; it was not excluded.
 
-## 25. 结果：曼哈顿居民，情景④，扩展模型
+## 25. Results: Manhattan residents, scenario (4), expanded model
 
-居民数（行走困难，人），1000 次。括号里是占基线的比例。**两种补值（EL132、EL133、EL520 取均值补 0.9787 或偏低补 0.9636）下，所有居民数统计量完全相同（差 0）**，所以只列一份；它们只在"至少一个站被堵的次数"上有差别（907 vs 909）。
+Residents (with ambulatory difficulty, persons), 1000 draws. In parentheses is the share of the baseline. **Under the two fills (EL132, EL133 and EL520 at the mean fill 0.9787 or the low fill 0.9636), all resident statistics are exactly identical (difference 0)**, so only one set is listed; they differ only in the number of draws with "at least one station blocked" (907 vs 909).
 
-| 医院 / 方向 | 基线（无停运） | 均值 | SD | **第 5 百分位** | 最差 5% 的均值 | 最小 | ≥ 90% | ≥ 95% | ≥ 97% | ≥ 99% | = 100% | 有损失的次数 |
+| Hospital / direction | Baseline (no outage) | Mean | SD | **5th percentile** | Mean of worst 5% | Min | ≥ 90% | ≥ 95% | ≥ 97% | ≥ 99% | = 100% | Draws with loss |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Harlem 反向 | 55,665 | 55,091（99.0%） | 1,813 | **50,357**（90%） | 48,383（87%） | 46,839（84%） | 55,665（100.0%） | 51,849（93.1%） | 42,290（76.0%） | 41,499（74.6%） | 41,123（73.9%） | 206 |
-| Harlem 正向 | 49,365 | 49,227（99.7%） | 1,233 | **49,199**（100%） | 46,912（95%） | 34,582（70%） | 49,304（99.9%） | 49,152（99.6%） | 49,111（99.5%） | 47,511（96.2%） | 34,429（69.7%） | 284 |
-| NYP/Columbia 反向 | 58,458 | 56,837（97.2%） | 5,601 | **40,942**（70%） | 34,515（59%） | 32,424（55%） | 57,582（98.5%） | 40,585（69.4%） | 33,368（57.1%） | 29,980（51.3%） | 29,980（51.3%） | 332 |
-| NYP/Columbia 正向 | 45,260 | 44,653（98.7%） | 2,112 | **38,701**（86%） | 36,141（80%） | 34,564（76%） | 45,206（99.9%） | 37,614（83.1%） | 34,564（76.4%） | 32,328（71.4%） | 32,174（71.1%） | 205 |
-| Mount Sinai 反向 | 45,694 | 45,441（99.4%） | 854 | **43,035**（94%） | 42,126（92%） | 39,172（86%） | 45,694（100.0%） | 42,499（93.0%） | 42,499（93.0%） | 39,172（85.7%） | 39,172（85.7%） | 145 |
-| Mount Sinai 正向 | 31,986 | 31,972（100.0%） | 51 | **31,795**（99%） | 31,786（99%） | 31,737（99%） | 31,986（100.0%） | 31,795（99.4%） | 31,795（99.4%） | 31,763（99.3%） | 31,513（98.5%） | 83 |
+| Harlem reverse | 55,665 | 55,091 (99.0%) | 1,813 | **50,357** (90%) | 48,383 (87%) | 46,839 (84%) | 55,665 (100.0%) | 51,849 (93.1%) | 42,290 (76.0%) | 41,499 (74.6%) | 41,123 (73.9%) | 206 |
+| Harlem forward | 49,365 | 49,227 (99.7%) | 1,233 | **49,199** (100%) | 46,912 (95%) | 34,582 (70%) | 49,304 (99.9%) | 49,152 (99.6%) | 49,111 (99.5%) | 47,511 (96.2%) | 34,429 (69.7%) | 284 |
+| NYP/Columbia reverse | 58,458 | 56,837 (97.2%) | 5,601 | **40,942** (70%) | 34,515 (59%) | 32,424 (55%) | 57,582 (98.5%) | 40,585 (69.4%) | 33,368 (57.1%) | 29,980 (51.3%) | 29,980 (51.3%) | 332 |
+| NYP/Columbia forward | 45,260 | 44,653 (98.7%) | 2,112 | **38,701** (86%) | 36,141 (80%) | 34,564 (76%) | 45,206 (99.9%) | 37,614 (83.1%) | 34,564 (76.4%) | 32,328 (71.4%) | 32,174 (71.1%) | 205 |
+| Mount Sinai reverse | 45,694 | 45,441 (99.4%) | 854 | **43,035** (94%) | 42,126 (92%) | 39,172 (86%) | 45,694 (100.0%) | 42,499 (93.0%) | 42,499 (93.0%) | 39,172 (85.7%) | 39,172 (85.7%) | 145 |
+| Mount Sinai forward | 31,986 | 31,972 (100.0%) | 51 | **31,795** (99%) | 31,786 (99%) | 31,737 (99%) | 31,986 (100.0%) | 31,795 (99.4%) | 31,795 (99.4%) | 31,763 (99.3%) | 31,513 (98.5%) | 83 |
 
-**面积（km²）：**
+**Area (km²):**
 
-| 医院 / 方向 | 至少一个站被堵的次数 | 有居民损失的次数 | 独立重算次数 | 参与扰动的站 / 电梯 | 面积 ≥90%（km²） | 面积 ≥99%（km²） | 面积 =100%（km²） | 基线面积（km²） |
+| Hospital / direction | Draws with ≥1 station blocked | Draws with resident loss | Unique recomputations | Perturbed stations / elevators | Area ≥90% (km²) | Area ≥99% (km²) | Area =100% (km²) | Baseline area (km²) |
 |---|---|---|---|---|---|---|---|---|
-| Harlem 反向 | 907 | 206 | 368 | 45 / 128 | 23.41 | 14.08 | 13.76 | 23.41 |
-| Harlem 正向 | 907 | 284 | 335 | 45 / 128 | 22.77 | 20.76 | 11.71 | 22.79 |
-| NYP/Columbia 反向 | 907 | 332 | 298 | 45 / 128 | 24.05 | 9.68 | 9.68 | 24.72 |
-| NYP/Columbia 正向 | 907 | 205 | 146 | 45 / 128 | 17.21 | 10.92 | 10.85 | 17.53 |
-| Mount Sinai 反向 | 907 | 145 | 47 | 45 / 128 | 17.54 | 15.08 | 15.08 | 17.54 |
-| Mount Sinai 正向 | 907 | 83 | 33 | 45 / 128 | 13.97 | 13.82 | 13.66 | 13.97 |
+| Harlem reverse | 907 | 206 | 368 | 45 / 128 | 23.41 | 14.08 | 13.76 | 23.41 |
+| Harlem forward | 907 | 284 | 335 | 45 / 128 | 22.77 | 20.76 | 11.71 | 22.79 |
+| NYP/Columbia reverse | 907 | 332 | 298 | 45 / 128 | 24.05 | 9.68 | 9.68 | 24.72 |
+| NYP/Columbia forward | 907 | 205 | 146 | 45 / 128 | 17.21 | 10.92 | 10.85 | 17.53 |
+| Mount Sinai reverse | 907 | 145 | 47 | 45 / 128 | 17.54 | 15.08 | 15.08 | 17.54 |
+| Mount Sinai forward | 907 | 83 | 33 | 45 / 128 | 13.97 | 13.82 | 13.66 | 13.97 |
 
-怎么读：
-1. **均值损失不大：** 比基线低 0.03%–2.8%（Harlem 反向 1.0%、正向 0.3%；NYP 反向 2.8%、正向 1.3%；Mount Sinai 反向 0.6%、正向 0.03%）。1000 次里**有 907 次（90.7%）至少有一个模型站被堵**，但真正减少曼哈顿居民的只有 83–332 次。
-2. **最差 5% 的水平（第 5 百分位）差别很大：** Mount Sinai 正向 31,795（99%）几乎无影响；Harlem 正向 49,199（99.7%）；Harlem 反向 50,357（90%）；Mount Sinai 反向 43,035（94%）；NYP 正向 38,701（86%）；**NYP 反向 40,942（70%）**，最差 5% 次抽样的均值只有基线的 59%。
-3. **阈值：** ≥ 90% 的居民占基线的 98.5%–100%；**≥ 95%** 降到 69%（NYP 反向）–99.6%（Harlem 正向）；**≥ 99%** 降到 51.3%（NYP 反向）–99.3%（Mount Sinai 正向）。= 100%（1000 次都覆盖）的居民：NYP 反向只有 51.3%，Harlem 反向 73.9%，Mount Sinai 反向 85.7%，其余 70%–99%。**阈值从 90% 提到 95% 时变化最大：** 关键站的整站可用概率多在 94%–98%，只略高于 90% 线，所以 ≥ 90% 几乎总能满足，而 ≥ 95% 就开始把依赖这些站的居民排除（这是对数字的读法，没有逐站核对每个站的概率）。
-4. **和上一章（只扰动 10 个站）比，扩展的影响主要在 Harlem：**
+How to read it:
+1. **The mean loss is small:** 0.03%–2.8% below the baseline (Harlem reverse 1.0%, forward 0.3%; NYP reverse 2.8%, forward 1.3%; Mount Sinai reverse 0.6%, forward 0.03%). In the 1000 draws **907 (90.7%) have at least one modelled station blocked**, but only 83–332 actually reduce the Manhattan residents.
+2. **The worst-5% level (5th percentile) differs a lot:** Mount Sinai forward 31,795 (99%) is almost unaffected; Harlem forward 49,199 (99.7%); Harlem reverse 50,357 (90%); Mount Sinai reverse 43,035 (94%); NYP forward 38,701 (86%); **NYP reverse 40,942 (70%)**, and the mean of the worst 5% of draws is only 59% of the baseline.
+3. **Thresholds:** residents with ≥ 90% are 98.5%–100% of the baseline; **≥ 95%** drops to 69% (NYP reverse) – 99.6% (Harlem forward); **≥ 99%** drops to 51.3% (NYP reverse) – 99.3% (Mount Sinai forward). Residents covered at = 100% (in all 1000 draws): NYP reverse only 51.3%, Harlem reverse 73.9%, Mount Sinai reverse 85.7%, the rest 70%–99%. **The biggest change comes when the threshold goes from 90% to 95%:** the whole-station availability of the key stations is mostly 94%–98%, only slightly above the 90% line, so ≥ 90% is almost always met, while ≥ 95% starts to exclude residents who depend on these stations (this is how I read the numbers; I did not check the probability of each station one by one).
+4. **Compared with the previous chapter (only 10 stations perturbed), the effect of the expansion is mainly on Harlem:**
 
-| 医院 / 方向 | 基线 | 10 站：均值 / P5 / ≥90% / ≥99% | 扩展：均值 / P5 / ≥90% / ≥99% |
+| Hospital / direction | Baseline | 10-station: mean / P5 / ≥90% / ≥99% | Expanded: mean / P5 / ≥90% / ≥99% |
 |---|---|---|---|
-| Harlem 反向 | 55,665 | 55,403 / 55,630 / 55,665 / 47,208 | 55,091 / 50,357 / 55,665 / 41,499 |
-| Harlem 正向 | 49,365 | 49,238 / 49,213 / 49,365 / 49,212 | 49,227 / 49,199 / 49,304 / 47,511 |
-| NYP/Columbia 反向 | 58,458 | 57,038 / 40,946 / 57,922 / 29,980 | 56,837 / 40,942 / 57,582 / 29,980 |
-| NYP/Columbia 正向 | 45,260 | 44,713 / 38,701 / 45,260 / 32,328 | 44,653 / 38,701 / 45,206 / 32,328 |
-| Mount Sinai 反向 | 45,694 | 45,431 / 43,035 / 45,694 / 39,172 | 45,441 / 43,035 / 45,694 / 39,172 |
-| Mount Sinai 正向 | 31,986 | 31,974 / 31,795 / 31,986 / 31,763 | 31,972 / 31,795 / 31,986 / 31,763 |
+| Harlem reverse | 55,665 | 55,403 / 55,630 / 55,665 / 47,208 | 55,091 / 50,357 / 55,665 / 41,499 |
+| Harlem forward | 49,365 | 49,238 / 49,213 / 49,365 / 49,212 | 49,227 / 49,199 / 49,304 / 47,511 |
+| NYP/Columbia reverse | 58,458 | 57,038 / 40,946 / 57,922 / 29,980 | 56,837 / 40,942 / 57,582 / 29,980 |
+| NYP/Columbia forward | 45,260 | 44,713 / 38,701 / 45,260 / 32,328 | 44,653 / 38,701 / 45,206 / 32,328 |
+| Mount Sinai reverse | 45,694 | 45,431 / 43,035 / 45,694 / 39,172 | 45,441 / 43,035 / 45,694 / 39,172 |
+| Mount Sinai forward | 31,986 | 31,974 / 31,795 / 31,986 / 31,763 | 31,972 / 31,795 / 31,986 / 31,763 |
 
-   Harlem 反向的第 5 百分位从 55,630（基线的 99.9%）降到 50,357（90.5%），≥ 99% 从 47,208 降到 41,499；Harlem 正向的 ≥ 90% 从 49,365 降到 49,304。NYP 和 Mount Sinai 几乎不变，因为它们的覆盖主要依赖原来那 10 个研究区站（168 St、125 St 等）。所以上一章写的"只扰动 10 个站会高估覆盖概率"这一点，**对 Harlem 是真实且有影响的，对 NYP 和 Mount Sinai 影响很小**。
+   Harlem reverse's 5th percentile falls from 55,630 (99.9% of baseline) to 50,357 (90.5%), and ≥ 99% from 47,208 to 41,499; Harlem forward's ≥ 90% falls from 49,365 to 49,304. NYP and Mount Sinai are almost unchanged because their coverage depends mainly on the original 10 study-area stations (168 St, 125 St and so on). So the previous chapter's point that "perturbing only 10 stations overestimates the coverage probability" is **real and matters for Harlem, and has very little effect for NYP and Mount Sinai**.
 
-## 26. 检验
+## 26. Checks
 
-**（1）把所有被扰动电梯的可用率设成 1，结果等于不扰动的基线（你的第 4 点）：** 1000 次抽样，**6 个"医院×方向"全部通过**：均值 = 基线，SD 为 10⁻¹¹ 量级（浮点误差），最小 = 基线，覆盖概率 = 100% 的居民 = 基线，只有 1 种配置（空），0 次损失，0 次有站被堵。包括没有可用率记录的 EL132、EL133、EL520 也设为 1。
+**(1) Setting the availability of all perturbed elevators to 1 gives the unperturbed baseline (your point 4):** 1000 draws, **all 6 "hospital × direction" pass**: mean = baseline, SD of order 10⁻¹¹ (floating-point error), minimum = baseline, residents at coverage probability = 100% = baseline, only 1 configuration (the empty one), 0 draws with loss, 0 draws with a blocked station. EL132, EL133 and EL520, which have no availability record, are also set to 1.
 
-| 医院 / 方向 | 基线 | 1000 次均值 | SD | 最小 | ≥ 99% 的居民 | = 100% 的居民 | 独立重算次数 | 有损失的次数 | 至少一站被堵的次数 | 通过 |
+| Hospital / direction | Baseline | Mean of 1000 | SD | Min | Residents ≥ 99% | Residents = 100% | Unique recomputations | Draws with loss | Draws with ≥1 station blocked | Pass |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Harlem 反向 | 55,665.06 | 55,665.06 | 1.5e-11 | 55,665.06 | 55,665.06 | 55,665.06 | 1 | 0 | 0 | 是 |
-| Harlem 正向 | 49,365.04 | 49,365.04 | 1.5e-11 | 49,365.04 | 49,365.04 | 49,365.04 | 1 | 0 | 0 | 是 |
-| NYP/Columbia 反向 | 58,457.58 | 58,457.58 | 2.2e-11 | 58,457.58 | 58,457.58 | 58,457.58 | 1 | 0 | 0 | 是 |
-| NYP/Columbia 正向 | 45,260.08 | 45,260.08 | 7.3e-12 | 45,260.08 | 45,260.08 | 45,260.08 | 1 | 0 | 0 | 是 |
-| Mount Sinai 反向 | 45,694.35 | 45,694.35 | 1.5e-11 | 45,694.35 | 45,694.35 | 45,694.35 | 1 | 0 | 0 | 是 |
-| Mount Sinai 正向 | 31,986.21 | 31,986.21 | 1.5e-11 | 31,986.21 | 31,986.21 | 31,986.21 | 1 | 0 | 0 | 是 |
+| Harlem reverse | 55,665.06 | 55,665.06 | 1.5e-11 | 55,665.06 | 55,665.06 | 55,665.06 | 1 | 0 | 0 | yes |
+| Harlem forward | 49,365.04 | 49,365.04 | 1.5e-11 | 49,365.04 | 49,365.04 | 49,365.04 | 1 | 0 | 0 | yes |
+| NYP/Columbia reverse | 58,457.58 | 58,457.58 | 2.2e-11 | 58,457.58 | 58,457.58 | 58,457.58 | 1 | 0 | 0 | yes |
+| NYP/Columbia forward | 45,260.08 | 45,260.08 | 7.3e-12 | 45,260.08 | 45,260.08 | 45,260.08 | 1 | 0 | 0 | yes |
+| Mount Sinai reverse | 45,694.35 | 45,694.35 | 1.5e-11 | 45,694.35 | 45,694.35 | 45,694.35 | 1 | 0 | 0 | yes |
+| Mount Sinai forward | 31,986.21 | 31,986.21 | 1.5e-11 | 31,986.21 | 31,986.21 | 31,986.21 | 1 | 0 | 0 | yes |
 
-**（2）引擎回归：** 原 10 站模型在**不裁剪、全部 tract** 的口径下，用上一章同样的随机数，重算的基线、1000 次均值、第 5 百分位与上一章 `mc_scenario4_summary.csv` **逐个相同**（6/6）：如 Harlem 反向均值 108,979.6 vs 108,979.6，NYP 反向第 5 百分位 52,487 vs 52,487。说明扩展、裁剪和并行改写没有改变引擎。
-**（3）期望一致：** 每个情景里，"从各格子覆盖概率算出的期望居民数"与"1000 次逐次结果的均值"相等（最大差 2×10⁻¹¹）。
-**（4）两种补值：** 居民数的所有统计量完全相同（见第 25 节）。
-**（5）去重提速是精确的：** 沿用了上一章对"被堵站台 ∩ 基线里到达的站台"去重的办法，那里已用 25 次随机抽样验证与完整重算逐点相同；本章（2）的逐个相同从另一个角度也确认了这一点。
+**(2) Engine regression:** the original 10-station model, with **no clipping and all tracts**, using the same random numbers as the previous chapter, reproduces the baseline, the mean of the 1000 draws and the 5th percentile **identically** to the previous chapter's `mc_scenario4_summary.csv` (6/6): for example Harlem reverse mean 108,979.6 vs 108,979.6, NYP reverse 5th percentile 52,487 vs 52,487. This shows that the expansion, the clipping and the parallel rewrite did not change the engine.
+**(3) Expectation consistency:** in every scenario, the "expected residents computed from the per-cell coverage probabilities" equals "the mean of the 1000 individual results" (maximum difference 2×10⁻¹¹).
+**(4) Two fills:** all resident statistics are identical (see section 25).
+**(5) The de-duplication speed-up is exact:** it reuses the previous chapter's way of de-duplicating by "blocked platforms ∩ platforms reached in the baseline", which was verified there against the full recomputation on 25 random draws with point-by-point agreement; the identical results in (2) of this chapter confirm this from another angle.
 
-## 27. 被扰动的车站占等时圈里 ADA 站的比例；哪个车站或电梯一停损失最大（你的第 5 点）
+## 27. Share of perturbed stations among the ADA stations in the isochrones; which station or elevator costs the most when it goes out (your point 5)
 
-### 占比
+### Share
 
-"到达的 ADA 站" = 基线情景④里 30 分钟内到达的 ADA 车站记录（GTFS 母站点）；"被扰动" = 能建电梯模型的站（有电梯依赖）。
+"ADA stations reached" = ADA station records (GTFS parent stops) reached within 30 minutes in baseline scenario (4); "perturbed" = stations that can be given an elevator model (those with elevator dependency).
 
-| 医院 / 方向 | 到达的 ADA 站 | 被扰动 | 比例 | 其中位于曼哈顿的站 | 被扰动 | 比例 |
+| Hospital / direction | ADA stations reached | Perturbed | Share | of which in Manhattan | Perturbed | Share |
 |---|---|---|---|---|---|---|
-| Harlem 反向 | 40 | 28 | **70%** | 26 | 16 | 62% |
-| Harlem 正向 | 40 | 28 | **70%** | 32 | 22 | 69% |
-| NYP/Columbia 反向 | 39 | 28 | **72%** | 32 | 23 | 72% |
-| NYP/Columbia 正向 | 22 | 16 | **73%** | 17 | 12 | 71% |
-| Mount Sinai 反向 | 15 | 10 | **67%** | 13 | 9 | 69% |
-| Mount Sinai 正向 | 10 | 7 | **70%** | 9 | 6 | 67% |
+| Harlem reverse | 40 | 28 | **70%** | 26 | 16 | 62% |
+| Harlem forward | 40 | 28 | **70%** | 32 | 22 | 69% |
+| NYP/Columbia reverse | 39 | 28 | **72%** | 32 | 23 | 72% |
+| NYP/Columbia forward | 22 | 16 | **73%** | 17 | 12 | 71% |
+| Mount Sinai reverse | 15 | 10 | **67%** | 13 | 9 | 69% |
+| Mount Sinai forward | 10 | 7 | **70%** | 9 | 6 | 67% |
 
-**所以 67%–73% 的 ADA 站被扰动（上一章只有 15%–47%），但仍有约三成没有被扰动。** 没被扰动的站集中在曼哈顿中城和上西区（72 St、96 St、Times Sq、42 St-Port Authority、59 St-Columbus Circle、W 4 St 等），这些站被当作永不停运。
+**So 67%–73% of ADA stations are perturbed (the previous chapter had only 15%–47%), but about 30% are still not perturbed.** The stations not perturbed are concentrated in Midtown and the Upper West Side (72 St, 96 St, Times Sq, 42 St-Port Authority, 59 St-Columbus Circle, W 4 St and so on), and these stations are treated as never out.
 
-### 一停损失最大的车站（单独停运，两个方向都停，其他站正常）
+### The station whose outage loses the most (out on its own, both directions, other stations normal)
 
-损失 = 基线 − 该站停运时的曼哈顿居民数。
+Loss = baseline − Manhattan residents when that station is out.
 
-| 医院 / 方向 | 基线 | 一停损失最大的车站（损失，占基线） | 其次 | 第三 |
+| Hospital / direction | Baseline | Station whose outage loses most (loss, share of baseline) | Second | Third |
 |---|---|---|---|---|
-| Harlem 反向 | 55,665 | 135 St (2 3)（17,667，32%） | 86 St (4 5 6)（5,308，10%） | 149 St-Hostos (4)（3,981，7%） |
-| Harlem 正向 | 49,365 | 135 St (2 3)（14,752，30%） | 14 St (1 2 3)（889，2%） | 34 St-Penn Station (1 2 3)（606，1%） |
-| NYP/Columbia 反向 | 58,458 | 168 St (A C)（25,089，43%） | 125 St (A C B D)（17,512，30%） | 59 St-Columbus Circle (A C B D)（4,424，8%） |
-| NYP/Columbia 正向 | 45,260 | 168 St (A C)（10,696，24%） | 125 St (A C B D)（6,559，14%） | Inwood-207 St (A)（3,262，7%） |
-| Mount Sinai 反向 | 45,694 | 125 St (A C B D)（5,986，13%） | 168 St (A C)（2,659，6%） | 59 St-Columbus Circle (A C B D)（952，2%） |
-| Mount Sinai 正向 | 31,986 | 66 St-Lincoln Center (1)（249，1%） | 125 St (A C B D)（224，1%） | 168 St (A C)（192，1%） |
+| Harlem reverse | 55,665 | 135 St (2 3) (17,667, 32%) | 86 St (4 5 6) (5,308, 10%) | 149 St-Hostos (4) (3,981, 7%) |
+| Harlem forward | 49,365 | 135 St (2 3) (14,752, 30%) | 14 St (1 2 3) (889, 2%) | 34 St-Penn Station (1 2 3) (606, 1%) |
+| NYP/Columbia reverse | 58,458 | 168 St (A C) (25,089, 43%) | 125 St (A C B D) (17,512, 30%) | 59 St-Columbus Circle (A C B D) (4,424, 8%) |
+| NYP/Columbia forward | 45,260 | 168 St (A C) (10,696, 24%) | 125 St (A C B D) (6,559, 14%) | Inwood-207 St (A) (3,262, 7%) |
+| Mount Sinai reverse | 45,694 | 125 St (A C B D) (5,986, 13%) | 168 St (A C) (2,659, 6%) | 59 St-Columbus Circle (A C B D) (952, 2%) |
+| Mount Sinai forward | 31,986 | 66 St-Lincoln Center (1) (249, 1%) | 125 St (A C B D) (224, 1%) | 168 St (A C) (192, 1%) |
 
-### 单部电梯单独停运
+### A single elevator out on its own
 
-| 医院 / 方向 | 单独停运损失最大的电梯（损失，占基线，停运概率） | 按"停运概率 × 损失"排序的前三（期望损失） |
+| Hospital / direction | Elevator whose outage loses most (loss, share of baseline, outage probability) | Top three by "outage probability × loss" (expected loss) |
 |---|---|---|
-| Harlem 反向 | EL180（8,414，15%，p=2.8%） | EL180（238）；EL273（117）；EL101（105） |
-| Harlem 正向 | EL181（14,751，30%，p=1.4%） | EL181（210）；EL618（10）；EL225（6） |
-| NYP/Columbia 反向 | EL139（25,089，43%，p=2.6%） | EL139（650）；EL140（418）；EL144（277） |
-| NYP/Columbia 正向 | EL139（10,696，24%，p=2.6%） | EL139（277）；EL141（86）；EL143（72） |
-| Mount Sinai 反向 | EL142（5,986，13%，p=0.7%） | EL139（69）；EL143（53）；EL142（44） |
-| Mount Sinai 正向 | EL238（249，1%，p=0.4%） | EL139（5）；EL140（3）；EL144（3） |
+| Harlem reverse | EL180 (8,414, 15%, p=2.8%) | EL180 (238); EL273 (117); EL101 (105) |
+| Harlem forward | EL181 (14,751, 30%, p=1.4%) | EL181 (210); EL618 (10); EL225 (6) |
+| NYP/Columbia reverse | EL139 (25,089, 43%, p=2.6%) | EL139 (650); EL140 (418); EL144 (277) |
+| NYP/Columbia forward | EL139 (10,696, 24%, p=2.6%) | EL139 (277); EL141 (86); EL143 (72) |
+| Mount Sinai reverse | EL142 (5,986, 13%, p=0.7%) | EL139 (69); EL143 (53); EL142 (44) |
+| Mount Sinai forward | EL238 (249, 1%, p=0.4%) | EL139 (5); EL140 (3); EL144 (3) |
 
-电梯编号对应的车站：EL139 / EL140 = 168 St（A/C）；EL142 / EL143 / EL144 = 125 St（A/C/B/D）；EL180 / EL181 = 135 St（2/3）；EL273 = 86 St（4/5/6）；**EL101 = 149 St-Hostos（4），在布朗克斯**；EL618 = 34 St-Penn Station（1/2/3）；EL225 = 34 St-Penn Station（A/C/E）；EL238 = 66 St-Lincoln Center（1）。期望损失 = 单独停运概率 × 单独停运损失，是单个电梯的粗略风险排序，没有计入多部同时停运。
+Stations of the elevator numbers: EL139 / EL140 = 168 St (A/C); EL142 / EL143 / EL144 = 125 St (A/C/B/D); EL180 / EL181 = 135 St (2/3); EL273 = 86 St (4/5/6); **EL101 = 149 St-Hostos (4), in the Bronx**; EL618 = 34 St-Penn Station (1/2/3); EL225 = 34 St-Penn Station (A/C/E); EL238 = 66 St-Lincoln Center (1). Expected loss = outage probability on its own × loss when out on its own; this is a rough risk ranking of single elevators and does not account for several being out at the same time.
 
-**回答你的问题：**
-- **一停损失最大：NYP/Columbia 反向的 168 St（A/C），损失 25,089 个曼哈顿居民，占该情景基线的 43%。** 它由一部电梯 EL139（街面到夹层，停运概率 2.6%）决定：EL139 停运的损失与整个 168 St 站停运完全相同。NYP 反向的第二是 125 St（A/C/B/D），损失 17,512（30%）；NYP 正向的 168 St 损失 10,696（24%）。
-- **Harlem：135 St（2/3）是单点**：反向损失 17,667（32%）、正向 14,752（30%），其电梯 EL180（反向最大，8,414，15%）、EL181（正向最大，14,751，30%）各自是唯一的站台电梯。Harlem 反向的第二、第三是 86 St（4/5/6）（5,308，10%）和**布朗克斯的 149 St-Hostos（4）**（3,981，7%）：布朗克斯的站也会影响曼哈顿居民，这是把扰动扩大到全部被用到的 ADA 站的原因之一。
-- **Mount Sinai：** 反向最大是 125 St（A/C/B/D），损失 5,986（13%）；**正向最大的单站损失只有 249（1%）**，说明它的正向覆盖几乎不依赖电梯。
-- **敏感站的数量：** 45 个模型站里，一停会损失居民的：Harlem 12（反向、正向各）、NYP 反向 15 / 正向 8、Mount Sinai 反向 7 / 正向 4。128 部电梯里，单独停运会损失居民的：Harlem 15、NYP 反向 22 / 正向 11、Mount Sinai 反向 11 / 正向 6。
+**Answers to your questions:**
+- **The largest loss from one outage: 168 St (A/C) in NYP/Columbia reverse, losing 25,089 Manhattan residents, 43% of that scenario's baseline.** It is decided by one elevator, EL139 (street to mezzanine, outage probability 2.6%): the loss when EL139 is out is exactly the same as when the whole 168 St station is out. Second in NYP reverse is 125 St (A/C/B/D), losing 17,512 (30%); 168 St in NYP forward loses 10,696 (24%).
+- **Harlem: 135 St (2/3) is a single point:** reverse loses 17,667 (32%) and forward 14,752 (30%), and its elevators EL180 (largest in reverse, 8,414, 15%) and EL181 (largest in forward, 14,751, 30%) are each the only platform elevator. Second and third for Harlem reverse are 86 St (4/5/6) (5,308, 10%) and **149 St-Hostos (4) in the Bronx** (3,981, 7%): stations in the Bronx also affect Manhattan residents, which is one of the reasons for extending the perturbation to all ADA stations used.
+- **Mount Sinai:** the largest in reverse is 125 St (A/C/B/D), losing 5,986 (13%); **the largest single-station loss in forward is only 249 (1%)**, which shows its forward coverage hardly depends on elevators.
+- **Number of sensitive stations:** of the 45 modelled stations, those whose outage loses residents: Harlem 12 (reverse and forward each), NYP reverse 15 / forward 8, Mount Sinai reverse 7 / forward 4. Of the 128 elevators, those whose outage on its own loses residents: Harlem 15, NYP reverse 22 / forward 11, Mount Sinai reverse 11 / forward 6.
 
-## 28. 局限、遇到的问题，以及本章的总括
+## 28. Limitations, problems met, and the overall summary of this chapter
 
-**局限：**
-1. **仍有 14 个被用到的 ADA 站（占 59 个的 24%）没法建模，被当作永不停运**，且集中在曼哈顿中城和上西区（另有 W 4 St-Wash Sq 和 Harlem-148 St，名单见第 24 节）。这使这些站上游和下游的覆盖概率**被高估**，特别是情景④里经中城往返的居民。原因是清单字段不全（8 个）或清单没有记录（6 个）。要补上，可以从实时设备清单的 `serving` 文字或备注里推断服务方向，但那是推断，我没有做；Harlem-148 St 沿用此前"无电梯依赖"的标记。
-2. **电梯结构由清单字段推出：** 45 个模型站里 8 个的入口是推断的；同一站综合体内的跨站换乘电梯没有建模（GTFS 的换乘当作永远可用）。
-3. **电梯独立、可用率为 12 个月 24 小时的平均、停运状态在 30 分钟内不变**，早高峰的实际可用率可能不同；独立假设会低估多个电梯同时停的大损失。
-4. **只做了 08:00 单一时刻**（正向 08:00 出发，反向 08:00 前到达）。第 17 节显示单一时刻的面积就有 10%–20% 的波动，Monte Carlo 没有对多个时刻重复。
-5. **只有 ADA 组受电梯影响，**基线是"所有电梯都正常"，不代表典型的一天；公交仍假设全部可用。
-6. 1000 次抽样，覆盖概率的估计误差最大约 1.6 个百分点；对尾部（第 5 百分位、最小值）更不稳定。
-7. 居民在 tract 内均匀分布，居住地不是患者来源。
+**Limitations:**
+1. **14 ADA stations used (24% of the 59) still cannot be modelled and are treated as never out,** and they are concentrated in Midtown and the Upper West Side (plus W 4 St-Wash Sq and Harlem-148 St; the list is in section 24). This **overestimates** the coverage probability upstream and downstream of those stations, especially for residents travelling to and from Midtown in scenario (4). The reason is incomplete inventory fields (8) or no inventory record (6). To repair them, the direction served could be inferred from the `serving` text or the notes in the live equipment list, but that is an inference and I did not do it; Harlem-148 St keeps the earlier "no elevator dependency" flag.
+2. **The elevator structure is derived from inventory fields:** the entrance of 8 of the 45 modelled stations is inferred; elevators for transfers between stations of the same complex are not modelled (GTFS transfers are treated as always available).
+3. **Elevators are independent, availability is the 12-month 24-hour average, and the outage state does not change within 30 minutes;** the real morning-peak availability may differ, and the independence assumption underestimates the large losses when several elevators are out together.
+4. **Only the single time 08:00 was done** (forward depart at 08:00, reverse arrive by 08:00). Section 17 shows that the area at a single time already varies by 10%–20%, and the Monte Carlo was not repeated for several times.
+5. **Only the ADA group is affected by elevators,** the baseline is "all elevators working", which does not represent a typical day; buses are still assumed to be fully usable.
+6. 1000 draws; the estimation error of a coverage probability is up to about 1.6 percentage points, and the tail (5th percentile, minimum) is less stable still.
+7. Residents are uniformly spread inside tracts; where people live is not where patients come from.
 
-**遇到的问题：**
-- 方向没有指定，两个都做了。
-- 进程并行时只有部分进程在忙（Harlem 的两个组合最慢），总共 233 秒。
+**Problems met:**
+- No direction was specified, so both were done.
+- With parallel processes only some processes were busy (the two Harlem combinations were the slowest); total 233 seconds.
 
-**对前面结论的总体影响（Monte Carlo 部分）：**
-- 把扰动扩大到所有被用到的 ADA 站后，**Harlem 的尾部风险明显变大**（反向第 5 百分位 99.9% → 90.5% of 基线），NYP 和 Mount Sinai 变化很小。
-- **三家医院的覆盖对电梯停运的脆弱程度不同**：NYP 反向最脆弱（第 5 百分位 70%，≥ 99% 只有 51%），原因是 168 St（A/C）一站承担了 43% 的覆盖；Mount Sinai 正向几乎不受影响（第 5 百分位 99%）。
-- **关键点是少数车站：** 168 St（A/C）、125 St（A/C/B/D）、135 St（2/3）。对这几个站的电梯做冗余或加强维护，比泛泛改善整个系统更能提高覆盖的确定性。这是对数据的读法，不是建议的结论，没有考虑成本和现场条件。
+**Overall effect on the earlier conclusions (Monte Carlo part):**
+- After extending the perturbation to all ADA stations used, **Harlem's tail risk becomes clearly larger** (reverse 5th percentile 99.9% → 90.5% of baseline), while NYP and Mount Sinai change very little.
+- **The three hospitals' coverage is vulnerable to elevator outages to different degrees:** NYP reverse is the most vulnerable (5th percentile 70%, ≥ 99% only 51%), because the single station 168 St (A/C) carries 43% of the coverage; Mount Sinai forward is almost unaffected (5th percentile 99%).
+- **The key points are a few stations:** 168 St (A/C), 125 St (A/C/B/D), 135 St (2/3). Adding redundancy or stronger maintenance for the elevators of these few stations would do more to make coverage reliable than improving the whole system broadly. This is how I read the data, not a recommended conclusion, and costs and site conditions were not considered.
 
 ---
 
-*（原章：第十一轮：14 个建不了模型的站、修复后的 Monte Carlo、最终汇总）*
+*(Original chapter: Round 11, the 14 stations that could not be modelled, Monte Carlo after the repair, final summary)*
 
-## 29. 修复后重跑的 Monte Carlo
+## 29. Monte Carlo re-run after the repair
 
-设置与第 24 节相同（情景④，曼哈顿居民，1000 次，两个方向），区别只是电梯模型换成修复后的（54 个站、132 部电梯）。
+The set-up is the same as in section 24 (scenario (4), Manhattan residents, 1000 draws, both directions); the only difference is that the elevator model is replaced with the repaired one (54 stations, 132 elevators).
 
-**修复前 → 修复后**（居民，人）：
+**Before repair → after repair** (residents, persons):
 
-| 医院 / 方向 | 基线 前→后 | 均值 前→后 | 第 5 百分位 前→后 | ≥ 99% 前→后 | 最差 5% 均值 前→后 | 有损失的次数 前→后 |
+| Hospital / direction | Baseline before→after | Mean before→after | 5th percentile before→after | ≥ 99% before→after | Worst-5% mean before→after | Draws with loss before→after |
 |---|---|---|---|---|---|---|
-| Harlem 反向 | 55,665 → 55,665 | 55,091 → 54,740 | 50,357 → **50,357** | 41,499 → **39,908** | 48,383 → 47,331 | 206 → 284 |
-| Harlem 正向 | 49,365 → 49,365 | 49,227 → 49,076 | 49,199 → **48,238** | 47,511 → **40,861** | 46,912 → 45,042 | 284 → 352 |
-| NYP/Columbia 反向 | 58,458 → 58,458 | 56,837 → 56,787 | 40,942 → **40,815** | 29,980 → **29,980** | 34,515 → 34,578 | 332 → 364 |
-| NYP/Columbia 正向 | 45,260 → 45,260 | 44,653 → 44,578 | 38,701 → **38,701** | 32,328 → **32,296** | 36,141 → 36,213 | 205 → 280 |
-| Mount Sinai 反向 | 45,694 → 45,694 | 45,441 → 45,415 | 43,035 → **43,035** | 39,172 → **37,997** | 42,126 → 42,052 | 145 → 160 |
-| Mount Sinai 正向 | 31,986 → 31,986 | 31,972 → 31,949 | 31,795 → **31,763** | 31,763 → **31,054** | 31,786 → 31,481 | 83 → 143 |
+| Harlem reverse | 55,665 → 55,665 | 55,091 → 54,740 | 50,357 → **50,357** | 41,499 → **39,908** | 48,383 → 47,331 | 206 → 284 |
+| Harlem forward | 49,365 → 49,365 | 49,227 → 49,076 | 49,199 → **48,238** | 47,511 → **40,861** | 46,912 → 45,042 | 284 → 352 |
+| NYP/Columbia reverse | 58,458 → 58,458 | 56,837 → 56,787 | 40,942 → **40,815** | 29,980 → **29,980** | 34,515 → 34,578 | 332 → 364 |
+| NYP/Columbia forward | 45,260 → 45,260 | 44,653 → 44,578 | 38,701 → **38,701** | 32,328 → **32,296** | 36,141 → 36,213 | 205 → 280 |
+| Mount Sinai reverse | 45,694 → 45,694 | 45,441 → 45,415 | 43,035 → **43,035** | 39,172 → **37,997** | 42,126 → 42,052 | 145 → 160 |
+| Mount Sinai forward | 31,986 → 31,986 | 31,972 → 31,949 | 31,795 → **31,763** | 31,763 → **31,054** | 31,786 → 31,481 | 83 → 143 |
 
-**检验（全部通过）：**
-1. **把所有被扰动电梯的可用率设成 1，结果等于基线**：修复后的模型，6 个"医院×方向"都通过（均值 = 基线，SD 最大 2.2×10⁻¹¹，最小 = 基线，只有 1 种配置，0 次损失）。
-2. **原 10 站模型**的结果与上一次运行**逐个相同**，说明引擎没变，变化只来自电梯模型。
-3. **两种补值**（EL132、EL133、EL520）下，居民数的所有统计量完全相同（差 0）。
+**Checks (all passed):**
+1. **Setting the availability of all perturbed elevators to 1 gives the baseline:** for the repaired model all 6 "hospital × direction" pass (mean = baseline, maximum SD 2.2×10⁻¹¹, minimum = baseline, only 1 configuration, 0 draws with loss).
+2. The results of the **original 10-station model** are **identical** to those of the previous run, which shows that the engine did not change and the change comes only from the elevator model.
+3. Under the **two fills** (EL132, EL133, EL520), all resident statistics are identical (difference 0).
 
-**读法：**
-- **基线不变，尾部变差：** 基线居民数完全不变（修复只改停运行为，不改全部正常时的覆盖）。均值略降（Harlem 反向 55,091 → 54,740），**覆盖概率 ≥ 99% 的居民在 Harlem 正向从 47,511 降到 40,861（−14%）**，Harlem 反向 41,499 → 39,908，Mount Sinai 反向 39,172 → 37,997；NYP 几乎不变。Harlem 正向第 5 百分位 49,199 → 48,238。
-- **1000 次里有 982 次至少一个被扰动的站不完全可用**（之前 907 次）。原因：参与扰动的站更多，而且新进模型的站里有可用率很低的电梯（12 个月 24 小时平均）：**161 St（B/D）的 EL131、EL134、EL135 只有 49%、53%、47.5%**；3 Av-149 St（2/5）的 EL130 76%、EL129 87.5%；34 St-Penn Station（A/C/E）的 EL228 83%、EL225 90%。这些低值来自可用率表本身，我没有核实原因（可能是长时间停用或施工）。
-- **新增的关键点：** Harlem 的 **96 St（1/2/3）**变成第二大单点（反向 −6,471，占基线 12%；正向 −4,628，9%）；Harlem 反向按"停运概率 × 损失"排序的第二名是 149 St-Hostos（2/5）的 EL100（停运概率 5.7%，期望损失 226）。Mount Sinai 正向最大单站损失从 66 St-Lincoln Center 的 249 变为 96 St（1/2/3）的 709（2%）。
-- **最大的单点故障不变：** NYP 反向 168 St（A/C）−25,089（43%）；Harlem 135 St（2/3）反向 −17,667（32%）、正向 −14,752（30%）；Mount Sinai 反向 125 St（A/C/B/D）−5,986（13%）。
-- **旧结果里受纠正影响的部分：** 161 St（B/D）和 59 St-Columbus Circle（A/C/B/D）的旧模型偏乐观。上表是所有修复合在一起的效果，我没有把这两个纠正单独拆出来。
+**How to read it:**
+- **The baseline is unchanged, the tail is worse:** the baseline resident counts are exactly unchanged (the repair changes only outage behaviour, not coverage when everything works). The mean falls slightly (Harlem reverse 55,091 → 54,740); **residents with coverage probability ≥ 99% in Harlem forward fall from 47,511 to 40,861 (−14%)**, Harlem reverse 41,499 → 39,908, Mount Sinai reverse 39,172 → 37,997; NYP is almost unchanged. Harlem forward's 5th percentile goes 49,199 → 48,238.
+- **In 982 of the 1000 draws at least one perturbed station is not fully usable** (907 before). The reasons: more stations are perturbed, and among the stations newly in the model there are elevators with very low availability (12-month 24-hour average): **EL131, EL134 and EL135 at 161 St (B/D) are only 49%, 53% and 47.5%**; EL130 76% and EL129 87.5% at 3 Av-149 St (2/5); EL228 83% and EL225 90% at 34 St-Penn Station (A/C/E). These low values come from the availability table itself, and I did not check the reason (possibly long-term closure or construction).
+- **New key points:** Harlem's **96 St (1/2/3)** becomes the second-largest single point (reverse −6,471, 12% of baseline; forward −4,628, 9%); the second in Harlem reverse by "outage probability × loss" is EL100 of 149 St-Hostos (2/5) (outage probability 5.7%, expected loss 226). Mount Sinai forward's largest single-station loss changes from 249 at 66 St-Lincoln Center to 709 (2%) at 96 St (1/2/3).
+- **The largest single-point failures are unchanged:** NYP reverse 168 St (A/C) −25,089 (43%); Harlem 135 St (2/3) reverse −17,667 (32%), forward −14,752 (30%); Mount Sinai reverse 125 St (A/C/B/D) −5,986 (13%).
+- **Part of the old results affected by the corrections:** the old models of 161 St (B/D) and 59 St-Columbus Circle (A/C/B/D) were optimistic. The table above is the combined effect of all repairs; I did not separate the effect of these two corrections.
 
-## 30. 最终汇总表（final_summary.csv）怎么读
+## 30. How to read the final summary table (final_summary.csv)
 
-每家医院一行。**列名里直接带单位、方向和时间口径**：`residents`（居民，人）、`area_km2`（面积，km²）、`pct`（百分比）；`reverse`（反向，到达医院）；`5time_mean`（五个到达时限 07:30–08:30 的均值）、`0800`（08:00 单一时刻）；`Manhattan`（仅曼哈顿）。
+One row per hospital. **Column names carry the unit, direction and time basis directly:** `residents` (persons), `area_km2` (km²), `pct` (percent); `reverse` (reverse, arriving at the hospital); `5time_mean` (mean over the five arrival deadlines 07:30–08:30), `0800` (single time 08:00); `Manhattan` (Manhattan only).
 
-| 列 | 含义 |
+| Column | Meaning |
 |---|---|
-| `S1…S4_residents_reverse_5time_mean_Manhattan` | 情景 ①–④ 的居民数，反向，五时刻均值 |
-| `S1…S4_residents_SD_over_5_times_reverse_Manhattan` | 五个时刻之间的标准差（居民） |
-| `S1…S4_area_km2_reverse_5time_mean_Manhattan` | 同上的面积 |
-| `ADAshare_subway_S2_over_S1_…_pct_…`、`ADAshare_subway+bus_S4_over_S3_…_pct_…` | ADA 组占普通人的比例：只有地铁、加公交；各有居民和面积两个版本 |
-| `MC_S4_baseline_no_outage / mean / P5 / coverage_prob_ge99pct / ge90pct_residents_reverse_0800_Manhattan` | Monte Carlo（情景④，1000 次，反向，08:00 单一时刻）：基线、均值、第 5 百分位、覆盖概率 ≥ 99%、≥ 90% 的居民 |
-| `worst_single_station_outage…`、`worst_station_loss_residents_Manhattan`、`…_pct_of_MC_baseline` | 一停损失最大的车站（反向，08:00），损失的居民数和占 MC 基线的比例 |
-| `worst_single_elevator_outage…`、`worst_elevator_loss_…`、`worst_elevator_outage_probability_pct` | 单部电梯停运损失最大的，及其停运概率 |
+| `S1…S4_residents_reverse_5time_mean_Manhattan` | Residents in scenarios 1–4, reverse, five-time mean |
+| `S1…S4_residents_SD_over_5_times_reverse_Manhattan` | Standard deviation over the five times (residents) |
+| `S1…S4_area_km2_reverse_5time_mean_Manhattan` | The same for area |
+| `ADAshare_subway_S2_over_S1_…_pct_…`, `ADAshare_subway+bus_S4_over_S3_…_pct_…` | ADA group as a share of anyone: subway only, with buses; each in a residents and an area version |
+| `MC_S4_baseline_no_outage / mean / P5 / coverage_prob_ge99pct / ge90pct_residents_reverse_0800_Manhattan` | Monte Carlo (scenario 4, 1000 draws, reverse, single time 08:00): baseline, mean, 5th percentile, residents with coverage probability ≥ 99% and ≥ 90% |
+| `worst_single_station_outage…`, `worst_station_loss_residents_Manhattan`, `…_pct_of_MC_baseline` | The station whose outage loses most (reverse, 08:00), the residents lost and the share of the MC baseline |
+| `worst_single_elevator_outage…`, `worst_elevator_loss_…`, `worst_elevator_outage_probability_pct` | The single elevator whose outage loses most, and its outage probability |
 
-**一个需要注意的口径差：** 前面的居民和比例列用**五时刻均值**，Monte Carlo 列用 **08:00 单一时刻**，因为 Monte Carlo 只在 08:00 做了。两者不是同一个时间口径（如 NYP 情景④：五时刻均值 51,954，Monte Carlo 的 08:00 基线 58,458）。
+**A difference in basis to note:** the earlier resident and ratio columns use the **five-time mean**, while the Monte Carlo columns use the **single time 08:00**, because the Monte Carlo was run only at 08:00. They are not on the same time basis (for example NYP scenario (4): five-time mean 51,954, Monte Carlo 08:00 baseline 58,458).
 
-## 31. 局限和没做的事
+## 31. Limitations and what was not done
 
-1. **补上的 9 个站的结构来自 MTA 实时设备清单的文字说明**，不是现场核实。其中 59 St-Columbus Circle 的 2 条备选路径是推断；Times Sq 的 7 号线假设两个方向共用 EL232。如果实际结构不同，这些站的停运影响会变。
-2. **仍有 5 个站没有被扰动**（5/59，8%）：Times Sq-42 St（S）、42 St-Port Authority（A/C/E）、51 St（6）、W 4 St-Wash Sq（A/C/E）按"永不停运"处理，覆盖概率因此被高估；Harlem-148 St 是真的没有电梯记录。
-3. 其余局限同第 28 节：电梯独立、可用率为 12 个月 24 小时平均、停运状态在 30 分钟内不变、居民在 tract 内均匀分布、公交全部当作可用。
-4. **没做：** 对补上的站做现场或其他数据源核对；Monte Carlo 在五个时刻上重复；把"纠正的 2 个旧模型"单独拆出效应。
+1. **The structure of the 9 added stations comes from the text descriptions in the MTA live equipment list,** not from a site check. Two of the alternative paths at 59 St-Columbus Circle are inferred; the Times Sq 7 line assumes the two directions share EL232. If the real structure differs, the outage effect of these stations would change.
+2. **5 stations are still not perturbed** (5/59, 8%): Times Sq-42 St (S), 42 St-Port Authority (A/C/E), 51 St (6) and W 4 St-Wash Sq (A/C/E) are treated as never out, so the coverage probability is overestimated; Harlem-148 St really has no elevator record.
+3. The other limitations are the same as in section 28: independent elevators, 12-month 24-hour average availability, outage state unchanged within 30 minutes, residents uniform inside tracts, all buses treated as usable.
+4. **Not done:** a site or other-source check of the added stations; repeating the Monte Carlo over the five times; separating the effect of the "2 corrected old models".
 
 ---
 
-## 附：新旧节号对照
+## Appendix: old and new section numbers
 
-| 新节号 | 原章 | 原节号 | 标题 |
+| New section | Original chapter | Original section | Title |
 |---|---|---|---|
-| 1 | 第四轮：148 St 电梯搜索、医院周边 ADA 车站、NYP/Columbia 30 分钟等时圈 | 24 | NYP/Columbia 30 分钟等时圈 |
-| 2 | 第四轮：148 St 电梯搜索、医院周边 ADA 车站、NYP/Columbia 30 分钟等时圈 | 25 | 本轮新增文件 |
-| 3 | 第五轮：加入公交（NYP/Columbia 等时圈） | 26 | 结果 |
-| 4 | 第五轮：加入公交（NYP/Columbia 等时圈） | 27 | 公交数据：用哪些 feed，其他区的数据是否需要 |
-| 5 | 第五轮：加入公交（NYP/Columbia 等时圈） | 28 | 用到的假设 |
-| 6 | 第五轮：加入公交（NYP/Columbia 等时圈） | 29 | 遇到的问题 |
-| 7 | 第五轮：加入公交（NYP/Columbia 等时圈） | 30 | 本轮新增文件 |
-| 8 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 36 | 本章产出 |
-| 9 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 37 | 三家医院四个情景的结果 |
-| 10 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 38 | 面积：只算陆地、按曼哈顿和其他区拆开 |
-| 11 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 39 | 居民人数：ACS 行走困难人口，按面积比例分配 |
-| 12 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 40 | 居民人数的相对比例 |
-| 13 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 41 | 方向检查：反过来算"08:00 前到达医院" |
-| 14 | 第八轮：三家医院的四情景等时圈、陆地面积、ACS 居民人数与方向检查 | 42 | 遇到的问题和局限 |
-| 15 | 第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo | 43 | 本章产出 |
-| 16 | 第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo | 44 | 居民数改成反向口径（到达医院），拆成曼哈顿和布朗克斯 |
-| 17 | 第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo | 45 | 多个出发时刻取平均：面积、居民数和各时刻之间的波动 |
-| 18 | 第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo | 46 | Monte Carlo：电梯随机停运下情景④的覆盖概率 |
-| 19 | 第九轮：反向口径居民数、多出发时刻平均、电梯停运 Monte Carlo | 47 | 本章遇到的问题 |
-| 20 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 48 | 本章做法和产出 |
-| 21 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 49 | 曼哈顿的范围：官方边界、去水面；Marble Hill 和罗斯福岛 |
-| 22 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 50 | 裁剪前后对照表 |
-| 23 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 51 | 去掉其他区后哪些结论变了：两件重点 |
-| 24 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 52 | Monte Carlo 的设置，以及和上一章的区别 |
-| 25 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 53 | 结果：曼哈顿居民，情景④，扩展模型 |
-| 26 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 54 | 检验 |
-| 27 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 55 | 被扰动的车站占等时圈里 ADA 站的比例；哪个车站或电梯一停损失最大（你的第 5 点） |
-| 28 | 第十轮：裁剪到曼哈顿范围、扩展的电梯 Monte Carlo | 56 | 局限、遇到的问题，以及本章的总括 |
-| 29 | 第十一轮：14 个建不了模型的站、修复后的 Monte Carlo、最终汇总 | 58 | 修复后重跑的 Monte Carlo |
-| 30 | 第十一轮：14 个建不了模型的站、修复后的 Monte Carlo、最终汇总 | 59 | 最终汇总表（final_summary.csv）怎么读 |
-| 31 | 第十一轮：14 个建不了模型的站、修复后的 Monte Carlo、最终汇总 | 60 | 局限和没做的事 |
+| 1 | Round 4: 148 St elevator search, ADA stations near hospitals, NYP/Columbia 30-minute isochrone | 24 | NYP/Columbia 30-minute isochrone |
+| 2 | Round 4: 148 St elevator search, ADA stations near hospitals, NYP/Columbia 30-minute isochrone | 25 | New files in this round |
+| 3 | Round 5: adding buses (NYP/Columbia isochrone) | 26 | Results |
+| 4 | Round 5: adding buses (NYP/Columbia isochrone) | 27 | Bus data: which feeds are used, and whether data for other boroughs is needed |
+| 5 | Round 5: adding buses (NYP/Columbia isochrone) | 28 | Assumptions used |
+| 6 | Round 5: adding buses (NYP/Columbia isochrone) | 29 | Problems met |
+| 7 | Round 5: adding buses (NYP/Columbia isochrone) | 30 | New files in this round |
+| 8 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 36 | Output of this chapter |
+| 9 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 37 | Results of the four scenarios for the three hospitals |
+| 10 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 38 | Area: land only, split into Manhattan and other boroughs |
+| 11 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 39 | Residents: ACS ambulatory-difficulty population, allocated by area share |
+| 12 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 40 | Relative ratios of residents |
+| 13 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 41 | Direction check: computing "arrive by 08:00" in reverse |
+| 14 | Round 8: four-scenario isochrones for the three hospitals, land area, ACS residents and direction check | 42 | Problems met and limitations |
+| 15 | Round 9: residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo | 43 | Output of this chapter |
+| 16 | Round 9: residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo | 44 | Residents on the reverse basis (arriving at the hospital), split into Manhattan and the Bronx |
+| 17 | Round 9: residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo | 45 | Averaging over several departure times: area, residents and variation between times |
+| 18 | Round 9: residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo | 46 | Monte Carlo: coverage probability of scenario (4) under random elevator outages |
+| 19 | Round 9: residents on the reverse basis, averaging over several departure times, elevator-outage Monte Carlo | 47 | Problems met in this chapter |
+| 20 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 48 | Method and output of this chapter |
+| 21 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 49 | Extent of Manhattan: official boundary, water removed; Marble Hill and Roosevelt Island |
+| 22 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 50 | Before and after clipping |
+| 23 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 51 | What changed after removing the other boroughs: two main points |
+| 24 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 52 | Monte Carlo set-up, and differences from the previous chapter |
+| 25 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 53 | Results: Manhattan residents, scenario (4), expanded model |
+| 26 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 54 | Checks |
+| 27 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 55 | Share of perturbed stations among the ADA stations in the isochrones; which station or elevator costs the most when it goes out |
+| 28 | Round 10: clipping to Manhattan, expanded elevator Monte Carlo | 56 | Limitations, problems met, and the overall summary of this chapter |
+| 29 | Round 11: the 14 stations that could not be modelled, Monte Carlo after the repair, final summary | 58 | Monte Carlo re-run after the repair |
+| 30 | Round 11: the 14 stations that could not be modelled, Monte Carlo after the repair, final summary | 59 | How to read the final summary table (final_summary.csv) |
+| 31 | Round 11: the 14 stations that could not be modelled, Monte Carlo after the repair, final summary | 60 | Limitations and what was not done |
