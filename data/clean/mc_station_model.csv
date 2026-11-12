@@ -1,0 +1,60 @@
+gtfs_stop_id,station,borough,ada,status,reason,n_inventory_elevators,n_modeled_elevators,unplaced,entrance,entrance_inferred,access_paths,elevators_without_availability,reached_by_Harlem-rev,reached_by_Harlem-for,reached_by_NYP/Co-rev,reached_by_NYP/Co-for,reached_by_Mount-rev,reached_by_Mount-for
+415,149 St-Hostos (4),Bx,1,modeled,,3,3,,Street,False,PN: EL101 ; PS: EL102,,True,True,True,False,True,False
+D11,161 St-Yankee Stadium (B D),Bx,1,modeled,,5,5,,Street,False,PN: EL131+EL132 | EL131+EL135 ; PS: EL131+EL132 | EL131+EL134,EL132;EL133,True,True,True,True,False,True
+412,170 St (4),Bx,1,modeled,,3,3,,Street,False,PN: EL506+EL507 ; PS: EL506+EL508,,True,True,False,True,False,False
+104,231 St (1),Bx,1,modeled,,2,2,,Street,False,PN: EL185 ; PS: EL184,,False,False,False,True,False,False
+221,3 Av-149 St (2 5),Bx,1,modeled,,2,2,,Street,False,PN: EL129 ; PS: EL130,,True,True,False,False,False,False
+615,E 149 St (6),Bx,1,modeled,,2,2,,Street,False,PN: EL515 ; PS: EL516,,True,False,False,False,False,False
+213,E 180 St (2 5),Bx,1,modeled,,2,2,,Street,False,PN: EL159 ; PS: EL160,,True,True,False,False,False,False
+407,Fordham Rd (4),Bx,1,modeled,,3,3,,Street,False,PN: EL186+EL187 ; PS: EL186+EL188,,True,False,True,True,False,False
+503,Gun Hill Rd (5),Bx,1,modeled,,2,2,,Street,False,PN: EL199 ; PS: EL198,,True,False,False,False,False,False
+613,Hunts Point Av (6),Bx,1,modeled,,3,3,,Street,False,PN: EL195+EL196 ; PS: EL195+EL197,,True,False,False,False,False,False
+D04,Kingsbridge Rd (B D),Bx,1,modeled,,3,3,,Street,False,PN: EL189+EL190 ; PS: EL189+EL191,,False,False,True,False,False,False
+211,Pelham Pkwy (2 5),Bx,1,modeled,,3,3,,Street,False,PN: EL136+EL138 ; PS: EL136+EL137,,True,False,False,False,False,False
+217,Simpson St (2 5),Bx,1,modeled,,2,2,,Street,False,PN: EL127 ; PS: EL128,,True,True,False,False,False,False
+D07,Tremont Av (B D),Bx,1,modeled,,3,3,,Street,False,PN: EL509+EL511 ; PS: EL509+EL510,,True,False,True,False,False,False
+621,125 St (4 5 6),M,1,modeled,,2,2,,Street,False,PN: EL125+EL126 ; PS: EL125+EL126,,True,True,True,True,True,True
+A15,125 St (A C B D),M,1,modeled,,3,3,,Street,False,PN: EL142+EL144 ; PS: EL142+EL143,,True,True,True,True,True,True
+224,135 St (2 3),M,1,modeled,,2,2,,Street,False,PN: EL180 ; PS: EL181,,True,True,True,True,True,False
+115,137 St-City College (1),M,1,modeled,,5,2,EL169X;EL166X;EL167X,Street,False,PN: EL519 ; PS: EL520,EL520,True,True,True,True,True,True
+132,14 St (1 2 3),M,1,modeled,,3,2,EL615,M1,True,PN: EL616 ; PS: EL617,,True,True,False,False,False,False
+A31,14 St (A C E),M,1,modeled,,2,2,,M1,True,PN: EL223 ; PS: EL222,,False,True,True,False,False,False
+D19,14 St (F M),M,1,modeled,,2,2,,M1,True,PN: EL614 ; PS: EL613,,False,True,False,False,False,False
+A09,168 St (A C),M,1,modeled,,3,3,,Street,False,PN: EL139+EL140 ; PS: EL139+EL141,,True,True,True,True,True,True
+A07,175 St (A),M,1,modeled,,2,2,,Street,False,PN: EL123+EL124 ; PS: EL123+EL124,,False,False,True,True,True,False
+A06,181 St (A),M,1,modeled,,5,5,,M2,True,PN: EL117+EL517 | EL118+EL517 | EL119+EL517 ; PS: EL117+EL518 | EL118+EL518 | EL119+EL518,,False,False,True,True,True,False
+D17,34 St-Herald Sq (B D F M),M,1,modeled,,2,2,,M1,True,PN: EL210 ; PS: EL209,,True,True,True,False,False,False
+R17,34 St-Herald Sq (N Q R W),M,1,modeled,,4,3,EL200X,Street,False,PN: EL212+EL213 ; PS: EL211+EL213,,True,True,True,False,False,False
+726,34 St-Hudson Yards (7),M,1,modeled,,4,4,,Street,False,PN: EL600+EL603 ; PS: EL600+EL603,,False,True,True,False,False,False
+128,34 St-Penn Station (1 2 3),M,1,modeled,,5,4,EL34X,Street,False,PN: EL214+EL618 | EL215+EL618 ; PS: EL215+EL618 | EL216+EL618,,True,True,False,False,False,False
+A28,34 St-Penn Station (A C E),M,1,modeled,,4,4,,Street,False,PN: EL225 ; PS: EL225,,False,True,True,True,False,False
+D15,47-50 Sts-Rockefeller Ctr (B D F M),M,1,modeled,,3,3,,Street,False,PN: EL234+EL235 ; PS: EL234+EL236,,False,False,True,False,False,False
+A25,50 St (C E),M,2,modeled,,2,1,EL207X,M1,True,PS: EL208X,,False,False,True,False,False,False
+B10,57 St (M),M,1,modeled,,2,2,,Street,False,PN: EL621 ; PS: EL621,,False,False,True,False,False,False
+R14,57 St-7 Av (N Q R W),M,1,modeled,,4,3,EL604,Street,False,PN: EL281+EL283 ; PS: EL281+EL282,,False,True,True,False,False,False
+A24,59 St-Columbus Circle (A C B D),M,1,modeled,,6,5,EL276X,Street,False,PN: EL278 | EL279 | EL280 ; PS: EL280 | EL277+EL278 | EL277+EL279 | EL278+EL622 | EL279+EL622,,True,True,True,True,True,True
+L02,6 Av (L),M,1,modeled,,4,4,,Street,False,PN: EL609+EL611 | EL609+EL612 | EL610+EL611 | EL610+EL612 ; PS: EL609+EL611 | EL609+EL612 | EL610+EL611 | EL610+EL612,,False,True,False,False,False,False
+124,66 St-Lincoln Center (1),M,1,modeled,,2,2,,Street,False,PN: EL237 ; PS: EL238,,True,True,True,True,False,True
+628,68 St-Hunter College (6),M,1,modeled,,3,3,,Street,False,PN: EL285+EL286 ; PS: EL284+EL286,,True,False,False,False,False,False
+L01,8 Av (L),M,1,modeled,,2,2,,Street,False,PN: EL221+EL224 ; PS: EL221+EL224,,False,True,True,False,False,False
+626,86 St (4 5 6),M,2,modeled,,1,1,,Street,False,PN: EL273,,True,False,True,False,True,False
+137,Chambers St (1 2 3),M,1,modeled,,3,3,,Street,False,PN: EL336+EL337 ; PS: EL336+EL338,,False,True,False,False,False,False
+109,Dyckman St (1),M,1,modeled,,3,2,EL156,Street,False,PN: EL178+EL179 ; PS: EL178,,False,False,False,True,False,False
+631,Grand Central-42 St (4 5 6),M,1,modeled,,4,4,,Street,False,PN: EL204+EL206 | EL206+EL296 ; PS: EL204+EL205 | EL205+EL296,,True,True,False,False,False,False
+723,Grand Central-42 St (7),M,1,modeled,,1,1,,M1,True,PN: EL244 ; PS: EL244,,True,True,True,False,False,False
+901,Grand Central-42 St (S),M,1,modeled,,3,2,EL608X,M2,True,PN: EL606X | EL607X ; PS: EL606X | EL607X,,True,True,True,False,False,False
+A02,Inwood-207 St (A),M,1,modeled,,2,2,,Street,False,PN: EL148+EL149 ; PS: EL148+EL149,,False,False,True,True,False,False
+222,149 St-Hostos (2 5),Bx,1,no_elevators,,0,0,,,False,,,True,True,True,False,True,False
+414,161 St-Yankee Stadium (4),Bx,1,no_elevators,,0,0,,,False,,,True,True,True,True,False,False
+125,59 St-Columbus Circle (1),M,1,no_elevators,,0,0,,,False,,,True,True,True,True,True,True
+301,Harlem-148 St (3),M,1,no_elevators,,0,0,,,False,,,True,True,True,True,False,False
+725,Times Sq-42 St (7),M,1,no_elevators,,0,0,,,False,,,True,True,True,True,False,False
+902,Times Sq-42 St (S),M,1,no_elevators,,0,0,,,False,,,True,True,True,False,False,False
+A27,42 St-Port Authority Bus Terminal (A C E),M,1,unmodelable,no elevator path from M2 to PN,4,1,EL289X;EL291X;EL288X,M2,True,,,True,True,True,True,True,False
+R15,49 St (N R W),M,2,unmodelable,no elevator with >=2 landing fields,1,0,EL268X,,False,,,False,True,False,False,False,False
+630,51 St (6),M,1,unmodelable,no elevator path from M2 to PN,2,2,,M2,True,,,True,False,False,False,False,False
+123,72 St (1 2 3),M,1,unmodelable,no elevator with >=2 landing fields,2,0,EL240;EL239,,False,,,True,True,True,True,True,True
+120,96 St (1 2 3),M,1,unmodelable,no elevator with >=2 landing fields,2,0,EL145;EL146,,False,,,True,True,False,False,True,True
+127,Times Sq-42 St (1 2 3),M,1,unmodelable,no elevator with >=2 landing fields,3,0,EL231X;EL232;EL233,,False,,,True,True,True,False,False,False
+R16,Times Sq-42 St (N Q R W),M,1,unmodelable,no elevator path from M2 to PS,3,2,EL229,M2,True,,,True,True,True,False,False,False
+A32,W 4 St-Wash Sq (A C E),M,1,unmodelable,no elevator path from Street to PN,3,3,,Street,False,,,False,False,True,False,False,False

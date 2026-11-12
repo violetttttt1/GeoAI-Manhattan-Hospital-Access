@@ -1,0 +1,23 @@
+departure,scenario,buffer_m,area_km2,reachable_street_km,subway_stations_reached,bus_stops_used
+08:00,"1 subway, anyone",100,30.95,452.9,61,0
+08:00,"1 subway, anyone",50,25.92,452.9,61,0
+08:00,"2 subway, ADA stations only",100,17.59,246.8,14,0
+08:00,"2 subway, ADA stations only",50,14.37,246.8,14,0
+08:00,"3 subway+bus, anyone",100,36.51,534.3,76,1170
+08:00,"3 subway+bus, anyone",50,30.83,534.3,76,1170
+08:00,"4 subway+bus, ADA subway only (all buses usable)",100,23.79,338.0,22,759
+08:00,"4 subway+bus, ADA subway only (all buses usable)",50,19.68,338.0,22,759
+12:00,"1 subway, anyone",100,37.3,564.4,69,0
+12:00,"1 subway, anyone",50,31.82,564.4,69,0
+12:00,"2 subway, ADA stations only",100,19.17,270.2,15,0
+12:00,"2 subway, ADA stations only",50,15.84,270.2,15,0
+12:00,"3 subway+bus, anyone",100,40.65,620.5,77,1254
+12:00,"3 subway+bus, anyone",50,34.94,620.5,77,1254
+12:00,"4 subway+bus, ADA subway only (all buses usable)",100,22.96,332.5,21,705
+12:00,"4 subway+bus, ADA subway only (all buses usable)",50,19.22,332.5,21,705
+-,0 walking only,100,7.99,134.0,0,0
+-,0 walking only,50,6.91,134.0,0,0
+08:00,prev-run 1 (superseded),100,30.83,450.7,0,0
+08:00,prev-run 1 (superseded),50,25.81,450.7,0,0
+08:00,prev-run 2 (superseded),100,17.59,246.8,0,0
+08:00,prev-run 2 (superseded),50,14.37,246.8,0,0

@@ -1,0 +1,193 @@
+hospital,direction,kind,item,loss,reached,p_out
+Harlem Hospital,reverse,station,Inwood-207 St (A),0.0,False,
+Harlem Hospital,reverse,station,Dyckman St (1),0.0,False,
+Harlem Hospital,reverse,station,181 St (A),0.0,False,
+Harlem Hospital,reverse,station,175 St (A),0.0,False,
+Harlem Hospital,reverse,station,168 St (A C),0.0,True,
+Harlem Hospital,reverse,station,137 St-City College (1),0.0,True,
+Harlem Hospital,reverse,station,135 St (2 3),57612.52315295997,True,
+Harlem Hospital,reverse,station,125 St (A C B D),35.45617209970078,True,
+Harlem Hospital,reverse,station,125 St (4 5 6),7.649361722826143,True,
+Harlem Hospital,reverse,elevator,EL117,0.0,False,0.043957382039574
+Harlem Hospital,reverse,elevator,EL118,0.0,False,0.029889649923896422
+Harlem Hospital,reverse,elevator,EL119,0.0,False,0.019254185692542003
+Harlem Hospital,reverse,elevator,EL123,0.0,False,0.009179984779299821
+Harlem Hospital,reverse,elevator,EL124,0.0,False,0.004082952815829599
+Harlem Hospital,reverse,elevator,EL125,7.649361722826143,True,0.017250761035007556
+Harlem Hospital,reverse,elevator,EL126,7.649361722826143,True,0.030700152207001397
+Harlem Hospital,reverse,elevator,EL139,0.0,True,0.02590515424939044
+Harlem Hospital,reverse,elevator,EL140,0.0,True,0.01773592085235942
+Harlem Hospital,reverse,elevator,EL141,0.0,True,0.010270167427701593
+Harlem Hospital,reverse,elevator,EL142,35.45617209970078,True,0.0073573059360729776
+Harlem Hospital,reverse,elevator,EL143,0.0,True,0.011000761035007578
+Harlem Hospital,reverse,elevator,EL144,35.45617209970078,True,0.015805375823048418
+Harlem Hospital,reverse,elevator,EL148,0.0,False,0.0158200152207002
+Harlem Hospital,reverse,elevator,EL149,0.0,False,0.009499619482496224
+Harlem Hospital,reverse,elevator,EL178,0.0,False,0.019649923896499222
+Harlem Hospital,reverse,elevator,EL179,0.0,False,0.011035007610350034
+Harlem Hospital,reverse,elevator,EL180,8414.373068788278,True,0.028226788432267558
+Harlem Hospital,reverse,elevator,EL181,45125.775995509655,True,0.014210984017400397
+Harlem Hospital,reverse,elevator,EL517,0.0,False,0.009760273972602818
+Harlem Hospital,reverse,elevator,EL518,0.0,False,0.005605022831050244
+Harlem Hospital,reverse,elevator,EL519,0.0,True,0.02907588961510521
+Harlem Hospital,reverse,elevator,EL520,0.0,True,0.021299999999999986
+Harlem Hospital,forward,station,Inwood-207 St (A),0.0,False,
+Harlem Hospital,forward,station,Dyckman St (1),0.0,False,
+Harlem Hospital,forward,station,181 St (A),0.0,False,
+Harlem Hospital,forward,station,175 St (A),0.0,False,
+Harlem Hospital,forward,station,168 St (A C),152.1746145671641,True,
+Harlem Hospital,forward,station,137 St-City College (1),0.0,True,
+Harlem Hospital,forward,station,135 St (2 3),28858.71621698221,True,
+Harlem Hospital,forward,station,125 St (A C B D),152.1746145671641,True,
+Harlem Hospital,forward,station,125 St (4 5 6),0.0,True,
+Harlem Hospital,forward,elevator,EL117,0.0,False,0.043957382039574
+Harlem Hospital,forward,elevator,EL118,0.0,False,0.029889649923896422
+Harlem Hospital,forward,elevator,EL119,0.0,False,0.019254185692542003
+Harlem Hospital,forward,elevator,EL123,0.0,False,0.009179984779299821
+Harlem Hospital,forward,elevator,EL124,0.0,False,0.004082952815829599
+Harlem Hospital,forward,elevator,EL125,0.0,True,0.017250761035007556
+Harlem Hospital,forward,elevator,EL126,0.0,True,0.030700152207001397
+Harlem Hospital,forward,elevator,EL139,152.1746145671641,True,0.02590515424939044
+Harlem Hospital,forward,elevator,EL140,152.1746145671641,True,0.01773592085235942
+Harlem Hospital,forward,elevator,EL141,0.0,True,0.010270167427701593
+Harlem Hospital,forward,elevator,EL142,152.1746145671641,True,0.0073573059360729776
+Harlem Hospital,forward,elevator,EL143,0.0,True,0.011000761035007578
+Harlem Hospital,forward,elevator,EL144,152.1746145671641,True,0.015805375823048418
+Harlem Hospital,forward,elevator,EL148,0.0,False,0.0158200152207002
+Harlem Hospital,forward,elevator,EL149,0.0,False,0.009499619482496224
+Harlem Hospital,forward,elevator,EL178,0.0,False,0.019649923896499222
+Harlem Hospital,forward,elevator,EL179,0.0,False,0.011035007610350034
+Harlem Hospital,forward,elevator,EL180,14107.930969532958,True,0.028226788432267558
+Harlem Hospital,forward,elevator,EL181,14750.785247449268,True,0.014210984017400397
+Harlem Hospital,forward,elevator,EL517,0.0,False,0.009760273972602818
+Harlem Hospital,forward,elevator,EL518,0.0,False,0.005605022831050244
+Harlem Hospital,forward,elevator,EL519,0.0,True,0.02907588961510521
+Harlem Hospital,forward,elevator,EL520,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),reverse,station,Inwood-207 St (A),6543.128752715769,True,
+NYP/Columbia (CUIMC),reverse,station,Dyckman St (1),0.0,False,
+NYP/Columbia (CUIMC),reverse,station,181 St (A),30.835352008696645,True,
+NYP/Columbia (CUIMC),reverse,station,175 St (A),0.0,True,
+NYP/Columbia (CUIMC),reverse,station,168 St (A C),32897.54321744504,True,
+NYP/Columbia (CUIMC),reverse,station,137 St-City College (1),0.0,True,
+NYP/Columbia (CUIMC),reverse,station,135 St (2 3),0.0,True,
+NYP/Columbia (CUIMC),reverse,station,125 St (A C B D),21182.425851534645,True,
+NYP/Columbia (CUIMC),reverse,station,125 St (4 5 6),782.3163480923395,True,
+NYP/Columbia (CUIMC),reverse,elevator,EL117,0.0,False,0.043957382039574
+NYP/Columbia (CUIMC),reverse,elevator,EL118,0.0,False,0.029889649923896422
+NYP/Columbia (CUIMC),reverse,elevator,EL119,0.0,False,0.019254185692542003
+NYP/Columbia (CUIMC),reverse,elevator,EL123,0.0,True,0.009179984779299821
+NYP/Columbia (CUIMC),reverse,elevator,EL124,0.0,True,0.004082952815829599
+NYP/Columbia (CUIMC),reverse,elevator,EL125,782.3163480923395,True,0.017250761035007556
+NYP/Columbia (CUIMC),reverse,elevator,EL126,782.3163480923395,True,0.030700152207001397
+NYP/Columbia (CUIMC),reverse,elevator,EL139,32897.54321744504,True,0.02590515424939044
+NYP/Columbia (CUIMC),reverse,elevator,EL140,27229.21231196187,True,0.01773592085235942
+NYP/Columbia (CUIMC),reverse,elevator,EL141,5668.330905483177,True,0.010270167427701593
+NYP/Columbia (CUIMC),reverse,elevator,EL142,21182.425851534645,True,0.0073573059360729776
+NYP/Columbia (CUIMC),reverse,elevator,EL143,3196.002921469335,True,0.011000761035007578
+NYP/Columbia (CUIMC),reverse,elevator,EL144,21182.425851534645,True,0.015805375823048418
+NYP/Columbia (CUIMC),reverse,elevator,EL148,6543.128752715769,True,0.0158200152207002
+NYP/Columbia (CUIMC),reverse,elevator,EL149,6543.128752715769,True,0.009499619482496224
+NYP/Columbia (CUIMC),reverse,elevator,EL178,0.0,False,0.019649923896499222
+NYP/Columbia (CUIMC),reverse,elevator,EL179,0.0,False,0.011035007610350034
+NYP/Columbia (CUIMC),reverse,elevator,EL180,0.0,True,0.028226788432267558
+NYP/Columbia (CUIMC),reverse,elevator,EL181,0.0,True,0.014210984017400397
+NYP/Columbia (CUIMC),reverse,elevator,EL517,0.0,True,0.009760273972602818
+NYP/Columbia (CUIMC),reverse,elevator,EL518,30.835352008696645,True,0.005605022831050244
+NYP/Columbia (CUIMC),reverse,elevator,EL519,0.0,True,0.02907588961510521
+NYP/Columbia (CUIMC),reverse,elevator,EL520,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),forward,station,Inwood-207 St (A),8521.486810508177,True,
+NYP/Columbia (CUIMC),forward,station,Dyckman St (1),0.0,True,
+NYP/Columbia (CUIMC),forward,station,181 St (A),8.320395596187154,True,
+NYP/Columbia (CUIMC),forward,station,175 St (A),1241.8362913607198,True,
+NYP/Columbia (CUIMC),forward,station,168 St (A C),17415.609598475407,True,
+NYP/Columbia (CUIMC),forward,station,137 St-City College (1),0.0,True,
+NYP/Columbia (CUIMC),forward,station,135 St (2 3),140.81846342271456,True,
+NYP/Columbia (CUIMC),forward,station,125 St (A C B D),6777.640174001957,True,
+NYP/Columbia (CUIMC),forward,station,125 St (4 5 6),0.0,True,
+NYP/Columbia (CUIMC),forward,elevator,EL117,0.0,False,0.043957382039574
+NYP/Columbia (CUIMC),forward,elevator,EL118,0.0,False,0.029889649923896422
+NYP/Columbia (CUIMC),forward,elevator,EL119,0.0,False,0.019254185692542003
+NYP/Columbia (CUIMC),forward,elevator,EL123,1241.8362913607198,True,0.009179984779299821
+NYP/Columbia (CUIMC),forward,elevator,EL124,1241.8362913607198,True,0.004082952815829599
+NYP/Columbia (CUIMC),forward,elevator,EL125,0.0,True,0.017250761035007556
+NYP/Columbia (CUIMC),forward,elevator,EL126,0.0,True,0.030700152207001397
+NYP/Columbia (CUIMC),forward,elevator,EL139,17415.609598475407,True,0.02590515424939044
+NYP/Columbia (CUIMC),forward,elevator,EL140,8805.67003684309,True,0.01773592085235942
+NYP/Columbia (CUIMC),forward,elevator,EL141,8609.939561632324,True,0.010270167427701593
+NYP/Columbia (CUIMC),forward,elevator,EL142,6777.640174001957,True,0.0073573059360729776
+NYP/Columbia (CUIMC),forward,elevator,EL143,6777.640174001957,True,0.011000761035007578
+NYP/Columbia (CUIMC),forward,elevator,EL144,218.89593874762795,True,0.015805375823048418
+NYP/Columbia (CUIMC),forward,elevator,EL148,8521.486810508177,True,0.0158200152207002
+NYP/Columbia (CUIMC),forward,elevator,EL149,8521.486810508177,True,0.009499619482496224
+NYP/Columbia (CUIMC),forward,elevator,EL178,0.0,True,0.019649923896499222
+NYP/Columbia (CUIMC),forward,elevator,EL179,0.0,True,0.011035007610350034
+NYP/Columbia (CUIMC),forward,elevator,EL180,0.0,False,0.028226788432267558
+NYP/Columbia (CUIMC),forward,elevator,EL181,140.81846342271456,True,0.014210984017400397
+NYP/Columbia (CUIMC),forward,elevator,EL517,8.320395596187154,True,0.009760273972602818
+NYP/Columbia (CUIMC),forward,elevator,EL518,0.0,True,0.005605022831050244
+NYP/Columbia (CUIMC),forward,elevator,EL519,0.0,True,0.02907588961510521
+NYP/Columbia (CUIMC),forward,elevator,EL520,0.0,True,0.021299999999999986
+Mount Sinai Morningside,reverse,station,Inwood-207 St (A),0.0,False,
+Mount Sinai Morningside,reverse,station,Dyckman St (1),0.0,False,
+Mount Sinai Morningside,reverse,station,181 St (A),300.2945124125181,True,
+Mount Sinai Morningside,reverse,station,175 St (A),888.9857170115793,True,
+Mount Sinai Morningside,reverse,station,168 St (A C),2659.423501033678,True,
+Mount Sinai Morningside,reverse,station,137 St-City College (1),0.0,True,
+Mount Sinai Morningside,reverse,station,135 St (2 3),0.0,True,
+Mount Sinai Morningside,reverse,station,125 St (A C B D),5986.22924793655,True,
+Mount Sinai Morningside,reverse,station,125 St (4 5 6),805.1765843128233,True,
+Mount Sinai Morningside,reverse,elevator,EL117,0.0,False,0.043957382039574
+Mount Sinai Morningside,reverse,elevator,EL118,0.0,False,0.029889649923896422
+Mount Sinai Morningside,reverse,elevator,EL119,0.0,False,0.019254185692542003
+Mount Sinai Morningside,reverse,elevator,EL123,888.9857170115793,True,0.009179984779299821
+Mount Sinai Morningside,reverse,elevator,EL124,888.9857170115793,True,0.004082952815829599
+Mount Sinai Morningside,reverse,elevator,EL125,805.1765843128233,True,0.017250761035007556
+Mount Sinai Morningside,reverse,elevator,EL126,805.1765843128233,True,0.030700152207001397
+Mount Sinai Morningside,reverse,elevator,EL139,2659.423501033678,True,0.02590515424939044
+Mount Sinai Morningside,reverse,elevator,EL140,0.0,True,0.01773592085235942
+Mount Sinai Morningside,reverse,elevator,EL141,2659.423501033678,True,0.010270167427701593
+Mount Sinai Morningside,reverse,elevator,EL142,5986.22924793655,True,0.0073573059360729776
+Mount Sinai Morningside,reverse,elevator,EL143,4811.311589964687,True,0.011000761035007578
+Mount Sinai Morningside,reverse,elevator,EL144,1174.917657971855,True,0.015805375823048418
+Mount Sinai Morningside,reverse,elevator,EL148,0.0,False,0.0158200152207002
+Mount Sinai Morningside,reverse,elevator,EL149,0.0,False,0.009499619482496224
+Mount Sinai Morningside,reverse,elevator,EL178,0.0,False,0.019649923896499222
+Mount Sinai Morningside,reverse,elevator,EL179,0.0,False,0.011035007610350034
+Mount Sinai Morningside,reverse,elevator,EL180,0.0,True,0.028226788432267558
+Mount Sinai Morningside,reverse,elevator,EL181,0.0,True,0.014210984017400397
+Mount Sinai Morningside,reverse,elevator,EL517,0.0,True,0.009760273972602818
+Mount Sinai Morningside,reverse,elevator,EL518,300.2945124125181,True,0.005605022831050244
+Mount Sinai Morningside,reverse,elevator,EL519,0.0,True,0.02907588961510521
+Mount Sinai Morningside,reverse,elevator,EL520,0.0,True,0.021299999999999986
+Mount Sinai Morningside,forward,station,Inwood-207 St (A),0.0,False,
+Mount Sinai Morningside,forward,station,Dyckman St (1),0.0,False,
+Mount Sinai Morningside,forward,station,181 St (A),0.0,False,
+Mount Sinai Morningside,forward,station,175 St (A),0.0,False,
+Mount Sinai Morningside,forward,station,168 St (A C),191.68842672185565,True,
+Mount Sinai Morningside,forward,station,137 St-City College (1),0.0,True,
+Mount Sinai Morningside,forward,station,135 St (2 3),0.0,False,
+Mount Sinai Morningside,forward,station,125 St (A C B D),717.8245469350877,True,
+Mount Sinai Morningside,forward,station,125 St (4 5 6),0.0,True,
+Mount Sinai Morningside,forward,elevator,EL117,0.0,False,0.043957382039574
+Mount Sinai Morningside,forward,elevator,EL118,0.0,False,0.029889649923896422
+Mount Sinai Morningside,forward,elevator,EL119,0.0,False,0.019254185692542003
+Mount Sinai Morningside,forward,elevator,EL123,0.0,False,0.009179984779299821
+Mount Sinai Morningside,forward,elevator,EL124,0.0,False,0.004082952815829599
+Mount Sinai Morningside,forward,elevator,EL125,0.0,True,0.017250761035007556
+Mount Sinai Morningside,forward,elevator,EL126,0.0,True,0.030700152207001397
+Mount Sinai Morningside,forward,elevator,EL139,191.68842672185565,True,0.02590515424939044
+Mount Sinai Morningside,forward,elevator,EL140,191.68842672185565,True,0.01773592085235942
+Mount Sinai Morningside,forward,elevator,EL141,0.0,True,0.010270167427701593
+Mount Sinai Morningside,forward,elevator,EL142,717.8245469350877,True,0.0073573059360729776
+Mount Sinai Morningside,forward,elevator,EL143,31.8644563857124,True,0.011000761035007578
+Mount Sinai Morningside,forward,elevator,EL144,685.960090549379,True,0.015805375823048418
+Mount Sinai Morningside,forward,elevator,EL148,0.0,False,0.0158200152207002
+Mount Sinai Morningside,forward,elevator,EL149,0.0,False,0.009499619482496224
+Mount Sinai Morningside,forward,elevator,EL178,0.0,False,0.019649923896499222
+Mount Sinai Morningside,forward,elevator,EL179,0.0,False,0.011035007610350034
+Mount Sinai Morningside,forward,elevator,EL180,0.0,False,0.028226788432267558
+Mount Sinai Morningside,forward,elevator,EL181,0.0,False,0.014210984017400397
+Mount Sinai Morningside,forward,elevator,EL517,0.0,False,0.009760273972602818
+Mount Sinai Morningside,forward,elevator,EL518,0.0,False,0.005605022831050244
+Mount Sinai Morningside,forward,elevator,EL519,0.0,True,0.02907588961510521
+Mount Sinai Morningside,forward,elevator,EL520,0.0,True,0.021299999999999986

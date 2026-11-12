@@ -1,0 +1,7 @@
+﻿equipment_code,lat,lon,asset_class,notes,service_status,maintained_by,installed,avail_status,nearest_station_id,nearest_station,nearest_station_ada,nearest_dist_m,second_station,second_dist_m,nearest_ada_station,nearest_ada_dist_m
+EL155,40.867073,-73.915596,Elevator Traction,Freight Elevator At 207Th Street Yard,Installed-Functioning-In Service,NYCT,06/01/1932,未知(无任何记录),297,215 St (1),0,265,Inwood-207 St (A),378,Inwood-207 St (A),378
+EL147,40.864727,-73.91642,Elevator Traction,Relay Building A,Installed-Functioning-In Service,NYCT,01/01/2025,未知(无任何记录),298,207 St (1),0,202,Inwood-207 St (A),473,Inwood-207 St (A),473
+EL150,40.867645,-73.91614,Elevator Traction,Passenger Elevator At 207Th Street Yard,Installed-Functioning-In Service,NYCT,09/28/2002,未知(无任何记录),297,215 St (1),0,213,Inwood-207 St (A),320,Inwood-207 St (A),320
+EL151,40.868195,-73.913055,Elevator Traction,Freight Elevator At 207Th Street Yard,Installed-Functioning-In Service,NYCT,06/01/1932,未知(无任何记录),297,215 St (1),0,233,Inwood-207 St (A),576,Inwood-207 St (A),576
+EL153,40.868076,-73.91567,Elevator Traction,Freight Elevator At 207Th Street Yard,Installed-Functioning-In Service,NYCT,06/01/1932,未知(无任何记录),297,215 St (1),0,156,Inwood-207 St (A),356,Inwood-207 St (A),356
+EL152,40.868145,-73.91528,Elevator Traction,Freight Elevator At 207Th Street Yard,Installed-Functioning-In Service,NYCT,06/01/1932,未知(无任何记录),297,215 St (1),0,144,Inwood-207 St (A),388,Inwood-207 St (A),388

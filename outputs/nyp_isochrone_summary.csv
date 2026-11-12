@@ -1,0 +1,11 @@
+departure,group,buffer_m,area_km2,reachable_street_km,stations_reached,complexes_reached
+08:00,ordinary,100,30.75,450.7,61,55
+08:00,ordinary,50,25.8,450.7,61,55
+08:00,ADA-only,100,17.58,246.8,14,11
+08:00,ADA-only,50,14.37,246.8,14,11
+12:00,ordinary,100,37.24,562.3,69,62
+12:00,ordinary,50,31.77,562.3,69,62
+12:00,ADA-only,100,19.15,270.2,15,12
+12:00,ADA-only,50,15.84,270.2,15,12
+-,walk only,100,7.99,134.0,0,0
+-,walk only,50,6.91,134.0,0,0

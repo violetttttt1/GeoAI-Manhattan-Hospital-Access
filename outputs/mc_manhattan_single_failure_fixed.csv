@@ -1,0 +1,1117 @@
+hospital,direction,kind,item,name,borough,loss,reached_key,p_out
+Harlem Hospital,reverse,station,104,231 St (1),Bx,0.0,False,
+Harlem Hospital,reverse,station,109,Dyckman St (1),M,0.0,False,
+Harlem Hospital,reverse,station,115,137 St-City College (1),M,0.0,True,
+Harlem Hospital,reverse,station,120,96 St (1 2 3),M,6470.851608800236,True,
+Harlem Hospital,reverse,station,123,72 St (1 2 3),M,2409.1463673532708,True,
+Harlem Hospital,reverse,station,124,66 St-Lincoln Center (1),M,3.492048767460801,True,
+Harlem Hospital,reverse,station,125,59 St-Columbus Circle (1),M,0.0,True,
+Harlem Hospital,reverse,station,127,Times Sq-42 St (1 2 3),M,860.9229936064294,True,
+Harlem Hospital,reverse,station,128,34 St-Penn Station (1 2 3),M,244.58687886226835,True,
+Harlem Hospital,reverse,station,132,14 St (1 2 3),M,379.03865302757185,True,
+Harlem Hospital,reverse,station,137,Chambers St (1 2 3),M,0.0,False,
+Harlem Hospital,reverse,station,211,Pelham Pkwy (2 5),Bx,0.0,True,
+Harlem Hospital,reverse,station,213,E 180 St (2 5),Bx,0.0,True,
+Harlem Hospital,reverse,station,217,Simpson St (2 5),Bx,0.0,True,
+Harlem Hospital,reverse,station,221,3 Av-149 St (2 5),Bx,0.2395695590748801,True,
+Harlem Hospital,reverse,station,222,149 St-Hostos (2 5),Bx,3980.711904972377,True,
+Harlem Hospital,reverse,station,224,135 St (2 3),M,17667.087302123873,True,
+Harlem Hospital,reverse,station,407,Fordham Rd (4),Bx,0.0,True,
+Harlem Hospital,reverse,station,412,170 St (4),Bx,0.0,True,
+Harlem Hospital,reverse,station,414,161 St-Yankee Stadium (4),Bx,0.0,True,
+Harlem Hospital,reverse,station,415,149 St-Hostos (4),Bx,3980.711904972377,True,
+Harlem Hospital,reverse,station,503,Gun Hill Rd (5),Bx,0.0,True,
+Harlem Hospital,reverse,station,613,Hunts Point Av (6),Bx,0.0,True,
+Harlem Hospital,reverse,station,615,E 149 St (6),Bx,0.0,True,
+Harlem Hospital,reverse,station,621,125 St (4 5 6),M,7.649361722833419,True,
+Harlem Hospital,reverse,station,626,86 St (4 5 6),M,5307.608386639295,True,
+Harlem Hospital,reverse,station,628,68 St-Hunter College (6),M,1304.955884509407,True,
+Harlem Hospital,reverse,station,631,Grand Central-42 St (4 5 6),M,156.20178840524022,True,
+Harlem Hospital,reverse,station,723,Grand Central-42 St (7),M,15.658480502672319,True,
+Harlem Hospital,reverse,station,725,Times Sq-42 St (7),M,0.0,True,
+Harlem Hospital,reverse,station,726,34 St-Hudson Yards (7),M,0.0,False,
+Harlem Hospital,reverse,station,901,Grand Central-42 St (S),M,0.0,True,
+Harlem Hospital,reverse,station,A02,Inwood-207 St (A),M,0.0,False,
+Harlem Hospital,reverse,station,A06,181 St (A),M,0.0,False,
+Harlem Hospital,reverse,station,A07,175 St (A),M,0.0,False,
+Harlem Hospital,reverse,station,A09,168 St (A C),M,0.0,True,
+Harlem Hospital,reverse,station,A15,125 St (A C B D),M,35.45617209968623,True,
+Harlem Hospital,reverse,station,A24,59 St-Columbus Circle (A C B D),M,35.45617209968623,True,
+Harlem Hospital,reverse,station,A25,50 St (C E),M,0.0,False,
+Harlem Hospital,reverse,station,A28,34 St-Penn Station (A C E),M,0.0,False,
+Harlem Hospital,reverse,station,A31,14 St (A C E),M,0.0,False,
+Harlem Hospital,reverse,station,B10,57 St (M),M,0.0,False,
+Harlem Hospital,reverse,station,D04,Kingsbridge Rd (B D),Bx,0.0,False,
+Harlem Hospital,reverse,station,D07,Tremont Av (B D),Bx,0.0,True,
+Harlem Hospital,reverse,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,True,
+Harlem Hospital,reverse,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,0.0,False,
+Harlem Hospital,reverse,station,D17,34 St-Herald Sq (B D F M),M,0.0,True,
+Harlem Hospital,reverse,station,D19,14 St (F M),M,0.0,False,
+Harlem Hospital,reverse,station,L01,8 Av (L),M,0.0,False,
+Harlem Hospital,reverse,station,L02,6 Av (L),M,0.0,False,
+Harlem Hospital,reverse,station,R14,57 St-7 Av (N Q R W),M,0.0,False,
+Harlem Hospital,reverse,station,R15,49 St (N R W),M,0.0,False,
+Harlem Hospital,reverse,station,R16,Times Sq-42 St (N Q R W),M,0.0,True,
+Harlem Hospital,reverse,station,R17,34 St-Herald Sq (N Q R W),M,0.0,True,
+Harlem Hospital,reverse,elevator,EL100,,,3980.711904972377,True,0.05669486280173297
+Harlem Hospital,reverse,elevator,EL101,,,3980.711904972377,True,0.026263023392962492
+Harlem Hospital,reverse,elevator,EL102,,,3980.711904972377,True,0.002256944444444575
+Harlem Hospital,reverse,elevator,EL117,,,0.0,False,0.04395738203957367
+Harlem Hospital,reverse,elevator,EL118,,,0.0,False,0.029889649923896533
+Harlem Hospital,reverse,elevator,EL119,,,0.0,False,0.01925418569254178
+Harlem Hospital,reverse,elevator,EL123,,,0.0,False,0.009179984779299821
+Harlem Hospital,reverse,elevator,EL124,,,0.0,False,0.004082952815829488
+Harlem Hospital,reverse,elevator,EL125,,,7.649361722833419,True,0.017250761035007667
+Harlem Hospital,reverse,elevator,EL126,,,7.649361722833419,True,0.030700152207001397
+Harlem Hospital,reverse,elevator,EL127,,,0.0,True,0.03300418569254182
+Harlem Hospital,reverse,elevator,EL128,,,0.0,True,0.021413622526636256
+Harlem Hospital,reverse,elevator,EL129,,,0.0,True,0.1248002283105023
+Harlem Hospital,reverse,elevator,EL130,,,0.2395695590748801,True,0.24039193302891926
+Harlem Hospital,reverse,elevator,EL131,,,0.0,True,0.5110451533836314
+Harlem Hospital,reverse,elevator,EL132,,,0.0,True,0.021299999999999986
+Harlem Hospital,reverse,elevator,EL133,,,0.0,True,0.021299999999999986
+Harlem Hospital,reverse,elevator,EL134,,,0.0,True,0.4695760407491095
+Harlem Hospital,reverse,elevator,EL135,,,0.0,True,0.5251579793956569
+Harlem Hospital,reverse,elevator,EL136,,,0.0,True,0.014935312024353165
+Harlem Hospital,reverse,elevator,EL137,,,0.0,True,0.03535388127853889
+Harlem Hospital,reverse,elevator,EL138,,,0.0,False,0.032028158295281495
+Harlem Hospital,reverse,elevator,EL139,,,0.0,True,0.02590515424939055
+Harlem Hospital,reverse,elevator,EL140,,,0.0,True,0.0177359208523592
+Harlem Hospital,reverse,elevator,EL141,,,0.0,True,0.010270167427701704
+Harlem Hospital,reverse,elevator,EL142,,,35.45617209968623,True,0.007357305936073089
+Harlem Hospital,reverse,elevator,EL143,,,0.0,True,0.011000761035007578
+Harlem Hospital,reverse,elevator,EL144,,,35.45617209968623,True,0.015805375823048196
+Harlem Hospital,reverse,elevator,EL145,,,0.0,True,0.01980213089802141
+Harlem Hospital,reverse,elevator,EL146,,,4485.036210744758,True,0.015957001522069914
+Harlem Hospital,reverse,elevator,EL148,,,0.0,False,0.0158200152207002
+Harlem Hospital,reverse,elevator,EL149,,,0.0,False,0.009499619482496224
+Harlem Hospital,reverse,elevator,EL159,,,0.0,True,0.010578386605783807
+Harlem Hospital,reverse,elevator,EL160,,,0.0,True,0.011815068493150727
+Harlem Hospital,reverse,elevator,EL178,,,0.0,False,0.019649923896499222
+Harlem Hospital,reverse,elevator,EL179,,,0.0,False,0.011035007610350034
+Harlem Hospital,reverse,elevator,EL180,,,8414.373068788285,True,0.02822678843226789
+Harlem Hospital,reverse,elevator,EL181,,,5180.340144673559,True,0.014210984017400285
+Harlem Hospital,reverse,elevator,EL184,,,0.0,False,0.029512937595129296
+Harlem Hospital,reverse,elevator,EL185,,,0.0,False,0.026786529680365212
+Harlem Hospital,reverse,elevator,EL186,,,0.0,True,0.011069514730364438
+Harlem Hospital,reverse,elevator,EL187,,,0.0,True,0.010918540605458271
+Harlem Hospital,reverse,elevator,EL188,,,0.0,True,0.015486139294499601
+Harlem Hospital,reverse,elevator,EL189,,,0.0,False,0.06072375117148521
+Harlem Hospital,reverse,elevator,EL190,,,0.0,False,0.036035007610350056
+Harlem Hospital,reverse,elevator,EL191,,,0.0,False,0.01931887366818874
+Harlem Hospital,reverse,elevator,EL195,,,0.0,True,0.028352359208523636
+Harlem Hospital,reverse,elevator,EL196,,,0.0,True,0.016898782343987784
+Harlem Hospital,reverse,elevator,EL197,,,0.0,True,0.01332191780821923
+Harlem Hospital,reverse,elevator,EL198,,,0.0,True,0.021611491628614754
+Harlem Hospital,reverse,elevator,EL199,,,0.0,False,0.020589802130898005
+Harlem Hospital,reverse,elevator,EL204,,,0.0,False,0.010488964992389604
+Harlem Hospital,reverse,elevator,EL205,,,0.0,True,0.011933028919330235
+Harlem Hospital,reverse,elevator,EL206,,,156.20178840524022,True,0.012692161339421748
+Harlem Hospital,reverse,elevator,EL208X,,,0.0,False,0.00016362252663637555
+Harlem Hospital,reverse,elevator,EL209,,,0.0,True,0.012709284627092865
+Harlem Hospital,reverse,elevator,EL210,,,0.0,True,0.012393455098934636
+Harlem Hospital,reverse,elevator,EL211,,,0.0,True,0.012442922374429233
+Harlem Hospital,reverse,elevator,EL212,,,0.0,True,0.010595509893455146
+Harlem Hospital,reverse,elevator,EL213,,,0.0,True,0.02886415525114161
+Harlem Hospital,reverse,elevator,EL214,,,0.0,False,0.012635083713850914
+Harlem Hospital,reverse,elevator,EL215,,,0.0,False,0.017140410958904062
+Harlem Hospital,reverse,elevator,EL216,,,0.0,False,0.01494292237442918
+Harlem Hospital,reverse,elevator,EL221,,,0.0,False,0.012675038051750298
+Harlem Hospital,reverse,elevator,EL222,,,0.0,False,0.00908485540334858
+Harlem Hospital,reverse,elevator,EL223,,,0.0,False,0.010127027297563207
+Harlem Hospital,reverse,elevator,EL224,,,0.0,False,0.014939117199391228
+Harlem Hospital,reverse,elevator,EL225,,,0.0,False,0.1004138349975322
+Harlem Hospital,reverse,elevator,EL226,,,0.0,False,0.021939582621461118
+Harlem Hospital,reverse,elevator,EL227,,,0.0,False,0.01095700152207002
+Harlem Hospital,reverse,elevator,EL228,,,0.0,False,0.17528729071537286
+Harlem Hospital,reverse,elevator,EL229,,,0.0,True,0.006715870258677148
+Harlem Hospital,reverse,elevator,EL230,,,0.0,True,0.008550228310502228
+Harlem Hospital,reverse,elevator,EL231X,,,0.0,False,0.04446347031963471
+Harlem Hospital,reverse,elevator,EL232,,,0.0,True,0.034762176560121705
+Harlem Hospital,reverse,elevator,EL233,,,860.9229936064294,True,0.016352739726027354
+Harlem Hospital,reverse,elevator,EL234,,,0.0,False,0.01731354642313543
+Harlem Hospital,reverse,elevator,EL235,,,0.0,False,0.02356164383561643
+Harlem Hospital,reverse,elevator,EL236,,,0.0,False,0.011362252663622452
+Harlem Hospital,reverse,elevator,EL237,,,3.492048767460801,True,0.006198630136986183
+Harlem Hospital,reverse,elevator,EL238,,,0.0,True,0.004427321156773134
+Harlem Hospital,reverse,elevator,EL239,,,2409.1463673532708,True,0.012588636960518373
+Harlem Hospital,reverse,elevator,EL240,,,0.0,True,0.0194166242786733
+Harlem Hospital,reverse,elevator,EL244,,,15.658480502672319,True,0.01390410958904098
+Harlem Hospital,reverse,elevator,EL268X,,,0.0,False,0.0035197869101979418
+Harlem Hospital,reverse,elevator,EL273,,,5307.608386639295,True,0.02207001522070018
+Harlem Hospital,reverse,elevator,EL276X,,,0.0,True,0.03699010654490098
+Harlem Hospital,reverse,elevator,EL277,,,0.0,False,0.03339611872146109
+Harlem Hospital,reverse,elevator,EL278,,,0.0,False,0.01450342465753418
+Harlem Hospital,reverse,elevator,EL279,,,0.0,False,0.021192922374429157
+Harlem Hospital,reverse,elevator,EL280,,,0.0,False,0.0117275494672755
+Harlem Hospital,reverse,elevator,EL281,,,0.0,False,0.01624955227520397
+Harlem Hospital,reverse,elevator,EL282,,,0.0,False,0.01312881518682496
+Harlem Hospital,reverse,elevator,EL283,,,0.0,False,0.009714656957725332
+Harlem Hospital,reverse,elevator,EL284,,,0.0,True,0.0038831811263317917
+Harlem Hospital,reverse,elevator,EL285,,,1304.955884509407,True,0.002393455098934627
+Harlem Hospital,reverse,elevator,EL286,,,1304.955884509407,True,0.004433028919330395
+Harlem Hospital,reverse,elevator,EL296,,,0.0,False,0.01492199391172
+Harlem Hospital,reverse,elevator,EL336,,,0.0,False,0.01749429223744292
+Harlem Hospital,reverse,elevator,EL337,,,0.0,False,0.01011225266362259
+Harlem Hospital,reverse,elevator,EL338,,,0.0,False,0.017368721461187175
+Harlem Hospital,reverse,elevator,EL506,,,0.0,True,0.027501902587518945
+Harlem Hospital,reverse,elevator,EL507,,,0.0,True,0.010135083713850745
+Harlem Hospital,reverse,elevator,EL508,,,0.0,True,0.013778538812785457
+Harlem Hospital,reverse,elevator,EL509,,,0.0,True,0.018854642313546388
+Harlem Hospital,reverse,elevator,EL510,,,0.0,True,0.01209665144596661
+Harlem Hospital,reverse,elevator,EL511,,,0.0,True,0.019385464231354788
+Harlem Hospital,reverse,elevator,EL515,,,0.0,True,0.021059741248097397
+Harlem Hospital,reverse,elevator,EL516,,,0.0,True,0.009098173515981856
+Harlem Hospital,reverse,elevator,EL517,,,0.0,False,0.009760273972602707
+Harlem Hospital,reverse,elevator,EL518,,,0.0,False,0.005605022831050244
+Harlem Hospital,reverse,elevator,EL519,,,0.0,True,0.02907588961510532
+Harlem Hospital,reverse,elevator,EL520,,,0.0,True,0.021299999999999986
+Harlem Hospital,reverse,elevator,EL600,,,0.0,False,0.01396879756468794
+Harlem Hospital,reverse,elevator,EL601,,,0.0,False,0.0320700152207003
+Harlem Hospital,reverse,elevator,EL602,,,0.0,False,0.0573306697108068
+Harlem Hospital,reverse,elevator,EL603,,,0.0,False,0.01842465753424649
+Harlem Hospital,reverse,elevator,EL606X,,,0.0,False,0.0
+Harlem Hospital,reverse,elevator,EL607X,,,0.0,False,0.0
+Harlem Hospital,reverse,elevator,EL609,,,0.0,False,0.0025703957382039455
+Harlem Hospital,reverse,elevator,EL610,,,0.0,False,0.0025818112633181345
+Harlem Hospital,reverse,elevator,EL611,,,0.0,False,0.004008751902587537
+Harlem Hospital,reverse,elevator,EL612,,,0.0,False,0.004691780821917901
+Harlem Hospital,reverse,elevator,EL613,,,0.0,False,0.0046232876712328785
+Harlem Hospital,reverse,elevator,EL614,,,0.0,False,0.002001522070015138
+Harlem Hospital,reverse,elevator,EL616,,,379.03865302757185,True,0.011835996955859907
+Harlem Hospital,reverse,elevator,EL617,,,0.0,True,0.006453576864535737
+Harlem Hospital,reverse,elevator,EL618,,,244.58687886226835,True,0.016297564687975608
+Harlem Hospital,reverse,elevator,EL619,,,0.0,False,0.02472792998477935
+Harlem Hospital,reverse,elevator,EL620,,,0.0,False,0.009427236971484731
+Harlem Hospital,reverse,elevator,EL621,,,0.0,False,0.0060220997930099385
+Harlem Hospital,reverse,elevator,EL622,,,0.0,False,0.018622286079182593
+Harlem Hospital,forward,station,104,231 St (1),Bx,0.0,False,
+Harlem Hospital,forward,station,109,Dyckman St (1),M,0.0,False,
+Harlem Hospital,forward,station,115,137 St-City College (1),M,0.0,True,
+Harlem Hospital,forward,station,120,96 St (1 2 3),M,4627.810621476077,True,
+Harlem Hospital,forward,station,123,72 St (1 2 3),M,934.485129041379,True,
+Harlem Hospital,forward,station,124,66 St-Lincoln Center (1),M,0.0,True,
+Harlem Hospital,forward,station,125,59 St-Columbus Circle (1),M,525.1505403211777,True,
+Harlem Hospital,forward,station,127,Times Sq-42 St (1 2 3),M,1538.5489252601255,True,
+Harlem Hospital,forward,station,128,34 St-Penn Station (1 2 3),M,605.9668749563571,True,
+Harlem Hospital,forward,station,132,14 St (1 2 3),M,888.8174177090987,True,
+Harlem Hospital,forward,station,137,Chambers St (1 2 3),M,23.05182700551086,True,
+Harlem Hospital,forward,station,211,Pelham Pkwy (2 5),Bx,0.0,False,
+Harlem Hospital,forward,station,213,E 180 St (2 5),Bx,0.0,True,
+Harlem Hospital,forward,station,217,Simpson St (2 5),Bx,0.0,True,
+Harlem Hospital,forward,station,221,3 Av-149 St (2 5),Bx,0.0,True,
+Harlem Hospital,forward,station,222,149 St-Hostos (2 5),Bx,0.0,True,
+Harlem Hospital,forward,station,224,135 St (2 3),M,14751.73434354821,True,
+Harlem Hospital,forward,station,407,Fordham Rd (4),Bx,0.0,False,
+Harlem Hospital,forward,station,412,170 St (4),Bx,0.0,True,
+Harlem Hospital,forward,station,414,161 St-Yankee Stadium (4),Bx,0.0,True,
+Harlem Hospital,forward,station,415,149 St-Hostos (4),Bx,0.0,True,
+Harlem Hospital,forward,station,503,Gun Hill Rd (5),Bx,0.0,False,
+Harlem Hospital,forward,station,613,Hunts Point Av (6),Bx,0.0,False,
+Harlem Hospital,forward,station,615,E 149 St (6),Bx,0.0,False,
+Harlem Hospital,forward,station,621,125 St (4 5 6),M,0.0,True,
+Harlem Hospital,forward,station,626,86 St (4 5 6),M,0.0,False,
+Harlem Hospital,forward,station,628,68 St-Hunter College (6),M,0.0,False,
+Harlem Hospital,forward,station,631,Grand Central-42 St (4 5 6),M,0.0,True,
+Harlem Hospital,forward,station,723,Grand Central-42 St (7),M,166.14985668283043,True,
+Harlem Hospital,forward,station,725,Times Sq-42 St (7),M,182.70166174195765,True,
+Harlem Hospital,forward,station,726,34 St-Hudson Yards (7),M,16.55180505912722,True,
+Harlem Hospital,forward,station,901,Grand Central-42 St (S),M,35.53781937799067,True,
+Harlem Hospital,forward,station,A02,Inwood-207 St (A),M,0.0,False,
+Harlem Hospital,forward,station,A06,181 St (A),M,0.0,False,
+Harlem Hospital,forward,station,A07,175 St (A),M,0.0,False,
+Harlem Hospital,forward,station,A09,168 St (A C),M,152.1746145671641,True,
+Harlem Hospital,forward,station,A15,125 St (A C B D),M,152.1746145671641,True,
+Harlem Hospital,forward,station,A24,59 St-Columbus Circle (A C B D),M,0.0,True,
+Harlem Hospital,forward,station,A25,50 St (C E),M,0.0,False,
+Harlem Hospital,forward,station,A28,34 St-Penn Station (A C E),M,60.84109429569071,True,
+Harlem Hospital,forward,station,A31,14 St (A C E),M,60.84109429569071,True,
+Harlem Hospital,forward,station,B10,57 St (M),M,0.0,False,
+Harlem Hospital,forward,station,D04,Kingsbridge Rd (B D),Bx,0.0,False,
+Harlem Hospital,forward,station,D07,Tremont Av (B D),Bx,0.0,False,
+Harlem Hospital,forward,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,True,
+Harlem Hospital,forward,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,0.0,False,
+Harlem Hospital,forward,station,D17,34 St-Herald Sq (B D F M),M,0.0,True,
+Harlem Hospital,forward,station,D19,14 St (F M),M,0.0,True,
+Harlem Hospital,forward,station,L01,8 Av (L),M,0.0,True,
+Harlem Hospital,forward,station,L02,6 Av (L),M,7.0476807276209,True,
+Harlem Hospital,forward,station,R14,57 St-7 Av (N Q R W),M,0.0,True,
+Harlem Hospital,forward,station,R15,49 St (N R W),M,0.0,True,
+Harlem Hospital,forward,station,R16,Times Sq-42 St (N Q R W),M,0.0,True,
+Harlem Hospital,forward,station,R17,34 St-Herald Sq (N Q R W),M,0.0,True,
+Harlem Hospital,forward,elevator,EL100,,,0.0,True,0.05669486280173297
+Harlem Hospital,forward,elevator,EL101,,,0.0,True,0.026263023392962492
+Harlem Hospital,forward,elevator,EL102,,,0.0,True,0.002256944444444575
+Harlem Hospital,forward,elevator,EL117,,,0.0,False,0.04395738203957367
+Harlem Hospital,forward,elevator,EL118,,,0.0,False,0.029889649923896533
+Harlem Hospital,forward,elevator,EL119,,,0.0,False,0.01925418569254178
+Harlem Hospital,forward,elevator,EL123,,,0.0,False,0.009179984779299821
+Harlem Hospital,forward,elevator,EL124,,,0.0,False,0.004082952815829488
+Harlem Hospital,forward,elevator,EL125,,,0.0,True,0.017250761035007667
+Harlem Hospital,forward,elevator,EL126,,,0.0,True,0.030700152207001397
+Harlem Hospital,forward,elevator,EL127,,,0.0,True,0.03300418569254182
+Harlem Hospital,forward,elevator,EL128,,,0.0,True,0.021413622526636256
+Harlem Hospital,forward,elevator,EL129,,,0.0,True,0.1248002283105023
+Harlem Hospital,forward,elevator,EL130,,,0.0,True,0.24039193302891926
+Harlem Hospital,forward,elevator,EL131,,,0.0,True,0.5110451533836314
+Harlem Hospital,forward,elevator,EL132,,,0.0,True,0.021299999999999986
+Harlem Hospital,forward,elevator,EL133,,,0.0,True,0.021299999999999986
+Harlem Hospital,forward,elevator,EL134,,,0.0,True,0.4695760407491095
+Harlem Hospital,forward,elevator,EL135,,,0.0,True,0.5251579793956569
+Harlem Hospital,forward,elevator,EL136,,,0.0,False,0.014935312024353165
+Harlem Hospital,forward,elevator,EL137,,,0.0,False,0.03535388127853889
+Harlem Hospital,forward,elevator,EL138,,,0.0,False,0.032028158295281495
+Harlem Hospital,forward,elevator,EL139,,,152.1746145671641,True,0.02590515424939055
+Harlem Hospital,forward,elevator,EL140,,,152.1746145671641,True,0.0177359208523592
+Harlem Hospital,forward,elevator,EL141,,,0.0,True,0.010270167427701704
+Harlem Hospital,forward,elevator,EL142,,,152.1746145671641,True,0.007357305936073089
+Harlem Hospital,forward,elevator,EL143,,,0.0,True,0.011000761035007578
+Harlem Hospital,forward,elevator,EL144,,,152.1746145671641,True,0.015805375823048196
+Harlem Hospital,forward,elevator,EL145,,,972.7838505852123,True,0.01980213089802141
+Harlem Hospital,forward,elevator,EL146,,,0.0,True,0.015957001522069914
+Harlem Hospital,forward,elevator,EL148,,,0.0,False,0.0158200152207002
+Harlem Hospital,forward,elevator,EL149,,,0.0,False,0.009499619482496224
+Harlem Hospital,forward,elevator,EL159,,,0.0,True,0.010578386605783807
+Harlem Hospital,forward,elevator,EL160,,,0.0,False,0.011815068493150727
+Harlem Hospital,forward,elevator,EL178,,,0.0,False,0.019649923896499222
+Harlem Hospital,forward,elevator,EL179,,,0.0,False,0.011035007610350034
+Harlem Hospital,forward,elevator,EL180,,,0.9490960989496671,True,0.02822678843226789
+Harlem Hospital,forward,elevator,EL181,,,14750.785247449254,True,0.014210984017400285
+Harlem Hospital,forward,elevator,EL184,,,0.0,False,0.029512937595129296
+Harlem Hospital,forward,elevator,EL185,,,0.0,False,0.026786529680365212
+Harlem Hospital,forward,elevator,EL186,,,0.0,False,0.011069514730364438
+Harlem Hospital,forward,elevator,EL187,,,0.0,False,0.010918540605458271
+Harlem Hospital,forward,elevator,EL188,,,0.0,False,0.015486139294499601
+Harlem Hospital,forward,elevator,EL189,,,0.0,False,0.06072375117148521
+Harlem Hospital,forward,elevator,EL190,,,0.0,False,0.036035007610350056
+Harlem Hospital,forward,elevator,EL191,,,0.0,False,0.01931887366818874
+Harlem Hospital,forward,elevator,EL195,,,0.0,False,0.028352359208523636
+Harlem Hospital,forward,elevator,EL196,,,0.0,False,0.016898782343987784
+Harlem Hospital,forward,elevator,EL197,,,0.0,False,0.01332191780821923
+Harlem Hospital,forward,elevator,EL198,,,0.0,False,0.021611491628614754
+Harlem Hospital,forward,elevator,EL199,,,0.0,False,0.020589802130898005
+Harlem Hospital,forward,elevator,EL204,,,0.0,False,0.010488964992389604
+Harlem Hospital,forward,elevator,EL205,,,0.0,True,0.011933028919330235
+Harlem Hospital,forward,elevator,EL206,,,0.0,True,0.012692161339421748
+Harlem Hospital,forward,elevator,EL208X,,,0.0,False,0.00016362252663637555
+Harlem Hospital,forward,elevator,EL209,,,0.0,True,0.012709284627092865
+Harlem Hospital,forward,elevator,EL210,,,0.0,True,0.012393455098934636
+Harlem Hospital,forward,elevator,EL211,,,0.0,True,0.012442922374429233
+Harlem Hospital,forward,elevator,EL212,,,0.0,True,0.010595509893455146
+Harlem Hospital,forward,elevator,EL213,,,0.0,True,0.02886415525114161
+Harlem Hospital,forward,elevator,EL214,,,0.0,False,0.012635083713850914
+Harlem Hospital,forward,elevator,EL215,,,0.0,False,0.017140410958904062
+Harlem Hospital,forward,elevator,EL216,,,0.0,False,0.01494292237442918
+Harlem Hospital,forward,elevator,EL221,,,0.0,True,0.012675038051750298
+Harlem Hospital,forward,elevator,EL222,,,60.84109429569071,True,0.00908485540334858
+Harlem Hospital,forward,elevator,EL223,,,0.0,True,0.010127027297563207
+Harlem Hospital,forward,elevator,EL224,,,0.0,True,0.014939117199391228
+Harlem Hospital,forward,elevator,EL225,,,60.84109429569071,True,0.1004138349975322
+Harlem Hospital,forward,elevator,EL226,,,0.0,False,0.021939582621461118
+Harlem Hospital,forward,elevator,EL227,,,0.0,False,0.01095700152207002
+Harlem Hospital,forward,elevator,EL228,,,0.0,False,0.17528729071537286
+Harlem Hospital,forward,elevator,EL229,,,0.0,True,0.006715870258677148
+Harlem Hospital,forward,elevator,EL230,,,0.0,True,0.008550228310502228
+Harlem Hospital,forward,elevator,EL231X,,,0.0,False,0.04446347031963471
+Harlem Hospital,forward,elevator,EL232,,,1460.112159516022,True,0.034762176560121705
+Harlem Hospital,forward,elevator,EL233,,,0.0,True,0.016352739726027354
+Harlem Hospital,forward,elevator,EL234,,,0.0,False,0.01731354642313543
+Harlem Hospital,forward,elevator,EL235,,,0.0,False,0.02356164383561643
+Harlem Hospital,forward,elevator,EL236,,,0.0,False,0.011362252663622452
+Harlem Hospital,forward,elevator,EL237,,,0.0,True,0.006198630136986183
+Harlem Hospital,forward,elevator,EL238,,,0.0,True,0.004427321156773134
+Harlem Hospital,forward,elevator,EL239,,,0.0,True,0.012588636960518373
+Harlem Hospital,forward,elevator,EL240,,,724.1472416539473,True,0.0194166242786733
+Harlem Hospital,forward,elevator,EL244,,,166.14985668283043,True,0.01390410958904098
+Harlem Hospital,forward,elevator,EL268X,,,0.0,True,0.0035197869101979418
+Harlem Hospital,forward,elevator,EL273,,,0.0,False,0.02207001522070018
+Harlem Hospital,forward,elevator,EL276X,,,525.1505403211777,True,0.03699010654490098
+Harlem Hospital,forward,elevator,EL277,,,0.0,False,0.03339611872146109
+Harlem Hospital,forward,elevator,EL278,,,0.0,False,0.01450342465753418
+Harlem Hospital,forward,elevator,EL279,,,0.0,False,0.021192922374429157
+Harlem Hospital,forward,elevator,EL280,,,0.0,False,0.0117275494672755
+Harlem Hospital,forward,elevator,EL281,,,0.0,True,0.01624955227520397
+Harlem Hospital,forward,elevator,EL282,,,0.0,True,0.01312881518682496
+Harlem Hospital,forward,elevator,EL283,,,0.0,True,0.009714656957725332
+Harlem Hospital,forward,elevator,EL284,,,0.0,False,0.0038831811263317917
+Harlem Hospital,forward,elevator,EL285,,,0.0,False,0.002393455098934627
+Harlem Hospital,forward,elevator,EL286,,,0.0,False,0.004433028919330395
+Harlem Hospital,forward,elevator,EL296,,,0.0,False,0.01492199391172
+Harlem Hospital,forward,elevator,EL336,,,23.05182700551086,True,0.01749429223744292
+Harlem Hospital,forward,elevator,EL337,,,0.0,False,0.01011225266362259
+Harlem Hospital,forward,elevator,EL338,,,23.05182700551086,True,0.017368721461187175
+Harlem Hospital,forward,elevator,EL506,,,0.0,True,0.027501902587518945
+Harlem Hospital,forward,elevator,EL507,,,0.0,True,0.010135083713850745
+Harlem Hospital,forward,elevator,EL508,,,0.0,True,0.013778538812785457
+Harlem Hospital,forward,elevator,EL509,,,0.0,False,0.018854642313546388
+Harlem Hospital,forward,elevator,EL510,,,0.0,False,0.01209665144596661
+Harlem Hospital,forward,elevator,EL511,,,0.0,False,0.019385464231354788
+Harlem Hospital,forward,elevator,EL515,,,0.0,False,0.021059741248097397
+Harlem Hospital,forward,elevator,EL516,,,0.0,False,0.009098173515981856
+Harlem Hospital,forward,elevator,EL517,,,0.0,False,0.009760273972602707
+Harlem Hospital,forward,elevator,EL518,,,0.0,False,0.005605022831050244
+Harlem Hospital,forward,elevator,EL519,,,0.0,True,0.02907588961510532
+Harlem Hospital,forward,elevator,EL520,,,0.0,True,0.021299999999999986
+Harlem Hospital,forward,elevator,EL600,,,16.55180505912722,True,0.01396879756468794
+Harlem Hospital,forward,elevator,EL601,,,0.0,False,0.0320700152207003
+Harlem Hospital,forward,elevator,EL602,,,0.0,False,0.0573306697108068
+Harlem Hospital,forward,elevator,EL603,,,16.55180505912722,True,0.01842465753424649
+Harlem Hospital,forward,elevator,EL606X,,,0.0,False,0.0
+Harlem Hospital,forward,elevator,EL607X,,,0.0,False,0.0
+Harlem Hospital,forward,elevator,EL609,,,0.0,False,0.0025703957382039455
+Harlem Hospital,forward,elevator,EL610,,,0.0,False,0.0025818112633181345
+Harlem Hospital,forward,elevator,EL611,,,0.0,False,0.004008751902587537
+Harlem Hospital,forward,elevator,EL612,,,0.0,False,0.004691780821917901
+Harlem Hospital,forward,elevator,EL613,,,0.0,True,0.0046232876712328785
+Harlem Hospital,forward,elevator,EL614,,,0.0,True,0.002001522070015138
+Harlem Hospital,forward,elevator,EL616,,,0.0,True,0.011835996955859907
+Harlem Hospital,forward,elevator,EL617,,,888.8174177090987,True,0.006453576864535737
+Harlem Hospital,forward,elevator,EL618,,,605.9668749563571,True,0.016297564687975608
+Harlem Hospital,forward,elevator,EL619,,,0.0,False,0.02472792998477935
+Harlem Hospital,forward,elevator,EL620,,,0.0,False,0.009427236971484731
+Harlem Hospital,forward,elevator,EL621,,,0.0,False,0.0060220997930099385
+Harlem Hospital,forward,elevator,EL622,,,0.0,False,0.018622286079182593
+NYP/Columbia (CUIMC),reverse,station,104,231 St (1),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,109,Dyckman St (1),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,115,137 St-City College (1),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,120,96 St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,123,72 St (1 2 3),M,294.7625437938623,True,
+NYP/Columbia (CUIMC),reverse,station,124,66 St-Lincoln Center (1),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,125,59 St-Columbus Circle (1),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,127,Times Sq-42 St (1 2 3),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,128,34 St-Penn Station (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,132,14 St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,137,Chambers St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,211,Pelham Pkwy (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,213,E 180 St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,217,Simpson St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,221,3 Av-149 St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,222,149 St-Hostos (2 5),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,224,135 St (2 3),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,407,Fordham Rd (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,412,170 St (4),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,414,161 St-Yankee Stadium (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,415,149 St-Hostos (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,503,Gun Hill Rd (5),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,613,Hunts Point Av (6),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,615,E 149 St (6),Bx,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,621,125 St (4 5 6),M,535.9200877251642,True,
+NYP/Columbia (CUIMC),reverse,station,626,86 St (4 5 6),M,535.9200877251642,True,
+NYP/Columbia (CUIMC),reverse,station,628,68 St-Hunter College (6),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,631,Grand Central-42 St (4 5 6),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,723,Grand Central-42 St (7),M,107.22562898886099,True,
+NYP/Columbia (CUIMC),reverse,station,725,Times Sq-42 St (7),M,129.126919786082,True,
+NYP/Columbia (CUIMC),reverse,station,726,34 St-Hudson Yards (7),M,21.307558934197004,True,
+NYP/Columbia (CUIMC),reverse,station,901,Grand Central-42 St (S),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,A02,Inwood-207 St (A),M,2405.5918646659993,True,
+NYP/Columbia (CUIMC),reverse,station,A06,181 St (A),M,30.83535200870392,True,
+NYP/Columbia (CUIMC),reverse,station,A07,175 St (A),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,A09,168 St (A C),M,25089.408589135368,True,
+NYP/Columbia (CUIMC),reverse,station,A15,125 St (A C B D),M,17511.828111274765,True,
+NYP/Columbia (CUIMC),reverse,station,A24,59 St-Columbus Circle (A C B D),M,4424.466749054045,True,
+NYP/Columbia (CUIMC),reverse,station,A25,50 St (C E),M,47.10817394143669,True,
+NYP/Columbia (CUIMC),reverse,station,A28,34 St-Penn Station (A C E),M,339.6239333021658,True,
+NYP/Columbia (CUIMC),reverse,station,A31,14 St (A C E),M,740.4263207002004,True,
+NYP/Columbia (CUIMC),reverse,station,B10,57 St (M),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,D04,Kingsbridge Rd (B D),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,D07,Tremont Av (B D),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,73.08422451009392,True,
+NYP/Columbia (CUIMC),reverse,station,D17,34 St-Herald Sq (B D F M),M,60.94547516442253,True,
+NYP/Columbia (CUIMC),reverse,station,D19,14 St (F M),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,L01,8 Av (L),M,48.09597305096395,True,
+NYP/Columbia (CUIMC),reverse,station,L02,6 Av (L),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,R14,57 St-7 Av (N Q R W),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,R15,49 St (N R W),M,0.0,False,
+NYP/Columbia (CUIMC),reverse,station,R16,Times Sq-42 St (N Q R W),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,station,R17,34 St-Herald Sq (N Q R W),M,0.0,True,
+NYP/Columbia (CUIMC),reverse,elevator,EL100,,,0.0,True,0.05669486280173297
+NYP/Columbia (CUIMC),reverse,elevator,EL101,,,0.0,True,0.026263023392962492
+NYP/Columbia (CUIMC),reverse,elevator,EL102,,,0.0,True,0.002256944444444575
+NYP/Columbia (CUIMC),reverse,elevator,EL117,,,0.0,False,0.04395738203957367
+NYP/Columbia (CUIMC),reverse,elevator,EL118,,,0.0,False,0.029889649923896533
+NYP/Columbia (CUIMC),reverse,elevator,EL119,,,0.0,False,0.01925418569254178
+NYP/Columbia (CUIMC),reverse,elevator,EL123,,,0.0,True,0.009179984779299821
+NYP/Columbia (CUIMC),reverse,elevator,EL124,,,0.0,True,0.004082952815829488
+NYP/Columbia (CUIMC),reverse,elevator,EL125,,,535.9200877251642,True,0.017250761035007667
+NYP/Columbia (CUIMC),reverse,elevator,EL126,,,535.9200877251642,True,0.030700152207001397
+NYP/Columbia (CUIMC),reverse,elevator,EL127,,,0.0,False,0.03300418569254182
+NYP/Columbia (CUIMC),reverse,elevator,EL128,,,0.0,False,0.021413622526636256
+NYP/Columbia (CUIMC),reverse,elevator,EL129,,,0.0,False,0.1248002283105023
+NYP/Columbia (CUIMC),reverse,elevator,EL130,,,0.0,False,0.24039193302891926
+NYP/Columbia (CUIMC),reverse,elevator,EL131,,,0.0,True,0.5110451533836314
+NYP/Columbia (CUIMC),reverse,elevator,EL132,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),reverse,elevator,EL133,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),reverse,elevator,EL134,,,0.0,True,0.4695760407491095
+NYP/Columbia (CUIMC),reverse,elevator,EL135,,,0.0,True,0.5251579793956569
+NYP/Columbia (CUIMC),reverse,elevator,EL136,,,0.0,False,0.014935312024353165
+NYP/Columbia (CUIMC),reverse,elevator,EL137,,,0.0,False,0.03535388127853889
+NYP/Columbia (CUIMC),reverse,elevator,EL138,,,0.0,False,0.032028158295281495
+NYP/Columbia (CUIMC),reverse,elevator,EL139,,,25089.408589135368,True,0.02590515424939055
+NYP/Columbia (CUIMC),reverse,elevator,EL140,,,23558.614571701975,True,0.0177359208523592
+NYP/Columbia (CUIMC),reverse,elevator,EL141,,,1530.7940174333999,True,0.010270167427701704
+NYP/Columbia (CUIMC),reverse,elevator,EL142,,,17511.828111274765,True,0.007357305936073089
+NYP/Columbia (CUIMC),reverse,elevator,EL143,,,0.0,True,0.011000761035007578
+NYP/Columbia (CUIMC),reverse,elevator,EL144,,,17511.828111274765,True,0.015805375823048196
+NYP/Columbia (CUIMC),reverse,elevator,EL145,,,0.0,False,0.01980213089802141
+NYP/Columbia (CUIMC),reverse,elevator,EL146,,,0.0,False,0.015957001522069914
+NYP/Columbia (CUIMC),reverse,elevator,EL148,,,2405.5918646659993,True,0.0158200152207002
+NYP/Columbia (CUIMC),reverse,elevator,EL149,,,2405.5918646659993,True,0.009499619482496224
+NYP/Columbia (CUIMC),reverse,elevator,EL159,,,0.0,False,0.010578386605783807
+NYP/Columbia (CUIMC),reverse,elevator,EL160,,,0.0,False,0.011815068493150727
+NYP/Columbia (CUIMC),reverse,elevator,EL178,,,0.0,False,0.019649923896499222
+NYP/Columbia (CUIMC),reverse,elevator,EL179,,,0.0,False,0.011035007610350034
+NYP/Columbia (CUIMC),reverse,elevator,EL180,,,0.0,True,0.02822678843226789
+NYP/Columbia (CUIMC),reverse,elevator,EL181,,,0.0,True,0.014210984017400285
+NYP/Columbia (CUIMC),reverse,elevator,EL184,,,0.0,False,0.029512937595129296
+NYP/Columbia (CUIMC),reverse,elevator,EL185,,,0.0,False,0.026786529680365212
+NYP/Columbia (CUIMC),reverse,elevator,EL186,,,0.0,True,0.011069514730364438
+NYP/Columbia (CUIMC),reverse,elevator,EL187,,,0.0,True,0.010918540605458271
+NYP/Columbia (CUIMC),reverse,elevator,EL188,,,0.0,True,0.015486139294499601
+NYP/Columbia (CUIMC),reverse,elevator,EL189,,,0.0,True,0.06072375117148521
+NYP/Columbia (CUIMC),reverse,elevator,EL190,,,0.0,True,0.036035007610350056
+NYP/Columbia (CUIMC),reverse,elevator,EL191,,,0.0,True,0.01931887366818874
+NYP/Columbia (CUIMC),reverse,elevator,EL195,,,0.0,False,0.028352359208523636
+NYP/Columbia (CUIMC),reverse,elevator,EL196,,,0.0,False,0.016898782343987784
+NYP/Columbia (CUIMC),reverse,elevator,EL197,,,0.0,False,0.01332191780821923
+NYP/Columbia (CUIMC),reverse,elevator,EL198,,,0.0,False,0.021611491628614754
+NYP/Columbia (CUIMC),reverse,elevator,EL199,,,0.0,False,0.020589802130898005
+NYP/Columbia (CUIMC),reverse,elevator,EL204,,,0.0,False,0.010488964992389604
+NYP/Columbia (CUIMC),reverse,elevator,EL205,,,0.0,False,0.011933028919330235
+NYP/Columbia (CUIMC),reverse,elevator,EL206,,,0.0,False,0.012692161339421748
+NYP/Columbia (CUIMC),reverse,elevator,EL208X,,,47.10817394143669,True,0.00016362252663637555
+NYP/Columbia (CUIMC),reverse,elevator,EL209,,,0.0,True,0.012709284627092865
+NYP/Columbia (CUIMC),reverse,elevator,EL210,,,60.94547516442253,True,0.012393455098934636
+NYP/Columbia (CUIMC),reverse,elevator,EL211,,,0.0,True,0.012442922374429233
+NYP/Columbia (CUIMC),reverse,elevator,EL212,,,0.0,True,0.010595509893455146
+NYP/Columbia (CUIMC),reverse,elevator,EL213,,,0.0,True,0.02886415525114161
+NYP/Columbia (CUIMC),reverse,elevator,EL214,,,0.0,False,0.012635083713850914
+NYP/Columbia (CUIMC),reverse,elevator,EL215,,,0.0,False,0.017140410958904062
+NYP/Columbia (CUIMC),reverse,elevator,EL216,,,0.0,False,0.01494292237442918
+NYP/Columbia (CUIMC),reverse,elevator,EL221,,,48.09597305096395,True,0.012675038051750298
+NYP/Columbia (CUIMC),reverse,elevator,EL222,,,0.0,True,0.00908485540334858
+NYP/Columbia (CUIMC),reverse,elevator,EL223,,,740.4263207002004,True,0.010127027297563207
+NYP/Columbia (CUIMC),reverse,elevator,EL224,,,48.09597305096395,True,0.014939117199391228
+NYP/Columbia (CUIMC),reverse,elevator,EL225,,,339.6239333021658,True,0.1004138349975322
+NYP/Columbia (CUIMC),reverse,elevator,EL226,,,0.0,False,0.021939582621461118
+NYP/Columbia (CUIMC),reverse,elevator,EL227,,,0.0,False,0.01095700152207002
+NYP/Columbia (CUIMC),reverse,elevator,EL228,,,0.0,False,0.17528729071537286
+NYP/Columbia (CUIMC),reverse,elevator,EL229,,,0.0,True,0.006715870258677148
+NYP/Columbia (CUIMC),reverse,elevator,EL230,,,0.0,True,0.008550228310502228
+NYP/Columbia (CUIMC),reverse,elevator,EL231X,,,0.0,False,0.04446347031963471
+NYP/Columbia (CUIMC),reverse,elevator,EL232,,,129.126919786082,True,0.034762176560121705
+NYP/Columbia (CUIMC),reverse,elevator,EL233,,,0.0,True,0.016352739726027354
+NYP/Columbia (CUIMC),reverse,elevator,EL234,,,73.08422451009392,True,0.01731354642313543
+NYP/Columbia (CUIMC),reverse,elevator,EL235,,,73.08422451009392,True,0.02356164383561643
+NYP/Columbia (CUIMC),reverse,elevator,EL236,,,0.0,True,0.011362252663622452
+NYP/Columbia (CUIMC),reverse,elevator,EL237,,,0.0,True,0.006198630136986183
+NYP/Columbia (CUIMC),reverse,elevator,EL238,,,0.0,True,0.004427321156773134
+NYP/Columbia (CUIMC),reverse,elevator,EL239,,,0.0,True,0.012588636960518373
+NYP/Columbia (CUIMC),reverse,elevator,EL240,,,294.7625437938623,True,0.0194166242786733
+NYP/Columbia (CUIMC),reverse,elevator,EL244,,,107.22562898886099,True,0.01390410958904098
+NYP/Columbia (CUIMC),reverse,elevator,EL268X,,,0.0,False,0.0035197869101979418
+NYP/Columbia (CUIMC),reverse,elevator,EL273,,,535.9200877251642,True,0.02207001522070018
+NYP/Columbia (CUIMC),reverse,elevator,EL276X,,,0.0,True,0.03699010654490098
+NYP/Columbia (CUIMC),reverse,elevator,EL277,,,0.0,False,0.03339611872146109
+NYP/Columbia (CUIMC),reverse,elevator,EL278,,,0.0,False,0.01450342465753418
+NYP/Columbia (CUIMC),reverse,elevator,EL279,,,0.0,False,0.021192922374429157
+NYP/Columbia (CUIMC),reverse,elevator,EL280,,,0.0,False,0.0117275494672755
+NYP/Columbia (CUIMC),reverse,elevator,EL281,,,0.0,True,0.01624955227520397
+NYP/Columbia (CUIMC),reverse,elevator,EL282,,,0.0,True,0.01312881518682496
+NYP/Columbia (CUIMC),reverse,elevator,EL283,,,0.0,True,0.009714656957725332
+NYP/Columbia (CUIMC),reverse,elevator,EL284,,,0.0,False,0.0038831811263317917
+NYP/Columbia (CUIMC),reverse,elevator,EL285,,,0.0,False,0.002393455098934627
+NYP/Columbia (CUIMC),reverse,elevator,EL286,,,0.0,False,0.004433028919330395
+NYP/Columbia (CUIMC),reverse,elevator,EL296,,,0.0,False,0.01492199391172
+NYP/Columbia (CUIMC),reverse,elevator,EL336,,,0.0,False,0.01749429223744292
+NYP/Columbia (CUIMC),reverse,elevator,EL337,,,0.0,False,0.01011225266362259
+NYP/Columbia (CUIMC),reverse,elevator,EL338,,,0.0,False,0.017368721461187175
+NYP/Columbia (CUIMC),reverse,elevator,EL506,,,0.0,False,0.027501902587518945
+NYP/Columbia (CUIMC),reverse,elevator,EL507,,,0.0,False,0.010135083713850745
+NYP/Columbia (CUIMC),reverse,elevator,EL508,,,0.0,False,0.013778538812785457
+NYP/Columbia (CUIMC),reverse,elevator,EL509,,,0.0,True,0.018854642313546388
+NYP/Columbia (CUIMC),reverse,elevator,EL510,,,0.0,True,0.01209665144596661
+NYP/Columbia (CUIMC),reverse,elevator,EL511,,,0.0,True,0.019385464231354788
+NYP/Columbia (CUIMC),reverse,elevator,EL515,,,0.0,False,0.021059741248097397
+NYP/Columbia (CUIMC),reverse,elevator,EL516,,,0.0,False,0.009098173515981856
+NYP/Columbia (CUIMC),reverse,elevator,EL517,,,0.0,True,0.009760273972602707
+NYP/Columbia (CUIMC),reverse,elevator,EL518,,,30.83535200870392,True,0.005605022831050244
+NYP/Columbia (CUIMC),reverse,elevator,EL519,,,0.0,True,0.02907588961510532
+NYP/Columbia (CUIMC),reverse,elevator,EL520,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),reverse,elevator,EL600,,,21.307558934197004,True,0.01396879756468794
+NYP/Columbia (CUIMC),reverse,elevator,EL601,,,0.0,False,0.0320700152207003
+NYP/Columbia (CUIMC),reverse,elevator,EL602,,,0.0,False,0.0573306697108068
+NYP/Columbia (CUIMC),reverse,elevator,EL603,,,21.307558934197004,True,0.01842465753424649
+NYP/Columbia (CUIMC),reverse,elevator,EL606X,,,0.0,False,0.0
+NYP/Columbia (CUIMC),reverse,elevator,EL607X,,,0.0,False,0.0
+NYP/Columbia (CUIMC),reverse,elevator,EL609,,,0.0,False,0.0025703957382039455
+NYP/Columbia (CUIMC),reverse,elevator,EL610,,,0.0,False,0.0025818112633181345
+NYP/Columbia (CUIMC),reverse,elevator,EL611,,,0.0,False,0.004008751902587537
+NYP/Columbia (CUIMC),reverse,elevator,EL612,,,0.0,False,0.004691780821917901
+NYP/Columbia (CUIMC),reverse,elevator,EL613,,,0.0,False,0.0046232876712328785
+NYP/Columbia (CUIMC),reverse,elevator,EL614,,,0.0,False,0.002001522070015138
+NYP/Columbia (CUIMC),reverse,elevator,EL616,,,0.0,False,0.011835996955859907
+NYP/Columbia (CUIMC),reverse,elevator,EL617,,,0.0,False,0.006453576864535737
+NYP/Columbia (CUIMC),reverse,elevator,EL618,,,0.0,False,0.016297564687975608
+NYP/Columbia (CUIMC),reverse,elevator,EL619,,,0.0,False,0.02472792998477935
+NYP/Columbia (CUIMC),reverse,elevator,EL620,,,0.0,False,0.009427236971484731
+NYP/Columbia (CUIMC),reverse,elevator,EL621,,,0.0,True,0.0060220997930099385
+NYP/Columbia (CUIMC),reverse,elevator,EL622,,,0.0,False,0.018622286079182593
+NYP/Columbia (CUIMC),forward,station,104,231 St (1),Bx,0.0,True,
+NYP/Columbia (CUIMC),forward,station,109,Dyckman St (1),M,0.0,True,
+NYP/Columbia (CUIMC),forward,station,115,137 St-City College (1),M,0.0,True,
+NYP/Columbia (CUIMC),forward,station,120,96 St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,123,72 St (1 2 3),M,390.16010875307984,True,
+NYP/Columbia (CUIMC),forward,station,124,66 St-Lincoln Center (1),M,256.0676490460537,True,
+NYP/Columbia (CUIMC),forward,station,125,59 St-Columbus Circle (1),M,646.2277577991263,True,
+NYP/Columbia (CUIMC),forward,station,127,Times Sq-42 St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,128,34 St-Penn Station (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,132,14 St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,137,Chambers St (1 2 3),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,211,Pelham Pkwy (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,213,E 180 St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,217,Simpson St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,221,3 Av-149 St (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,222,149 St-Hostos (2 5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,224,135 St (2 3),M,140.81846342271456,True,
+NYP/Columbia (CUIMC),forward,station,407,Fordham Rd (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),forward,station,412,170 St (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),forward,station,414,161 St-Yankee Stadium (4),Bx,0.0,True,
+NYP/Columbia (CUIMC),forward,station,415,149 St-Hostos (4),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,503,Gun Hill Rd (5),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,613,Hunts Point Av (6),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,615,E 149 St (6),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,621,125 St (4 5 6),M,0.0,True,
+NYP/Columbia (CUIMC),forward,station,626,86 St (4 5 6),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,628,68 St-Hunter College (6),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,631,Grand Central-42 St (4 5 6),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,723,Grand Central-42 St (7),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,725,Times Sq-42 St (7),M,1.755238508056209,True,
+NYP/Columbia (CUIMC),forward,station,726,34 St-Hudson Yards (7),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,901,Grand Central-42 St (S),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,A02,Inwood-207 St (A),M,3262.188494350972,True,
+NYP/Columbia (CUIMC),forward,station,A06,181 St (A),M,8.320395596201706,True,
+NYP/Columbia (CUIMC),forward,station,A07,175 St (A),M,0.0,True,
+NYP/Columbia (CUIMC),forward,station,A09,168 St (A C),M,10695.579052209832,True,
+NYP/Columbia (CUIMC),forward,station,A15,125 St (A C B D),M,6558.744235254329,True,
+NYP/Columbia (CUIMC),forward,station,A24,59 St-Columbus Circle (A C B D),M,2243.9736898771444,True,
+NYP/Columbia (CUIMC),forward,station,A25,50 St (C E),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,A28,34 St-Penn Station (A C E),M,54.042582647402014,True,
+NYP/Columbia (CUIMC),forward,station,A31,14 St (A C E),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,B10,57 St (M),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,D04,Kingsbridge Rd (B D),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,D07,Tremont Av (B D),Bx,0.0,False,
+NYP/Columbia (CUIMC),forward,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,True,
+NYP/Columbia (CUIMC),forward,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,D17,34 St-Herald Sq (B D F M),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,D19,14 St (F M),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,L01,8 Av (L),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,L02,6 Av (L),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,R14,57 St-7 Av (N Q R W),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,R15,49 St (N R W),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,R16,Times Sq-42 St (N Q R W),M,0.0,False,
+NYP/Columbia (CUIMC),forward,station,R17,34 St-Herald Sq (N Q R W),M,0.0,False,
+NYP/Columbia (CUIMC),forward,elevator,EL100,,,0.0,False,0.05669486280173297
+NYP/Columbia (CUIMC),forward,elevator,EL101,,,0.0,False,0.026263023392962492
+NYP/Columbia (CUIMC),forward,elevator,EL102,,,0.0,False,0.002256944444444575
+NYP/Columbia (CUIMC),forward,elevator,EL117,,,0.0,False,0.04395738203957367
+NYP/Columbia (CUIMC),forward,elevator,EL118,,,0.0,False,0.029889649923896533
+NYP/Columbia (CUIMC),forward,elevator,EL119,,,0.0,False,0.01925418569254178
+NYP/Columbia (CUIMC),forward,elevator,EL123,,,0.0,True,0.009179984779299821
+NYP/Columbia (CUIMC),forward,elevator,EL124,,,0.0,True,0.004082952815829488
+NYP/Columbia (CUIMC),forward,elevator,EL125,,,0.0,True,0.017250761035007667
+NYP/Columbia (CUIMC),forward,elevator,EL126,,,0.0,True,0.030700152207001397
+NYP/Columbia (CUIMC),forward,elevator,EL127,,,0.0,False,0.03300418569254182
+NYP/Columbia (CUIMC),forward,elevator,EL128,,,0.0,False,0.021413622526636256
+NYP/Columbia (CUIMC),forward,elevator,EL129,,,0.0,False,0.1248002283105023
+NYP/Columbia (CUIMC),forward,elevator,EL130,,,0.0,False,0.24039193302891926
+NYP/Columbia (CUIMC),forward,elevator,EL131,,,0.0,True,0.5110451533836314
+NYP/Columbia (CUIMC),forward,elevator,EL132,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),forward,elevator,EL133,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),forward,elevator,EL134,,,0.0,True,0.4695760407491095
+NYP/Columbia (CUIMC),forward,elevator,EL135,,,0.0,True,0.5251579793956569
+NYP/Columbia (CUIMC),forward,elevator,EL136,,,0.0,False,0.014935312024353165
+NYP/Columbia (CUIMC),forward,elevator,EL137,,,0.0,False,0.03535388127853889
+NYP/Columbia (CUIMC),forward,elevator,EL138,,,0.0,False,0.032028158295281495
+NYP/Columbia (CUIMC),forward,elevator,EL139,,,10695.579052209832,True,0.02590515424939055
+NYP/Columbia (CUIMC),forward,elevator,EL140,,,2304.535429325151,True,0.0177359208523592
+NYP/Columbia (CUIMC),forward,elevator,EL141,,,8391.043622884681,True,0.010270167427701704
+NYP/Columbia (CUIMC),forward,elevator,EL142,,,6558.744235254329,True,0.007357305936073089
+NYP/Columbia (CUIMC),forward,elevator,EL143,,,6558.744235254329,True,0.011000761035007578
+NYP/Columbia (CUIMC),forward,elevator,EL144,,,0.0,True,0.015805375823048196
+NYP/Columbia (CUIMC),forward,elevator,EL145,,,0.0,False,0.01980213089802141
+NYP/Columbia (CUIMC),forward,elevator,EL146,,,0.0,False,0.015957001522069914
+NYP/Columbia (CUIMC),forward,elevator,EL148,,,3262.188494350972,True,0.0158200152207002
+NYP/Columbia (CUIMC),forward,elevator,EL149,,,3262.188494350972,True,0.009499619482496224
+NYP/Columbia (CUIMC),forward,elevator,EL159,,,0.0,False,0.010578386605783807
+NYP/Columbia (CUIMC),forward,elevator,EL160,,,0.0,False,0.011815068493150727
+NYP/Columbia (CUIMC),forward,elevator,EL178,,,0.0,True,0.019649923896499222
+NYP/Columbia (CUIMC),forward,elevator,EL179,,,0.0,True,0.011035007610350034
+NYP/Columbia (CUIMC),forward,elevator,EL180,,,0.0,False,0.02822678843226789
+NYP/Columbia (CUIMC),forward,elevator,EL181,,,140.81846342271456,True,0.014210984017400285
+NYP/Columbia (CUIMC),forward,elevator,EL184,,,0.0,True,0.029512937595129296
+NYP/Columbia (CUIMC),forward,elevator,EL185,,,0.0,True,0.026786529680365212
+NYP/Columbia (CUIMC),forward,elevator,EL186,,,0.0,True,0.011069514730364438
+NYP/Columbia (CUIMC),forward,elevator,EL187,,,0.0,True,0.010918540605458271
+NYP/Columbia (CUIMC),forward,elevator,EL188,,,0.0,True,0.015486139294499601
+NYP/Columbia (CUIMC),forward,elevator,EL189,,,0.0,False,0.06072375117148521
+NYP/Columbia (CUIMC),forward,elevator,EL190,,,0.0,False,0.036035007610350056
+NYP/Columbia (CUIMC),forward,elevator,EL191,,,0.0,False,0.01931887366818874
+NYP/Columbia (CUIMC),forward,elevator,EL195,,,0.0,False,0.028352359208523636
+NYP/Columbia (CUIMC),forward,elevator,EL196,,,0.0,False,0.016898782343987784
+NYP/Columbia (CUIMC),forward,elevator,EL197,,,0.0,False,0.01332191780821923
+NYP/Columbia (CUIMC),forward,elevator,EL198,,,0.0,False,0.021611491628614754
+NYP/Columbia (CUIMC),forward,elevator,EL199,,,0.0,False,0.020589802130898005
+NYP/Columbia (CUIMC),forward,elevator,EL204,,,0.0,False,0.010488964992389604
+NYP/Columbia (CUIMC),forward,elevator,EL205,,,0.0,False,0.011933028919330235
+NYP/Columbia (CUIMC),forward,elevator,EL206,,,0.0,False,0.012692161339421748
+NYP/Columbia (CUIMC),forward,elevator,EL208X,,,0.0,False,0.00016362252663637555
+NYP/Columbia (CUIMC),forward,elevator,EL209,,,0.0,False,0.012709284627092865
+NYP/Columbia (CUIMC),forward,elevator,EL210,,,0.0,False,0.012393455098934636
+NYP/Columbia (CUIMC),forward,elevator,EL211,,,0.0,False,0.012442922374429233
+NYP/Columbia (CUIMC),forward,elevator,EL212,,,0.0,False,0.010595509893455146
+NYP/Columbia (CUIMC),forward,elevator,EL213,,,0.0,False,0.02886415525114161
+NYP/Columbia (CUIMC),forward,elevator,EL214,,,0.0,False,0.012635083713850914
+NYP/Columbia (CUIMC),forward,elevator,EL215,,,0.0,False,0.017140410958904062
+NYP/Columbia (CUIMC),forward,elevator,EL216,,,0.0,False,0.01494292237442918
+NYP/Columbia (CUIMC),forward,elevator,EL221,,,0.0,False,0.012675038051750298
+NYP/Columbia (CUIMC),forward,elevator,EL222,,,0.0,False,0.00908485540334858
+NYP/Columbia (CUIMC),forward,elevator,EL223,,,0.0,False,0.010127027297563207
+NYP/Columbia (CUIMC),forward,elevator,EL224,,,0.0,False,0.014939117199391228
+NYP/Columbia (CUIMC),forward,elevator,EL225,,,54.042582647402014,True,0.1004138349975322
+NYP/Columbia (CUIMC),forward,elevator,EL226,,,0.0,False,0.021939582621461118
+NYP/Columbia (CUIMC),forward,elevator,EL227,,,0.0,False,0.01095700152207002
+NYP/Columbia (CUIMC),forward,elevator,EL228,,,0.0,False,0.17528729071537286
+NYP/Columbia (CUIMC),forward,elevator,EL229,,,0.0,False,0.006715870258677148
+NYP/Columbia (CUIMC),forward,elevator,EL230,,,0.0,False,0.008550228310502228
+NYP/Columbia (CUIMC),forward,elevator,EL231X,,,0.0,False,0.04446347031963471
+NYP/Columbia (CUIMC),forward,elevator,EL232,,,1.755238508056209,True,0.034762176560121705
+NYP/Columbia (CUIMC),forward,elevator,EL233,,,0.0,False,0.016352739726027354
+NYP/Columbia (CUIMC),forward,elevator,EL234,,,0.0,False,0.01731354642313543
+NYP/Columbia (CUIMC),forward,elevator,EL235,,,0.0,False,0.02356164383561643
+NYP/Columbia (CUIMC),forward,elevator,EL236,,,0.0,False,0.011362252663622452
+NYP/Columbia (CUIMC),forward,elevator,EL237,,,256.0676490460537,True,0.006198630136986183
+NYP/Columbia (CUIMC),forward,elevator,EL238,,,0.0,False,0.004427321156773134
+NYP/Columbia (CUIMC),forward,elevator,EL239,,,390.16010875307984,True,0.012588636960518373
+NYP/Columbia (CUIMC),forward,elevator,EL240,,,0.0,True,0.0194166242786733
+NYP/Columbia (CUIMC),forward,elevator,EL244,,,0.0,False,0.01390410958904098
+NYP/Columbia (CUIMC),forward,elevator,EL268X,,,0.0,False,0.0035197869101979418
+NYP/Columbia (CUIMC),forward,elevator,EL273,,,0.0,False,0.02207001522070018
+NYP/Columbia (CUIMC),forward,elevator,EL276X,,,2243.9736898771444,True,0.03699010654490098
+NYP/Columbia (CUIMC),forward,elevator,EL277,,,0.0,False,0.03339611872146109
+NYP/Columbia (CUIMC),forward,elevator,EL278,,,0.0,False,0.01450342465753418
+NYP/Columbia (CUIMC),forward,elevator,EL279,,,0.0,False,0.021192922374429157
+NYP/Columbia (CUIMC),forward,elevator,EL280,,,0.0,False,0.0117275494672755
+NYP/Columbia (CUIMC),forward,elevator,EL281,,,0.0,False,0.01624955227520397
+NYP/Columbia (CUIMC),forward,elevator,EL282,,,0.0,False,0.01312881518682496
+NYP/Columbia (CUIMC),forward,elevator,EL283,,,0.0,False,0.009714656957725332
+NYP/Columbia (CUIMC),forward,elevator,EL284,,,0.0,False,0.0038831811263317917
+NYP/Columbia (CUIMC),forward,elevator,EL285,,,0.0,False,0.002393455098934627
+NYP/Columbia (CUIMC),forward,elevator,EL286,,,0.0,False,0.004433028919330395
+NYP/Columbia (CUIMC),forward,elevator,EL296,,,0.0,False,0.01492199391172
+NYP/Columbia (CUIMC),forward,elevator,EL336,,,0.0,False,0.01749429223744292
+NYP/Columbia (CUIMC),forward,elevator,EL337,,,0.0,False,0.01011225266362259
+NYP/Columbia (CUIMC),forward,elevator,EL338,,,0.0,False,0.017368721461187175
+NYP/Columbia (CUIMC),forward,elevator,EL506,,,0.0,True,0.027501902587518945
+NYP/Columbia (CUIMC),forward,elevator,EL507,,,0.0,True,0.010135083713850745
+NYP/Columbia (CUIMC),forward,elevator,EL508,,,0.0,True,0.013778538812785457
+NYP/Columbia (CUIMC),forward,elevator,EL509,,,0.0,False,0.018854642313546388
+NYP/Columbia (CUIMC),forward,elevator,EL510,,,0.0,False,0.01209665144596661
+NYP/Columbia (CUIMC),forward,elevator,EL511,,,0.0,False,0.019385464231354788
+NYP/Columbia (CUIMC),forward,elevator,EL515,,,0.0,False,0.021059741248097397
+NYP/Columbia (CUIMC),forward,elevator,EL516,,,0.0,False,0.009098173515981856
+NYP/Columbia (CUIMC),forward,elevator,EL517,,,8.320395596201706,True,0.009760273972602707
+NYP/Columbia (CUIMC),forward,elevator,EL518,,,0.0,True,0.005605022831050244
+NYP/Columbia (CUIMC),forward,elevator,EL519,,,0.0,True,0.02907588961510532
+NYP/Columbia (CUIMC),forward,elevator,EL520,,,0.0,True,0.021299999999999986
+NYP/Columbia (CUIMC),forward,elevator,EL600,,,0.0,False,0.01396879756468794
+NYP/Columbia (CUIMC),forward,elevator,EL601,,,0.0,False,0.0320700152207003
+NYP/Columbia (CUIMC),forward,elevator,EL602,,,0.0,False,0.0573306697108068
+NYP/Columbia (CUIMC),forward,elevator,EL603,,,0.0,False,0.01842465753424649
+NYP/Columbia (CUIMC),forward,elevator,EL606X,,,0.0,False,0.0
+NYP/Columbia (CUIMC),forward,elevator,EL607X,,,0.0,False,0.0
+NYP/Columbia (CUIMC),forward,elevator,EL609,,,0.0,False,0.0025703957382039455
+NYP/Columbia (CUIMC),forward,elevator,EL610,,,0.0,False,0.0025818112633181345
+NYP/Columbia (CUIMC),forward,elevator,EL611,,,0.0,False,0.004008751902587537
+NYP/Columbia (CUIMC),forward,elevator,EL612,,,0.0,False,0.004691780821917901
+NYP/Columbia (CUIMC),forward,elevator,EL613,,,0.0,False,0.0046232876712328785
+NYP/Columbia (CUIMC),forward,elevator,EL614,,,0.0,False,0.002001522070015138
+NYP/Columbia (CUIMC),forward,elevator,EL616,,,0.0,False,0.011835996955859907
+NYP/Columbia (CUIMC),forward,elevator,EL617,,,0.0,False,0.006453576864535737
+NYP/Columbia (CUIMC),forward,elevator,EL618,,,0.0,False,0.016297564687975608
+NYP/Columbia (CUIMC),forward,elevator,EL619,,,0.0,False,0.02472792998477935
+NYP/Columbia (CUIMC),forward,elevator,EL620,,,0.0,False,0.009427236971484731
+NYP/Columbia (CUIMC),forward,elevator,EL621,,,0.0,False,0.0060220997930099385
+NYP/Columbia (CUIMC),forward,elevator,EL622,,,0.0,False,0.018622286079182593
+Mount Sinai Morningside,reverse,station,104,231 St (1),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,109,Dyckman St (1),M,0.0,False,
+Mount Sinai Morningside,reverse,station,115,137 St-City College (1),M,0.0,True,
+Mount Sinai Morningside,reverse,station,120,96 St (1 2 3),M,1175.5286987775107,True,
+Mount Sinai Morningside,reverse,station,123,72 St (1 2 3),M,1175.5286987775107,True,
+Mount Sinai Morningside,reverse,station,124,66 St-Lincoln Center (1),M,0.0,False,
+Mount Sinai Morningside,reverse,station,125,59 St-Columbus Circle (1),M,0.0,True,
+Mount Sinai Morningside,reverse,station,127,Times Sq-42 St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,reverse,station,128,34 St-Penn Station (1 2 3),M,0.0,False,
+Mount Sinai Morningside,reverse,station,132,14 St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,reverse,station,137,Chambers St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,reverse,station,211,Pelham Pkwy (2 5),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,213,E 180 St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,217,Simpson St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,221,3 Av-149 St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,222,149 St-Hostos (2 5),Bx,0.0,True,
+Mount Sinai Morningside,reverse,station,224,135 St (2 3),M,0.0,True,
+Mount Sinai Morningside,reverse,station,407,Fordham Rd (4),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,412,170 St (4),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,414,161 St-Yankee Stadium (4),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,415,149 St-Hostos (4),Bx,0.0,True,
+Mount Sinai Morningside,reverse,station,503,Gun Hill Rd (5),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,613,Hunts Point Av (6),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,615,E 149 St (6),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,621,125 St (4 5 6),M,535.9200877251569,True,
+Mount Sinai Morningside,reverse,station,626,86 St (4 5 6),M,535.9200877251569,True,
+Mount Sinai Morningside,reverse,station,628,68 St-Hunter College (6),M,0.0,False,
+Mount Sinai Morningside,reverse,station,631,Grand Central-42 St (4 5 6),M,0.0,False,
+Mount Sinai Morningside,reverse,station,723,Grand Central-42 St (7),M,0.0,False,
+Mount Sinai Morningside,reverse,station,725,Times Sq-42 St (7),M,0.0,False,
+Mount Sinai Morningside,reverse,station,726,34 St-Hudson Yards (7),M,0.0,False,
+Mount Sinai Morningside,reverse,station,901,Grand Central-42 St (S),M,0.0,False,
+Mount Sinai Morningside,reverse,station,A02,Inwood-207 St (A),M,0.0,False,
+Mount Sinai Morningside,reverse,station,A06,181 St (A),M,300.2945124125108,True,
+Mount Sinai Morningside,reverse,station,A07,175 St (A),M,888.9857170115793,True,
+Mount Sinai Morningside,reverse,station,A09,168 St (A C),M,2659.4235010336706,True,
+Mount Sinai Morningside,reverse,station,A15,125 St (A C B D),M,5986.22924793655,True,
+Mount Sinai Morningside,reverse,station,A24,59 St-Columbus Circle (A C B D),M,951.908688811789,True,
+Mount Sinai Morningside,reverse,station,A25,50 St (C E),M,0.0,False,
+Mount Sinai Morningside,reverse,station,A28,34 St-Penn Station (A C E),M,0.0,False,
+Mount Sinai Morningside,reverse,station,A31,14 St (A C E),M,0.0,False,
+Mount Sinai Morningside,reverse,station,B10,57 St (M),M,0.0,False,
+Mount Sinai Morningside,reverse,station,D04,Kingsbridge Rd (B D),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,D07,Tremont Av (B D),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,False,
+Mount Sinai Morningside,reverse,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,0.0,False,
+Mount Sinai Morningside,reverse,station,D17,34 St-Herald Sq (B D F M),M,0.0,False,
+Mount Sinai Morningside,reverse,station,D19,14 St (F M),M,0.0,False,
+Mount Sinai Morningside,reverse,station,L01,8 Av (L),M,0.0,False,
+Mount Sinai Morningside,reverse,station,L02,6 Av (L),M,0.0,False,
+Mount Sinai Morningside,reverse,station,R14,57 St-7 Av (N Q R W),M,0.0,False,
+Mount Sinai Morningside,reverse,station,R15,49 St (N R W),M,0.0,False,
+Mount Sinai Morningside,reverse,station,R16,Times Sq-42 St (N Q R W),M,0.0,False,
+Mount Sinai Morningside,reverse,station,R17,34 St-Herald Sq (N Q R W),M,0.0,False,
+Mount Sinai Morningside,reverse,elevator,EL100,,,0.0,True,0.05669486280173297
+Mount Sinai Morningside,reverse,elevator,EL101,,,0.0,True,0.026263023392962492
+Mount Sinai Morningside,reverse,elevator,EL102,,,0.0,True,0.002256944444444575
+Mount Sinai Morningside,reverse,elevator,EL117,,,0.0,False,0.04395738203957367
+Mount Sinai Morningside,reverse,elevator,EL118,,,0.0,False,0.029889649923896533
+Mount Sinai Morningside,reverse,elevator,EL119,,,0.0,False,0.01925418569254178
+Mount Sinai Morningside,reverse,elevator,EL123,,,888.9857170115793,True,0.009179984779299821
+Mount Sinai Morningside,reverse,elevator,EL124,,,888.9857170115793,True,0.004082952815829488
+Mount Sinai Morningside,reverse,elevator,EL125,,,535.9200877251569,True,0.017250761035007667
+Mount Sinai Morningside,reverse,elevator,EL126,,,535.9200877251569,True,0.030700152207001397
+Mount Sinai Morningside,reverse,elevator,EL127,,,0.0,False,0.03300418569254182
+Mount Sinai Morningside,reverse,elevator,EL128,,,0.0,False,0.021413622526636256
+Mount Sinai Morningside,reverse,elevator,EL129,,,0.0,False,0.1248002283105023
+Mount Sinai Morningside,reverse,elevator,EL130,,,0.0,False,0.24039193302891926
+Mount Sinai Morningside,reverse,elevator,EL131,,,0.0,False,0.5110451533836314
+Mount Sinai Morningside,reverse,elevator,EL132,,,0.0,False,0.021299999999999986
+Mount Sinai Morningside,reverse,elevator,EL133,,,0.0,False,0.021299999999999986
+Mount Sinai Morningside,reverse,elevator,EL134,,,0.0,False,0.4695760407491095
+Mount Sinai Morningside,reverse,elevator,EL135,,,0.0,False,0.5251579793956569
+Mount Sinai Morningside,reverse,elevator,EL136,,,0.0,False,0.014935312024353165
+Mount Sinai Morningside,reverse,elevator,EL137,,,0.0,False,0.03535388127853889
+Mount Sinai Morningside,reverse,elevator,EL138,,,0.0,False,0.032028158295281495
+Mount Sinai Morningside,reverse,elevator,EL139,,,2659.4235010336706,True,0.02590515424939055
+Mount Sinai Morningside,reverse,elevator,EL140,,,0.0,True,0.0177359208523592
+Mount Sinai Morningside,reverse,elevator,EL141,,,2659.4235010336706,True,0.010270167427701704
+Mount Sinai Morningside,reverse,elevator,EL142,,,5986.22924793655,True,0.007357305936073089
+Mount Sinai Morningside,reverse,elevator,EL143,,,4811.31158996468,True,0.011000761035007578
+Mount Sinai Morningside,reverse,elevator,EL144,,,1174.9176579718624,True,0.015805375823048196
+Mount Sinai Morningside,reverse,elevator,EL145,,,0.0,True,0.01980213089802141
+Mount Sinai Morningside,reverse,elevator,EL146,,,1175.5286987775107,True,0.015957001522069914
+Mount Sinai Morningside,reverse,elevator,EL148,,,0.0,False,0.0158200152207002
+Mount Sinai Morningside,reverse,elevator,EL149,,,0.0,False,0.009499619482496224
+Mount Sinai Morningside,reverse,elevator,EL159,,,0.0,False,0.010578386605783807
+Mount Sinai Morningside,reverse,elevator,EL160,,,0.0,False,0.011815068493150727
+Mount Sinai Morningside,reverse,elevator,EL178,,,0.0,False,0.019649923896499222
+Mount Sinai Morningside,reverse,elevator,EL179,,,0.0,False,0.011035007610350034
+Mount Sinai Morningside,reverse,elevator,EL180,,,0.0,True,0.02822678843226789
+Mount Sinai Morningside,reverse,elevator,EL181,,,0.0,True,0.014210984017400285
+Mount Sinai Morningside,reverse,elevator,EL184,,,0.0,False,0.029512937595129296
+Mount Sinai Morningside,reverse,elevator,EL185,,,0.0,False,0.026786529680365212
+Mount Sinai Morningside,reverse,elevator,EL186,,,0.0,False,0.011069514730364438
+Mount Sinai Morningside,reverse,elevator,EL187,,,0.0,False,0.010918540605458271
+Mount Sinai Morningside,reverse,elevator,EL188,,,0.0,False,0.015486139294499601
+Mount Sinai Morningside,reverse,elevator,EL189,,,0.0,False,0.06072375117148521
+Mount Sinai Morningside,reverse,elevator,EL190,,,0.0,False,0.036035007610350056
+Mount Sinai Morningside,reverse,elevator,EL191,,,0.0,False,0.01931887366818874
+Mount Sinai Morningside,reverse,elevator,EL195,,,0.0,False,0.028352359208523636
+Mount Sinai Morningside,reverse,elevator,EL196,,,0.0,False,0.016898782343987784
+Mount Sinai Morningside,reverse,elevator,EL197,,,0.0,False,0.01332191780821923
+Mount Sinai Morningside,reverse,elevator,EL198,,,0.0,False,0.021611491628614754
+Mount Sinai Morningside,reverse,elevator,EL199,,,0.0,False,0.020589802130898005
+Mount Sinai Morningside,reverse,elevator,EL204,,,0.0,False,0.010488964992389604
+Mount Sinai Morningside,reverse,elevator,EL205,,,0.0,False,0.011933028919330235
+Mount Sinai Morningside,reverse,elevator,EL206,,,0.0,False,0.012692161339421748
+Mount Sinai Morningside,reverse,elevator,EL208X,,,0.0,False,0.00016362252663637555
+Mount Sinai Morningside,reverse,elevator,EL209,,,0.0,False,0.012709284627092865
+Mount Sinai Morningside,reverse,elevator,EL210,,,0.0,False,0.012393455098934636
+Mount Sinai Morningside,reverse,elevator,EL211,,,0.0,False,0.012442922374429233
+Mount Sinai Morningside,reverse,elevator,EL212,,,0.0,False,0.010595509893455146
+Mount Sinai Morningside,reverse,elevator,EL213,,,0.0,False,0.02886415525114161
+Mount Sinai Morningside,reverse,elevator,EL214,,,0.0,False,0.012635083713850914
+Mount Sinai Morningside,reverse,elevator,EL215,,,0.0,False,0.017140410958904062
+Mount Sinai Morningside,reverse,elevator,EL216,,,0.0,False,0.01494292237442918
+Mount Sinai Morningside,reverse,elevator,EL221,,,0.0,False,0.012675038051750298
+Mount Sinai Morningside,reverse,elevator,EL222,,,0.0,False,0.00908485540334858
+Mount Sinai Morningside,reverse,elevator,EL223,,,0.0,False,0.010127027297563207
+Mount Sinai Morningside,reverse,elevator,EL224,,,0.0,False,0.014939117199391228
+Mount Sinai Morningside,reverse,elevator,EL225,,,0.0,False,0.1004138349975322
+Mount Sinai Morningside,reverse,elevator,EL226,,,0.0,False,0.021939582621461118
+Mount Sinai Morningside,reverse,elevator,EL227,,,0.0,False,0.01095700152207002
+Mount Sinai Morningside,reverse,elevator,EL228,,,0.0,False,0.17528729071537286
+Mount Sinai Morningside,reverse,elevator,EL229,,,0.0,False,0.006715870258677148
+Mount Sinai Morningside,reverse,elevator,EL230,,,0.0,False,0.008550228310502228
+Mount Sinai Morningside,reverse,elevator,EL231X,,,0.0,False,0.04446347031963471
+Mount Sinai Morningside,reverse,elevator,EL232,,,0.0,False,0.034762176560121705
+Mount Sinai Morningside,reverse,elevator,EL233,,,0.0,False,0.016352739726027354
+Mount Sinai Morningside,reverse,elevator,EL234,,,0.0,False,0.01731354642313543
+Mount Sinai Morningside,reverse,elevator,EL235,,,0.0,False,0.02356164383561643
+Mount Sinai Morningside,reverse,elevator,EL236,,,0.0,False,0.011362252663622452
+Mount Sinai Morningside,reverse,elevator,EL237,,,0.0,False,0.006198630136986183
+Mount Sinai Morningside,reverse,elevator,EL238,,,0.0,False,0.004427321156773134
+Mount Sinai Morningside,reverse,elevator,EL239,,,1175.5286987775107,True,0.012588636960518373
+Mount Sinai Morningside,reverse,elevator,EL240,,,0.0,True,0.0194166242786733
+Mount Sinai Morningside,reverse,elevator,EL244,,,0.0,False,0.01390410958904098
+Mount Sinai Morningside,reverse,elevator,EL268X,,,0.0,False,0.0035197869101979418
+Mount Sinai Morningside,reverse,elevator,EL273,,,535.9200877251569,True,0.02207001522070018
+Mount Sinai Morningside,reverse,elevator,EL276X,,,0.0,True,0.03699010654490098
+Mount Sinai Morningside,reverse,elevator,EL277,,,0.0,False,0.03339611872146109
+Mount Sinai Morningside,reverse,elevator,EL278,,,0.0,False,0.01450342465753418
+Mount Sinai Morningside,reverse,elevator,EL279,,,0.0,False,0.021192922374429157
+Mount Sinai Morningside,reverse,elevator,EL280,,,0.0,False,0.0117275494672755
+Mount Sinai Morningside,reverse,elevator,EL281,,,0.0,False,0.01624955227520397
+Mount Sinai Morningside,reverse,elevator,EL282,,,0.0,False,0.01312881518682496
+Mount Sinai Morningside,reverse,elevator,EL283,,,0.0,False,0.009714656957725332
+Mount Sinai Morningside,reverse,elevator,EL284,,,0.0,False,0.0038831811263317917
+Mount Sinai Morningside,reverse,elevator,EL285,,,0.0,False,0.002393455098934627
+Mount Sinai Morningside,reverse,elevator,EL286,,,0.0,False,0.004433028919330395
+Mount Sinai Morningside,reverse,elevator,EL296,,,0.0,False,0.01492199391172
+Mount Sinai Morningside,reverse,elevator,EL336,,,0.0,False,0.01749429223744292
+Mount Sinai Morningside,reverse,elevator,EL337,,,0.0,False,0.01011225266362259
+Mount Sinai Morningside,reverse,elevator,EL338,,,0.0,False,0.017368721461187175
+Mount Sinai Morningside,reverse,elevator,EL506,,,0.0,False,0.027501902587518945
+Mount Sinai Morningside,reverse,elevator,EL507,,,0.0,False,0.010135083713850745
+Mount Sinai Morningside,reverse,elevator,EL508,,,0.0,False,0.013778538812785457
+Mount Sinai Morningside,reverse,elevator,EL509,,,0.0,False,0.018854642313546388
+Mount Sinai Morningside,reverse,elevator,EL510,,,0.0,False,0.01209665144596661
+Mount Sinai Morningside,reverse,elevator,EL511,,,0.0,False,0.019385464231354788
+Mount Sinai Morningside,reverse,elevator,EL515,,,0.0,False,0.021059741248097397
+Mount Sinai Morningside,reverse,elevator,EL516,,,0.0,False,0.009098173515981856
+Mount Sinai Morningside,reverse,elevator,EL517,,,0.0,True,0.009760273972602707
+Mount Sinai Morningside,reverse,elevator,EL518,,,300.2945124125108,True,0.005605022831050244
+Mount Sinai Morningside,reverse,elevator,EL519,,,0.0,True,0.02907588961510532
+Mount Sinai Morningside,reverse,elevator,EL520,,,0.0,True,0.021299999999999986
+Mount Sinai Morningside,reverse,elevator,EL600,,,0.0,False,0.01396879756468794
+Mount Sinai Morningside,reverse,elevator,EL601,,,0.0,False,0.0320700152207003
+Mount Sinai Morningside,reverse,elevator,EL602,,,0.0,False,0.0573306697108068
+Mount Sinai Morningside,reverse,elevator,EL603,,,0.0,False,0.01842465753424649
+Mount Sinai Morningside,reverse,elevator,EL606X,,,0.0,False,0.0
+Mount Sinai Morningside,reverse,elevator,EL607X,,,0.0,False,0.0
+Mount Sinai Morningside,reverse,elevator,EL609,,,0.0,False,0.0025703957382039455
+Mount Sinai Morningside,reverse,elevator,EL610,,,0.0,False,0.0025818112633181345
+Mount Sinai Morningside,reverse,elevator,EL611,,,0.0,False,0.004008751902587537
+Mount Sinai Morningside,reverse,elevator,EL612,,,0.0,False,0.004691780821917901
+Mount Sinai Morningside,reverse,elevator,EL613,,,0.0,False,0.0046232876712328785
+Mount Sinai Morningside,reverse,elevator,EL614,,,0.0,False,0.002001522070015138
+Mount Sinai Morningside,reverse,elevator,EL616,,,0.0,False,0.011835996955859907
+Mount Sinai Morningside,reverse,elevator,EL617,,,0.0,False,0.006453576864535737
+Mount Sinai Morningside,reverse,elevator,EL618,,,0.0,False,0.016297564687975608
+Mount Sinai Morningside,reverse,elevator,EL619,,,0.0,False,0.02472792998477935
+Mount Sinai Morningside,reverse,elevator,EL620,,,0.0,False,0.009427236971484731
+Mount Sinai Morningside,reverse,elevator,EL621,,,0.0,False,0.0060220997930099385
+Mount Sinai Morningside,reverse,elevator,EL622,,,0.0,False,0.018622286079182593
+Mount Sinai Morningside,forward,station,104,231 St (1),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,109,Dyckman St (1),M,0.0,False,
+Mount Sinai Morningside,forward,station,115,137 St-City College (1),M,0.0,True,
+Mount Sinai Morningside,forward,station,120,96 St (1 2 3),M,709.0386192313454,True,
+Mount Sinai Morningside,forward,station,123,72 St (1 2 3),M,459.633331209232,True,
+Mount Sinai Morningside,forward,station,124,66 St-Lincoln Center (1),M,249.40528802211338,True,
+Mount Sinai Morningside,forward,station,125,59 St-Columbus Circle (1),M,0.0,True,
+Mount Sinai Morningside,forward,station,127,Times Sq-42 St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,forward,station,128,34 St-Penn Station (1 2 3),M,0.0,False,
+Mount Sinai Morningside,forward,station,132,14 St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,forward,station,137,Chambers St (1 2 3),M,0.0,False,
+Mount Sinai Morningside,forward,station,211,Pelham Pkwy (2 5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,213,E 180 St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,217,Simpson St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,221,3 Av-149 St (2 5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,222,149 St-Hostos (2 5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,224,135 St (2 3),M,0.0,False,
+Mount Sinai Morningside,forward,station,407,Fordham Rd (4),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,412,170 St (4),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,414,161 St-Yankee Stadium (4),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,415,149 St-Hostos (4),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,503,Gun Hill Rd (5),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,613,Hunts Point Av (6),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,615,E 149 St (6),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,621,125 St (4 5 6),M,0.0,True,
+Mount Sinai Morningside,forward,station,626,86 St (4 5 6),M,0.0,False,
+Mount Sinai Morningside,forward,station,628,68 St-Hunter College (6),M,0.0,False,
+Mount Sinai Morningside,forward,station,631,Grand Central-42 St (4 5 6),M,0.0,False,
+Mount Sinai Morningside,forward,station,723,Grand Central-42 St (7),M,0.0,False,
+Mount Sinai Morningside,forward,station,725,Times Sq-42 St (7),M,0.0,False,
+Mount Sinai Morningside,forward,station,726,34 St-Hudson Yards (7),M,0.0,False,
+Mount Sinai Morningside,forward,station,901,Grand Central-42 St (S),M,0.0,False,
+Mount Sinai Morningside,forward,station,A02,Inwood-207 St (A),M,0.0,False,
+Mount Sinai Morningside,forward,station,A06,181 St (A),M,0.0,False,
+Mount Sinai Morningside,forward,station,A07,175 St (A),M,0.0,False,
+Mount Sinai Morningside,forward,station,A09,168 St (A C),M,191.68842672186292,True,
+Mount Sinai Morningside,forward,station,A15,125 St (A C B D),M,223.5528831075717,True,
+Mount Sinai Morningside,forward,station,A24,59 St-Columbus Circle (A C B D),M,31.8644563857124,True,
+Mount Sinai Morningside,forward,station,A25,50 St (C E),M,0.0,False,
+Mount Sinai Morningside,forward,station,A28,34 St-Penn Station (A C E),M,0.0,False,
+Mount Sinai Morningside,forward,station,A31,14 St (A C E),M,0.0,False,
+Mount Sinai Morningside,forward,station,B10,57 St (M),M,0.0,False,
+Mount Sinai Morningside,forward,station,D04,Kingsbridge Rd (B D),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,D07,Tremont Av (B D),Bx,0.0,False,
+Mount Sinai Morningside,forward,station,D11,161 St-Yankee Stadium (B D),Bx,0.0,True,
+Mount Sinai Morningside,forward,station,D15,47-50 Sts-Rockefeller Ctr (B D F M),M,0.0,False,
+Mount Sinai Morningside,forward,station,D17,34 St-Herald Sq (B D F M),M,0.0,False,
+Mount Sinai Morningside,forward,station,D19,14 St (F M),M,0.0,False,
+Mount Sinai Morningside,forward,station,L01,8 Av (L),M,0.0,False,
+Mount Sinai Morningside,forward,station,L02,6 Av (L),M,0.0,False,
+Mount Sinai Morningside,forward,station,R14,57 St-7 Av (N Q R W),M,0.0,False,
+Mount Sinai Morningside,forward,station,R15,49 St (N R W),M,0.0,False,
+Mount Sinai Morningside,forward,station,R16,Times Sq-42 St (N Q R W),M,0.0,False,
+Mount Sinai Morningside,forward,station,R17,34 St-Herald Sq (N Q R W),M,0.0,False,
+Mount Sinai Morningside,forward,elevator,EL100,,,0.0,False,0.05669486280173297
+Mount Sinai Morningside,forward,elevator,EL101,,,0.0,False,0.026263023392962492
+Mount Sinai Morningside,forward,elevator,EL102,,,0.0,False,0.002256944444444575
+Mount Sinai Morningside,forward,elevator,EL117,,,0.0,False,0.04395738203957367
+Mount Sinai Morningside,forward,elevator,EL118,,,0.0,False,0.029889649923896533
+Mount Sinai Morningside,forward,elevator,EL119,,,0.0,False,0.01925418569254178
+Mount Sinai Morningside,forward,elevator,EL123,,,0.0,False,0.009179984779299821
+Mount Sinai Morningside,forward,elevator,EL124,,,0.0,False,0.004082952815829488
+Mount Sinai Morningside,forward,elevator,EL125,,,0.0,True,0.017250761035007667
+Mount Sinai Morningside,forward,elevator,EL126,,,0.0,True,0.030700152207001397
+Mount Sinai Morningside,forward,elevator,EL127,,,0.0,False,0.03300418569254182
+Mount Sinai Morningside,forward,elevator,EL128,,,0.0,False,0.021413622526636256
+Mount Sinai Morningside,forward,elevator,EL129,,,0.0,False,0.1248002283105023
+Mount Sinai Morningside,forward,elevator,EL130,,,0.0,False,0.24039193302891926
+Mount Sinai Morningside,forward,elevator,EL131,,,0.0,True,0.5110451533836314
+Mount Sinai Morningside,forward,elevator,EL132,,,0.0,False,0.021299999999999986
+Mount Sinai Morningside,forward,elevator,EL133,,,0.0,False,0.021299999999999986
+Mount Sinai Morningside,forward,elevator,EL134,,,0.0,False,0.4695760407491095
+Mount Sinai Morningside,forward,elevator,EL135,,,0.0,True,0.5251579793956569
+Mount Sinai Morningside,forward,elevator,EL136,,,0.0,False,0.014935312024353165
+Mount Sinai Morningside,forward,elevator,EL137,,,0.0,False,0.03535388127853889
+Mount Sinai Morningside,forward,elevator,EL138,,,0.0,False,0.032028158295281495
+Mount Sinai Morningside,forward,elevator,EL139,,,191.68842672186292,True,0.02590515424939055
+Mount Sinai Morningside,forward,elevator,EL140,,,191.68842672186292,True,0.0177359208523592
+Mount Sinai Morningside,forward,elevator,EL141,,,0.0,True,0.010270167427701704
+Mount Sinai Morningside,forward,elevator,EL142,,,223.5528831075717,True,0.007357305936073089
+Mount Sinai Morningside,forward,elevator,EL143,,,31.8644563857124,True,0.011000761035007578
+Mount Sinai Morningside,forward,elevator,EL144,,,191.68842672186292,True,0.015805375823048196
+Mount Sinai Morningside,forward,elevator,EL145,,,709.0386192313454,True,0.01980213089802141
+Mount Sinai Morningside,forward,elevator,EL146,,,0.0,True,0.015957001522069914
+Mount Sinai Morningside,forward,elevator,EL148,,,0.0,False,0.0158200152207002
+Mount Sinai Morningside,forward,elevator,EL149,,,0.0,False,0.009499619482496224
+Mount Sinai Morningside,forward,elevator,EL159,,,0.0,False,0.010578386605783807
+Mount Sinai Morningside,forward,elevator,EL160,,,0.0,False,0.011815068493150727
+Mount Sinai Morningside,forward,elevator,EL178,,,0.0,False,0.019649923896499222
+Mount Sinai Morningside,forward,elevator,EL179,,,0.0,False,0.011035007610350034
+Mount Sinai Morningside,forward,elevator,EL180,,,0.0,False,0.02822678843226789
+Mount Sinai Morningside,forward,elevator,EL181,,,0.0,False,0.014210984017400285
+Mount Sinai Morningside,forward,elevator,EL184,,,0.0,False,0.029512937595129296
+Mount Sinai Morningside,forward,elevator,EL185,,,0.0,False,0.026786529680365212
+Mount Sinai Morningside,forward,elevator,EL186,,,0.0,False,0.011069514730364438
+Mount Sinai Morningside,forward,elevator,EL187,,,0.0,False,0.010918540605458271
+Mount Sinai Morningside,forward,elevator,EL188,,,0.0,False,0.015486139294499601
+Mount Sinai Morningside,forward,elevator,EL189,,,0.0,False,0.06072375117148521
+Mount Sinai Morningside,forward,elevator,EL190,,,0.0,False,0.036035007610350056
+Mount Sinai Morningside,forward,elevator,EL191,,,0.0,False,0.01931887366818874
+Mount Sinai Morningside,forward,elevator,EL195,,,0.0,False,0.028352359208523636
+Mount Sinai Morningside,forward,elevator,EL196,,,0.0,False,0.016898782343987784
+Mount Sinai Morningside,forward,elevator,EL197,,,0.0,False,0.01332191780821923
+Mount Sinai Morningside,forward,elevator,EL198,,,0.0,False,0.021611491628614754
+Mount Sinai Morningside,forward,elevator,EL199,,,0.0,False,0.020589802130898005
+Mount Sinai Morningside,forward,elevator,EL204,,,0.0,False,0.010488964992389604
+Mount Sinai Morningside,forward,elevator,EL205,,,0.0,False,0.011933028919330235
+Mount Sinai Morningside,forward,elevator,EL206,,,0.0,False,0.012692161339421748
+Mount Sinai Morningside,forward,elevator,EL208X,,,0.0,False,0.00016362252663637555
+Mount Sinai Morningside,forward,elevator,EL209,,,0.0,False,0.012709284627092865
+Mount Sinai Morningside,forward,elevator,EL210,,,0.0,False,0.012393455098934636
+Mount Sinai Morningside,forward,elevator,EL211,,,0.0,False,0.012442922374429233
+Mount Sinai Morningside,forward,elevator,EL212,,,0.0,False,0.010595509893455146
+Mount Sinai Morningside,forward,elevator,EL213,,,0.0,False,0.02886415525114161
+Mount Sinai Morningside,forward,elevator,EL214,,,0.0,False,0.012635083713850914
+Mount Sinai Morningside,forward,elevator,EL215,,,0.0,False,0.017140410958904062
+Mount Sinai Morningside,forward,elevator,EL216,,,0.0,False,0.01494292237442918
+Mount Sinai Morningside,forward,elevator,EL221,,,0.0,False,0.012675038051750298
+Mount Sinai Morningside,forward,elevator,EL222,,,0.0,False,0.00908485540334858
+Mount Sinai Morningside,forward,elevator,EL223,,,0.0,False,0.010127027297563207
+Mount Sinai Morningside,forward,elevator,EL224,,,0.0,False,0.014939117199391228
+Mount Sinai Morningside,forward,elevator,EL225,,,0.0,False,0.1004138349975322
+Mount Sinai Morningside,forward,elevator,EL226,,,0.0,False,0.021939582621461118
+Mount Sinai Morningside,forward,elevator,EL227,,,0.0,False,0.01095700152207002
+Mount Sinai Morningside,forward,elevator,EL228,,,0.0,False,0.17528729071537286
+Mount Sinai Morningside,forward,elevator,EL229,,,0.0,False,0.006715870258677148
+Mount Sinai Morningside,forward,elevator,EL230,,,0.0,False,0.008550228310502228
+Mount Sinai Morningside,forward,elevator,EL231X,,,0.0,False,0.04446347031963471
+Mount Sinai Morningside,forward,elevator,EL232,,,0.0,False,0.034762176560121705
+Mount Sinai Morningside,forward,elevator,EL233,,,0.0,False,0.016352739726027354
+Mount Sinai Morningside,forward,elevator,EL234,,,0.0,False,0.01731354642313543
+Mount Sinai Morningside,forward,elevator,EL235,,,0.0,False,0.02356164383561643
+Mount Sinai Morningside,forward,elevator,EL236,,,0.0,False,0.011362252663622452
+Mount Sinai Morningside,forward,elevator,EL237,,,0.0,False,0.006198630136986183
+Mount Sinai Morningside,forward,elevator,EL238,,,249.40528802211338,True,0.004427321156773134
+Mount Sinai Morningside,forward,elevator,EL239,,,0.0,True,0.012588636960518373
+Mount Sinai Morningside,forward,elevator,EL240,,,459.633331209232,True,0.0194166242786733
+Mount Sinai Morningside,forward,elevator,EL244,,,0.0,False,0.01390410958904098
+Mount Sinai Morningside,forward,elevator,EL268X,,,0.0,False,0.0035197869101979418
+Mount Sinai Morningside,forward,elevator,EL273,,,0.0,False,0.02207001522070018
+Mount Sinai Morningside,forward,elevator,EL276X,,,31.8644563857124,True,0.03699010654490098
+Mount Sinai Morningside,forward,elevator,EL277,,,0.0,False,0.03339611872146109
+Mount Sinai Morningside,forward,elevator,EL278,,,0.0,False,0.01450342465753418
+Mount Sinai Morningside,forward,elevator,EL279,,,0.0,False,0.021192922374429157
+Mount Sinai Morningside,forward,elevator,EL280,,,0.0,False,0.0117275494672755
+Mount Sinai Morningside,forward,elevator,EL281,,,0.0,False,0.01624955227520397
+Mount Sinai Morningside,forward,elevator,EL282,,,0.0,False,0.01312881518682496
+Mount Sinai Morningside,forward,elevator,EL283,,,0.0,False,0.009714656957725332
+Mount Sinai Morningside,forward,elevator,EL284,,,0.0,False,0.0038831811263317917
+Mount Sinai Morningside,forward,elevator,EL285,,,0.0,False,0.002393455098934627
+Mount Sinai Morningside,forward,elevator,EL286,,,0.0,False,0.004433028919330395
+Mount Sinai Morningside,forward,elevator,EL296,,,0.0,False,0.01492199391172
+Mount Sinai Morningside,forward,elevator,EL336,,,0.0,False,0.01749429223744292
+Mount Sinai Morningside,forward,elevator,EL337,,,0.0,False,0.01011225266362259
+Mount Sinai Morningside,forward,elevator,EL338,,,0.0,False,0.017368721461187175
+Mount Sinai Morningside,forward,elevator,EL506,,,0.0,False,0.027501902587518945
+Mount Sinai Morningside,forward,elevator,EL507,,,0.0,False,0.010135083713850745
+Mount Sinai Morningside,forward,elevator,EL508,,,0.0,False,0.013778538812785457
+Mount Sinai Morningside,forward,elevator,EL509,,,0.0,False,0.018854642313546388
+Mount Sinai Morningside,forward,elevator,EL510,,,0.0,False,0.01209665144596661
+Mount Sinai Morningside,forward,elevator,EL511,,,0.0,False,0.019385464231354788
+Mount Sinai Morningside,forward,elevator,EL515,,,0.0,False,0.021059741248097397
+Mount Sinai Morningside,forward,elevator,EL516,,,0.0,False,0.009098173515981856
+Mount Sinai Morningside,forward,elevator,EL517,,,0.0,False,0.009760273972602707
+Mount Sinai Morningside,forward,elevator,EL518,,,0.0,False,0.005605022831050244
+Mount Sinai Morningside,forward,elevator,EL519,,,0.0,True,0.02907588961510532
+Mount Sinai Morningside,forward,elevator,EL520,,,0.0,True,0.021299999999999986
+Mount Sinai Morningside,forward,elevator,EL600,,,0.0,False,0.01396879756468794
+Mount Sinai Morningside,forward,elevator,EL601,,,0.0,False,0.0320700152207003
+Mount Sinai Morningside,forward,elevator,EL602,,,0.0,False,0.0573306697108068
+Mount Sinai Morningside,forward,elevator,EL603,,,0.0,False,0.01842465753424649
+Mount Sinai Morningside,forward,elevator,EL606X,,,0.0,False,0.0
+Mount Sinai Morningside,forward,elevator,EL607X,,,0.0,False,0.0
+Mount Sinai Morningside,forward,elevator,EL609,,,0.0,False,0.0025703957382039455
+Mount Sinai Morningside,forward,elevator,EL610,,,0.0,False,0.0025818112633181345
+Mount Sinai Morningside,forward,elevator,EL611,,,0.0,False,0.004008751902587537
+Mount Sinai Morningside,forward,elevator,EL612,,,0.0,False,0.004691780821917901
+Mount Sinai Morningside,forward,elevator,EL613,,,0.0,False,0.0046232876712328785
+Mount Sinai Morningside,forward,elevator,EL614,,,0.0,False,0.002001522070015138
+Mount Sinai Morningside,forward,elevator,EL616,,,0.0,False,0.011835996955859907
+Mount Sinai Morningside,forward,elevator,EL617,,,0.0,False,0.006453576864535737
+Mount Sinai Morningside,forward,elevator,EL618,,,0.0,False,0.016297564687975608
+Mount Sinai Morningside,forward,elevator,EL619,,,0.0,False,0.02472792998477935
+Mount Sinai Morningside,forward,elevator,EL620,,,0.0,False,0.009427236971484731
+Mount Sinai Morningside,forward,elevator,EL621,,,0.0,False,0.0060220997930099385
+Mount Sinai Morningside,forward,elevator,EL622,,,0.0,False,0.018622286079182593
